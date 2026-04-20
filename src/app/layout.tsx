@@ -1,5 +1,4 @@
 import "../styles/globals.css";
-import "../styles/reset.css";
 
 export default function RootLayout({
   children,
@@ -8,6 +7,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+        />
+      </head>
       <body>{children}</body>
     </html>
   );
