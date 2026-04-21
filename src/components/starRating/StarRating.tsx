@@ -1,11 +1,8 @@
 import { STAR } from '@/constants/icons';
+import { StarRatingProps } from './type';
 import Image from 'next/image';
 
 const NUMBER_ARR = [1, 2, 3, 4, 5] as const;
-
-interface StarRatingProps {
-  rating: number;
-}
 
 const StarRating = ({ rating }: StarRatingProps) => {
   return (
