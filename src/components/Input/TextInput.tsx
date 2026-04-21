@@ -1,7 +1,7 @@
 import React from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
 import Image from 'next/image';
-import { SVG_ICONS } from '@/constants/svgIcons';
+import { ErrorIcon } from '@/constants/icons';
 
 interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string;
@@ -61,7 +61,7 @@ const TextInput = ({
         {isError && (
           <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
             <div className="w-4 h-4 md:w-5 md:h-5">
-              <Image src={SVG_ICONS.ERROR} alt="에러" />
+              <Image src={ErrorIcon} alt="에러" />
             </div>
           </div>
         )}
