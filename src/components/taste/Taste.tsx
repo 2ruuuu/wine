@@ -1,19 +1,7 @@
 import React from 'react';
+import { TasteVariant, TasteDataKey, TasteProps } from './type';
 
-type TasteVariant =
-  | 'label-boxed-long'
-  | 'label-boxed-middle'
-  | 'label-boxed-short'
-  | 'label-bold'
-  | 'label-top';
-
-type TasteDataKey = 'lightBold' | 'smoothTannic' | 'drySweet' | 'softAcidic';
-
-interface TasteProps {
-  variant: TasteVariant;
-  type: TasteDataKey;
-  value: number;
-}
+const INTENSITY = [1, 2, 3, 4, 5, 6];
 
 const TASTE_CONFIG: Record<
   TasteDataKey,
@@ -35,7 +23,7 @@ const Bar = ({
   widthClass: string;
 }) => (
   <div className={`flex ${gapClass}`}>
-    {[1, 2, 3, 4, 5, 6].map((num) => (
+    {INTENSITY.map((num) => (
       <div
         key={num}
         className={`h-3 ${widthClass} rounded-full ${
