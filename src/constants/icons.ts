@@ -1,3 +1,3 @@
-import Star from '../assets/icons/star.svg';
+import Star from '@/assets/icons/star.svg';
 
 export const STAR = Star;
