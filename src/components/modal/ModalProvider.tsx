@@ -1,27 +1,16 @@
 'use client';
 
 import { createContext, ReactNode, useContext, useState } from 'react';
+import { ModalProviderProps, ModalContextProps } from './type';
 import Modal from './ModalRoot';
 
-type ModalState =
-  | { type: 'filter' }
-  | { type: 'register' }
-  | { type: 'review' }
-  | { type: 'delete' }
-  | { type: 'nickname' }
-  | null;
-
-type ModalContextType = {
-  openModal: (modal: Exclude<ModalState, null>) => void;
-  closeModal: () => void;
-};
-
-const ModalContext = createContext<ModalContextType | null>(null);
+const ModalContext = createContext<ModalContextProps | null>(null);
 
 const ModalProvider = ({ children }: { children: ReactNode }) => {
-  const [modal, setModal] = useState<ModalState>(null);
+  const [modal, setModal] = useState<ModalProviderProps>(null);
 
-  const openModal = (modal: Exclude<ModalState, null>) => setModal(modal);
+  const openModal = (modal: Exclude<ModalProviderProps, null>) =>
+    setModal(modal);
   const closeModal = () => setModal(null);
 
   return (
@@ -98,3 +87,31 @@ export const useModal = () => {
 };
 
 export default ModalProvider;
+
+// 사용예시
+// <button
+//   onClick={() => openModal({ type: 'filter' })}
+// >
+//   필터
+// </button>
+
+// <button
+//   onClick={() => openModal({ type: 'register' })}
+// >
+//   와인등록
+// </button>
+// <button
+//   onClick={() => openModal({ type: 'review' })}
+// >
+//   리뷰등록
+// </button>
+// <button
+//   onClick={() => openModal({ type: 'delete' })}
+// >
+//   삭제
+// </button>
+// <button
+//   onClick={() => openModal({ type: 'nickname' })}
+// >
+//   닉네임변경
+// </button>

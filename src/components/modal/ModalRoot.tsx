@@ -1,18 +1,16 @@
 'use client';
 
-import { ReactNode } from 'react';
+import { ModalRootProps } from './type';
 import Image from 'next/image';
 import Close from '@/assets/icons/close.svg';
 
-type Props = {
-  title: string;
-  children: ReactNode;
-  onClose: () => void;
-  hasHead?: boolean;
-  className?: string;
-};
-
-const Modal = ({ title, children, onClose, hasHead, className }: Props) => {
+const Modal = ({
+  title,
+  children,
+  onClose,
+  hasHead,
+  className,
+}: ModalRootProps) => {
   return (
     <div
       onClick={onClose}
@@ -42,31 +40,3 @@ const Modal = ({ title, children, onClose, hasHead, className }: Props) => {
 };
 
 export default Modal;
-
-// 사용예시
-// <button
-//   onClick={() => openModal({ type: 'filter' })}
-// >
-//   필터
-// </button>
-
-// <button
-//   onClick={() => openModal({ type: 'register' })}
-// >
-//   와인등록
-// </button>
-// <button
-//   onClick={() => openModal({ type: 'review' })}
-// >
-//   리뷰등록
-// </button>
-// <button
-//   onClick={() => openModal({ type: 'delete' })}
-// >
-//   삭제
-// </button>
-// <button
-//   onClick={() => openModal({ type: 'nickname' })}
-// >
-//   닉네임변경
-// </button>
