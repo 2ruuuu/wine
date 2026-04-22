@@ -19,6 +19,8 @@ import Spice from '@/assets/icons/spice.svg';
 import Tobacco from '@/assets/icons/tobacco.svg';
 import Tropical from '@/assets/icons/tropical.svg';
 import Vanilla from '@/assets/icons/vanilla.svg';
+import Alert from '@/assets/icons/alert.svg';
+import Search from '@/assets/icons/search.svg';
 
 export {
   Star,
@@ -42,4 +44,6 @@ export {
   Tobacco,
   Tropical,
   Vanilla,
+  Alert,
+  Search,
 };
