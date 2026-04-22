@@ -2,7 +2,7 @@
 
 import { ModalRootProps } from './type';
 import Image from 'next/image';
-import Close from '@/assets/icons/close.svg';
+import { Close } from '@/constants/icons';
 
 const Modal = ({
   title,
