@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 const useCheckScreenWidth = () => {
   const [screenWidth, setScreenWidth] = useState(0);
@@ -11,10 +11,10 @@ const useCheckScreenWidth = () => {
     };
 
     handleResize();
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
@@ -28,6 +28,6 @@ const useCheckScreenWidth = () => {
     isTablet,
     isPc,
   };
-}
+};
 
 export default useCheckScreenWidth;
