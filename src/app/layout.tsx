@@ -1,5 +1,5 @@
-import ModalProvider from "@/components/modal/ModalProvider";
-import "../styles/globals.css";
+import ModalProvider from '@/components/modal/ModalProvider';
+import '../styles/globals.css';
 
 export default function RootLayout({
   children,
