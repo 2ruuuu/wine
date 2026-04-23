@@ -11,3 +11,13 @@ export interface TextInputProps
   isSearch?: boolean;
   hideLabel?: boolean;
 }
+
+export interface PhotoInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  id?: string;
+  label: string;
+  error?: string;
+  register: UseFormRegisterReturn;
+  variant?: 'circle' | 'square'; // 프로필일 경우 원형, 사진일 경우 사각형
+  hideLabel?: boolean;
+}

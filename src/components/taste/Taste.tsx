@@ -1,7 +1,6 @@
 import React from 'react';
+import { INTENSITY } from '@/constants/taste';
 import { TasteVariant, TasteDataKey, TasteProps } from './type';
-
-const INTENSITY = [1, 2, 3, 4, 5, 6];
 
 const TASTE_CONFIG: Record<
   TasteDataKey,
