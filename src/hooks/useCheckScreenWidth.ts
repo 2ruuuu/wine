@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-export default function useCheckScreenWidth() {
+const useCheckScreenWidth = () => {
   const [screenWidth, setScreenWidth] = useState(0);
 
   useEffect(() => {
@@ -29,3 +29,5 @@ export default function useCheckScreenWidth() {
     isPc,
   };
 }
+
+export default useCheckScreenWidth;
