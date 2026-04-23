@@ -35,11 +35,11 @@ const Bar = ({
 
 const Taste = ({ variant, type, value }: TasteProps) => {
   const { label, min, max } = TASTE_CONFIG[type];
-  const LABELDEFAULT = 'flex justify-center items-center w-full';
+  const LABELDEFAULT = 'flex items-center w-full';
 
   const container: { [key in TasteVariant]: string } = {
     'label-boxed-long': `${LABELDEFAULT} gap-3 max-w-[500px]`,
-    'label-boxed-middle': `${LABELDEFAULT} gap-4 max-w-[340px]`,
+    'label-boxed-middle': `${LABELDEFAULT} gap-4 max-w-[320px]`,
     'label-boxed-short': `${LABELDEFAULT} gap-5 max-w-[320px]`,
     'label-bold': `${LABELDEFAULT} gap-5 max-w-[480px]`,
     'label-top': `${LABELDEFAULT} flex-col max-w-[320px]`,
@@ -60,10 +60,10 @@ const Taste = ({ variant, type, value }: TasteProps) => {
     ),
     'label-boxed-middle': (
       <div className={container[variant]}>
-        <span className="bg-[hsl(var(--gray-100))] font-bold px-[7px] py-[2px] rounded text-sm text-[hsl(var(--gray-600))]">
+        <span className="flex items-center justify-center shrink-0 bg-[hsl(var(--gray-100))] font-bold w-[53px] h-[30px] rounded text-sm text-[hsl(var(--gray-600))]">
           {label}
         </span>
-        <Bar value={value} gapClass="gap-0.5" widthClass="w-10" />
+        <Bar value={value} gapClass="gap-0.5" widthClass="w-7" />
         <span className="text-sm font-medium">{max}</span>
       </div>
     ),

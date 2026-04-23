@@ -11,7 +11,7 @@ import Flower from '@/assets/icons/flower.svg';
 import Grass from '@/assets/icons/grass.svg';
 import Leather from '@/assets/icons/leather.svg';
 import Mineral from '@/assets/icons/mineral.svg';
-import Oak from '@/assets/icons/Oak.svg';
+import Oak from '@/assets/icons/oak.svg';
 import Peach from '@/assets/icons/peach.svg';
 import Pepper from '@/assets/icons/pepper.svg';
 import Soil from '@/assets/icons/soil.svg';
@@ -24,6 +24,11 @@ import Search from '@/assets/icons/search.svg';
 import Close from '@/assets/icons/close.svg';
 import CameraBlack from '@/assets/icons/camera-black.svg';
 import CameraGray from '@/assets/icons/camera-gray.svg';
+import Up from '@/assets/icons/up.svg';
+import Down from '@/assets/icons/down.svg';
+import HeartEmpty from '@/assets/icons/heart-empty.svg';
+import HeartFill from '@/assets/icons/heart-fill.svg';
+import Hamburger from '@/assets/icons/hamburger.svg';
 
 export {
   Star,
@@ -52,4 +57,9 @@ export {
   Close,
   CameraBlack,
   CameraGray,
+  Up,
+  Down,
+  HeartEmpty,
+  HeartFill,
+  Hamburger,
 };
