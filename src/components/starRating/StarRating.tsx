@@ -1,8 +1,7 @@
-import { STAR } from '@/constants/icons';
+import { Star } from '@/constants/icons';
 import { StarRatingProps } from './type';
+import { NUMBER_ARR } from '@/constants/starRating';
 import Image from 'next/image';
-
-const NUMBER_ARR = [1, 2, 3, 4, 5] as const;
 
 const StarRating = ({ rating }: StarRatingProps) => {
   return (
@@ -10,7 +9,7 @@ const StarRating = ({ rating }: StarRatingProps) => {
       {NUMBER_ARR.map((item) => (
         <Image
           key={item}
-          src={STAR}
+          src={Star}
           alt="별"
           width={20}
           height={20}
