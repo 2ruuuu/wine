@@ -21,6 +21,9 @@ import Tropical from '@/assets/icons/tropical.svg';
 import Vanilla from '@/assets/icons/vanilla.svg';
 import Alert from '@/assets/icons/alert.svg';
 import Search from '@/assets/icons/search.svg';
+import Close from '@/assets/icons/close.svg';
+import CameraBlack from '@/assets/icons/camera-black.svg';
+import CameraGray from '@/assets/icons/camera-gray.svg';
 
 export {
   Star,
@@ -46,4 +49,7 @@ export {
   Vanilla,
   Alert,
   Search,
+  Close,
+  CameraBlack,
+  CameraGray,
 };

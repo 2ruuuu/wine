@@ -2,7 +2,7 @@
 
 import { ModalRootProps } from './type';
 import Image from 'next/image';
-import Close from '@/assets/icons/close.svg';
+import { Close } from '@/constants/icons';
 
 const Modal = ({
   title,
@@ -18,11 +18,11 @@ const Modal = ({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className={`rounded-[16px] bg-white shadow-xl py-8 px-6 ${className}`}
+        className={`rounded-2xl bg-white shadow-xl py-8 px-6 ${className}`}
       >
         {hasHead && (
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-[24px]">{title}</h2>
+            <h2 className="md:text-[24px] text-[20px]">{title}</h2>
             <button onClick={onClose}>
               <Image
                 src={Close}
