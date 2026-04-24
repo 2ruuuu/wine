@@ -19,7 +19,7 @@ const ReviewCard = () => {
   ];
 
   return (
-    <div className="flex flex-col gap-12 max-w-[725px] pt-10 pb-10 border-b border-[hsl(var(--gray-300))]">
+    <div className="flex flex-col gap-12 max-w-[725px] pt-10 pb-10 border-b border-gray-300">
       <div className="flex flex-col gap-5">
         <StarRating rating={Mock.rating} />
         <div className="flex justify-between items-center">
@@ -32,10 +32,10 @@ const ReviewCard = () => {
               className="rounded-full"
             />
             <div className="flex flex-col">
-              <span className="text-[hsl(var(--black))] font-semibold">
+              <span className="text-black font-semibold">
                 {Mock.user.nickname}
               </span>
-              <span className="text-[hsl(var(--gray-600))]">
+              <span className="text-gray-600">
                 {formatTimeAgo(Mock.createdAt)}
               </span>
             </div>
@@ -57,7 +57,7 @@ const ReviewCard = () => {
           </Dropdown>
         </div>
         <AromaList aroma={Mock.aroma} />
-        <p className="text-[hsl(var(--black))]">{Mock.content}</p>
+        <p className="text-black">{Mock.content}</p>
       </div>
       {isTasteOpen && (
         <TasteList
