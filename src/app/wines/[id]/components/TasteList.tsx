@@ -1,11 +1,5 @@
 import Taste from '@/components/Taste/Taste';
-
-interface TasteListProps {
-  lightBold: number;
-  smoothTannic: number;
-  drySweet: number;
-  softAcidic: number;
-}
+import { TasteListProps } from './type';
 
 const TasteList = ({
   lightBold,

@@ -2,21 +2,7 @@
 
 import { INTENSITY } from '@/constants/taste';
 import { useState } from 'react';
-
-export type TasteDataKey =
-  | 'lightBold'
-  | 'smoothTannic'
-  | 'drySweet'
-  | 'softAcidic';
-
-interface TasteButtonProps {
-  type: TasteDataKey;
-  initialValue?: number;
-  label: string;
-  min: string;
-  max: string;
-  onChange?: (value: number) => void;
-}
+import { TasteButtonProps } from './type';
 
 const TasteButton = ({
   initialValue = 0,

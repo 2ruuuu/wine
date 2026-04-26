@@ -2,11 +2,8 @@
 
 import { useState } from 'react';
 import { HeartEmpty, HeartFill } from '@/constants/icons';
+import { HeartToggleProps } from './type';
 import Image from 'next/image';
-
-interface HeartToggleProps {
-  isLiked: boolean;
-}
 
 const HeartToggle = ({ isLiked }: HeartToggleProps) => {
   const [isHeartButtonClick, setIsHeartButtonClick] = useState(isLiked);
