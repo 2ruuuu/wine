@@ -1,9 +1,9 @@
-import ReviewCard from './components/ReviewCard';
+import RatingCard from './components/RatingCard/RatingCard';
 
 const Wine = () => {
   return (
     <div className="m-[50px]">
-      <ReviewCard />
+      <RatingCard />
     </div>
   );
 };

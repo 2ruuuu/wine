@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 const StarRating = ({ rating }: StarRatingProps) => {
   return (
-    <div className="flex gap-0.5">
+    <div className="flex items-center gap-0.5">
       {NUMBER_ARR.map((item) => (
         <Image
           key={item}
@@ -13,6 +13,7 @@ const StarRating = ({ rating }: StarRatingProps) => {
           alt="별"
           width={20}
           height={20}
+          style={{ width: '20px', height: '20px' }}
           className={item > rating ? 'invert' : ''}
         />
       ))}
