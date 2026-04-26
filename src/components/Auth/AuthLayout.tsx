@@ -13,6 +13,7 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
               src={LogoBlack}
               alt="WINE"
               className="mx-auto h-auto w-auto"
+              priority
             />
           </Link>
         </h1>
