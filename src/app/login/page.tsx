@@ -1,5 +1,7 @@
+import AuthLayout from '@/components/Auth/AuthLayout';
+
 const Login = () => {
-  return <div>login</div>;
+  return <AuthLayout>{/* <LoginForm /> */}</AuthLayout>;
 };
 
 export default Login;
