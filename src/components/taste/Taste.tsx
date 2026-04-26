@@ -26,7 +26,7 @@ const Bar = ({
       <div
         key={num}
         className={`h-3 ${widthClass} rounded-full ${
-          num <= value ? 'bg-[hsl(var(--black))]' : 'bg-[hsl(var(--gray-100))]'
+          num <= value ? 'bg-black' : 'bg-gray-100'
         }`}
       />
     ))}
@@ -49,10 +49,10 @@ const Taste = ({ variant, type, value }: TasteProps) => {
     'label-boxed-long': (
       <div className={container[variant]}>
         <div className="flex justify-between items-center gap-3.5">
-          <span className="bg-[hsl(var(--gray-100))] px-[5px] py-[7px] rounded text-sm font-bold min-w-[50px] text-center text-gray-600">
+          <span className="bg-gray-100 px-[5px] py-[7px] rounded text-sm font-bold min-w-[50px] text-center text-gray-600">
             {label}
           </span>
-          <div className="h-[30px] w-px bg-[hsl(var(--gray-100))] mx-1" />
+          <div className="h-[30px] w-px bg-gray-100 mx-1" />
         </div>
         <Bar value={value} gapClass="gap-1" widthClass="w-12" />
         <span className="ml-auto text-sm font-medium">{max}</span>
@@ -60,7 +60,7 @@ const Taste = ({ variant, type, value }: TasteProps) => {
     ),
     'label-boxed-middle': (
       <div className={container[variant]}>
-        <span className="flex items-center justify-center shrink-0 bg-[hsl(var(--gray-100))] font-bold w-[53px] h-[30px] rounded text-sm text-[hsl(var(--gray-600))]">
+        <span className="flex items-center justify-center shrink-0 bg-gray-100 font-bold w-[53px] h-[30px] rounded text-sm text-gray-600">
           {label}
         </span>
         <Bar value={value} gapClass="gap-0.5" widthClass="w-7" />
@@ -70,11 +70,11 @@ const Taste = ({ variant, type, value }: TasteProps) => {
 
     'label-boxed-short': (
       <div className={container[variant]}>
-        <span className="bg-[hsl(var(--gray-100))] font-bold px-[13.5px] py-[5px] rounded text-sm text-[hsl(var(--gray-600))]">
+        <span className="bg-gray-100 font-bold px-[13.5px] py-[5px] rounded text-sm text-gray-600">
           {label}
         </span>
         <Bar value={value} gapClass="gap-0.5" widthClass="w-8" />
-        <span className="text-sm font-medium text-[hsl(var(--gray-800))]">
+        <span className="text-sm font-medium text-gray-800">
           {min === '부드러워요' ? min : max}
         </span>
       </div>
@@ -83,20 +83,20 @@ const Taste = ({ variant, type, value }: TasteProps) => {
       <div className={container[variant]}>
         <div className="flex justify-center items-center">
           <span className="text-xl font-bold mr-2 text-gray-800">{label}</span>
-          <div className="h-6 w-px bg-[hsl(var(--gray-100))] mx-0.5" />
+          <div className="h-6 w-px bg-gray-100 mx-0.5" />
         </div>
-        <span className="text-[hsl(var(--gray-600))] text-sm">{min}</span>
+        <span className="text-gray-600 text-sm">{min}</span>
         <Bar value={value} gapClass="gap-1" widthClass="w-10" />
-        <span className="text-[hsl(var(--gray-600))] text-sm">{max}</span>
+        <span className="text-gray-600 text-sm">{max}</span>
       </div>
     ),
     'label-top': (
       <div className={container[variant]}>
-        <span className="font-bold text-[hsl(var(--gray-800))]">{label}</span>
+        <span className="font-bold text-gray-800">{label}</span>
         <div className="flex items-center gap-3">
-          <span className="text-[hsl(var(--gray-600))] text-sm">{min}</span>
+          <span className="text-gray-600 text-sm">{min}</span>
           <Bar value={value} gapClass="gap-0.5" widthClass="w-9" />
-          <span className="text-[hsl(var(--gray-600))] text-sm">{max}</span>
+          <span className="text-gray-600 text-sm">{max}</span>
         </div>
       </div>
     ),

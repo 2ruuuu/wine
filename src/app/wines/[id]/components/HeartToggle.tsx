@@ -15,9 +15,7 @@ const HeartToggle = ({ isLiked }: HeartToggleProps) => {
   return (
     <button
       className={`border-2 rounded-md flex justify-center items-center gap-2 w-[50px] h-9 cursor-pointer transition-colors ${
-        isHeartButtonClick
-          ? 'border-[hsl(1,88%,40%)]'
-          : 'border-[hsl(var(--gray-300))]'
+        isHeartButtonClick ? 'border-[hsl(1,88%,40%)]' : 'border-gray-300'
       }`}
       onClick={toggleHeart}
     >

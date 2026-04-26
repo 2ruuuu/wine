@@ -9,7 +9,7 @@ const AromaList = ({ aroma }: AromaListProps) => {
         <Fragment key={item}>
           <Aroma item={item} />
           {index !== aroma.length - 1 && (
-            <span className="text-[hsl(var(--gray-300))] pr-2 pl-2">·</span>
+            <span className="text-gray-300 pr-2 pl-2">·</span>
           )}
         </Fragment>
       ))}
