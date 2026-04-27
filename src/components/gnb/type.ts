@@ -1,4 +1,4 @@
 export type HeaderProps = {
-  isLogIn: boolean;
+  isLogin: boolean;
   HeaderBg: boolean;
 };

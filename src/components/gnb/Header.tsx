@@ -1,11 +1,25 @@
 'use client';
 import Image from 'next/image';
-import Logo from '@/assets/images/logo.svg';
+import { LogoBlack } from '@/constants/icons';
 import Link from 'next/link';
 import { HeaderProps } from './type';
 import Dropdown from '../DropDown/Dropdown';
+import { useEffect, useState } from 'react';
 
-const Header = ({ isLogIn, HeaderBg = false }: HeaderProps) => {
+const Header = ({ isLogin, HeaderBg = false }: HeaderProps) => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 250);
+    };
+    handleScroll();
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const options = [
     {
       label: '마이페이지',
@@ -21,23 +35,25 @@ const Header = ({ isLogIn, HeaderBg = false }: HeaderProps) => {
     },
   ];
   return (
-    <header className="fixed w-full z-10">
+    <header
+      className={`w-full z-10 ${isScrolled ? 'fixed' : 'absolute'} transition-all duration-500`}
+    >
       <div
-        className={`max-w-285 md:h-17.5 h- md:px-[60px] px-5 flex justify-between items-center rounded m-auto  ${HeaderBg ? 'bg-black mt-10 ' : 'bg-[#171A21]  mt-5'}`}
+        className={`max-w-285 md:h-17.5 max-[756px]:h-[50px] md:px-[60px] px-5 flex justify-between items-center m-auto mt-0 ${HeaderBg ? 'bg-black md:mt-10' : 'md:mt-5'} ${isScrolled && 'bg-[#171A21] w-full md:rounded rounded-none'} `}
       >
         <h1>
           <Link href="/">
-            <Image src={Logo} alt="" />
+            <Image src={LogoBlack} alt="" height={15} className="invert" />
           </Link>
         </h1>
 
-        {isLogIn ? (
+        {isLogin ? (
           <Dropdown variant="basic" options={options}>
             {({ toggle }) => (
               <button
                 type="button"
                 onClick={toggle}
-                className=" w-11.25 h-11.25 rounded-full overflow-hidden border border-white cursor-pointer"
+                className="w-11.25 h-11.25 rounded-full overflow-hidden border border-white cursor-pointer max-[756px]:w-[20px] max-[756px]:h-[20px] align-middle"
               >
                 <img
                   src="https://i.namu.wiki/i/QMYkLdvhM3sxErXFfp6f8OooYMjrwqo7nraefN3QIGNMjAtPY3NcLS5ubG4KD70N8AOyPxTQy_-MSsrtxgJhIg.webp"
@@ -48,9 +64,9 @@ const Header = ({ isLogIn, HeaderBg = false }: HeaderProps) => {
             )}
           </Dropdown>
         ) : (
-          <button className="md:text-[16px] text-[12px]  text-white">
+          <Link href="" className="md:text-[16px] text-[12px]  text-white">
             로그인
-          </button>
+          </Link>
         )}
       </div>
     </header>

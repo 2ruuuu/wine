@@ -1,4 +1,4 @@
-import ModalProvider from '@/components/modal/ModalProvider';
+import ModalProvider from '@/components/Modal/ModalProvider';
 import '../styles/globals.css';
 
 export default function RootLayout({
