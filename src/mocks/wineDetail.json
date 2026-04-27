@@ -1,0 +1,92 @@
+{
+  "id": 2596,
+  "name": "이것은 와인입니다",
+  "region": "한국",
+  "image": "https://pds.joongang.co.kr/news/component/joongang_sunday/202503/26/86279e32-9aa6-4f50-9772-f43015bd56be.jpg",
+  "price": 1200000,
+  "type": "RED",
+  "avgRating": 3.33,
+  "reviewCount": 3,
+  "recentReview": {
+    "id": 13642,
+    "rating": 3,
+    "lightBold": 5,
+    "smoothTannic": 1,
+    "drySweet": 3,
+    "softAcidic": 4,
+    "aroma": ["EARTH", "TOBACCO", "SPICE", "BERRY", "APPLE"],
+    "content": "너는 누구세요오오오오오오오오오오오",
+    "createdAt": "2026-04-26T07:06:26.993Z",
+    "updatedAt": "2026-04-26T07:06:26.993Z",
+    "user": {
+      "id": 2969,
+      "nickname": "qwerqwer",
+      "image": null
+    },
+    "likes": []
+  },
+  "userId": 2969,
+  "reviews": [
+    {
+      "id": 13642,
+      "rating": 3,
+      "aroma": ["EARTH", "TOBACCO", "SPICE", "BERRY", "APPLE"],
+      "content": "너는 누구세요오오오오오오오오오오오",
+      "createdAt": "2026-04-26T07:06:26.993Z",
+      "updatedAt": "2026-04-26T07:06:26.993Z",
+      "lightBold": 5,
+      "smoothTannic": 1,
+      "drySweet": 3,
+      "softAcidic": 4,
+      "user": {
+        "id": 2969,
+        "nickname": "qwerqwer",
+        "image": null
+      },
+      "isLiked": false
+    },
+    {
+      "id": 13641,
+      "rating": 3,
+      "aroma": ["CHERRY", "APPLE", "GRASS", "MINERAL"],
+      "content": "안녕하세요오오오오오오오오오오오오오오오",
+      "createdAt": "2026-04-26T07:05:07.607Z",
+      "updatedAt": "2026-04-26T07:05:07.607Z",
+      "lightBold": 2,
+      "smoothTannic": 5,
+      "drySweet": 4,
+      "softAcidic": 3,
+      "user": {
+        "id": 2969,
+        "nickname": "qwerqwer",
+        "image": null
+      },
+      "isLiked": false
+    },
+    {
+      "id": 13640,
+      "rating": 4,
+      "aroma": ["CHERRY", "BERRY", "OAK", "PEPPER"],
+      "content": "이것은 무슨 와인일까요??",
+      "createdAt": "2026-04-26T07:04:04.475Z",
+      "updatedAt": "2026-04-26T07:04:04.475Z",
+      "lightBold": 3,
+      "smoothTannic": 2,
+      "drySweet": 1,
+      "softAcidic": 3,
+      "user": {
+        "id": 2969,
+        "nickname": "qwerqwer",
+        "image": null
+      },
+      "isLiked": false
+    }
+  ],
+  "avgRatings": {
+    "1": 0,
+    "2": 0,
+    "3": 2,
+    "4": 1,
+    "5": 0
+  }
+}
