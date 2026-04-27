@@ -8,11 +8,7 @@ const variantClassMap = {
   small: 'min-w-[101px] text-sm',
 } as const;
 
-const Dropdown = ({
-  variant,
-  options,
-  children,
-}: DropdownProps) => {
+const Dropdown = ({ variant, options, children }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -41,7 +37,7 @@ const Dropdown = ({
       {isOpen && (
         <ul
           role="listbox"
-          className={`absolute left-0 top-full mt-5 rounded-sm border border-[hsl(var(--gray-300))] bg-white shadow-[0_16px_32px_rgba(0,0,0,0.1)] ${variantClassMap[variant]}`}
+          className={`absolute right-0 top-full mt-5 rounded-sm border border-[hsl(var(--gray-300))] bg-white shadow-[0_16px_32px_rgba(0,0,0,0.1)] ${variantClassMap[variant]}`}
         >
           {options.map((option) => (
             <li key={option.label} className="px-[4px] py-[3px]">
