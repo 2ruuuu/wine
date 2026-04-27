@@ -4,13 +4,15 @@ import Logo from '@/assets/images/logo.svg';
 import Link from 'next/link';
 import { HeaderProps } from './type';
 import Dropdown from '../DropDown/Dropdown';
+import { useRouter } from 'next/navigation';
 
 const Header = ({ isLogIn, HeaderBg = false }: HeaderProps) => {
+  const router = useRouter();
   const options = [
     {
       label: '마이페이지',
       onSelect: () => {
-        console.log('마이페이지로 이동');
+        router.push('/myprofile');
       },
     },
     {
