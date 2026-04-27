@@ -1,10 +1,11 @@
 import AuthLayout from '@/components/Auth/AuthLayout';
 import AuthFooter from '@/components/Auth/AuthFooter';
+import SignupForm from './components/SignupForm';
 
 const Signup = () => {
   return (
     <AuthLayout>
-      {/* <SignupForm /> */}
+      <SignupForm />
       <AuthFooter type="signup" />
     </AuthLayout>
   );
