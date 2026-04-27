@@ -1,3 +1,4 @@
+'use client';
 import Image from 'next/image';
 import WineRecommend from '@/assets/images/wine-product-img.png';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -64,7 +65,6 @@ const WineList = () => {
         centeredSlides={true}
         autoplay={{ delay: 7000 }}
         allowTouchMove={false}
-        effect="fade"
         loop
         className="select-none"
         breakpoints={{

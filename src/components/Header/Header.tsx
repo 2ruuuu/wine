@@ -64,7 +64,10 @@ const Header = ({ isLogin, HeaderBg = false }: HeaderProps) => {
             )}
           </Dropdown>
         ) : (
-          <Link href="" className="md:text-[16px] text-[12px]  text-white">
+          <Link
+            href="/login"
+            className="md:text-[16px] text-[12px]  text-white"
+          >
             로그인
           </Link>
         )}
