@@ -2,12 +2,8 @@
 
 import { Star } from '@/constants/icons';
 import { NUMBER_ARR } from '@/constants/starRating';
-import { StarRatingProps } from './type';
+import { InteractiveStarProps } from './type';
 import Image from 'next/image';
-
-interface InteractiveStarProps extends StarRatingProps {
-  onChange?: (rating: number) => void;
-}
 
 const StarRating = ({ rating, onChange }: InteractiveStarProps) => {
   return (
@@ -27,6 +23,7 @@ const StarRating = ({ rating, onChange }: InteractiveStarProps) => {
             alt={`${item}점`}
             width={20}
             height={20}
+            style={{ height: 'auto' }}
             className={`transition-opacity ${
               item > rating ? 'opacity-20 grayscale' : 'opacity-100'
             }`}
