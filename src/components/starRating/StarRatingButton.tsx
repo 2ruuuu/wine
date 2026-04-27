@@ -2,12 +2,8 @@
 
 import { Star } from '@/constants/icons';
 import { NUMBER_ARR } from '@/constants/starRating';
-import { StarRatingProps } from './type';
+import { InteractiveStarProps } from './type';
 import Image from 'next/image';
-
-interface InteractiveStarProps extends StarRatingProps {
-  onChange?: (rating: number) => void;
-}
 
 const StarRating = ({ rating, onChange }: InteractiveStarProps) => {
   return (

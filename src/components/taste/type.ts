@@ -16,3 +16,12 @@ export interface TasteProps {
   type: TasteDataKey;
   value: number;
 }
+
+export interface TasteButtonProps {
+  type: TasteDataKey;
+  initialValue?: number;
+  label: string;
+  min: string;
+  max: string;
+  onChange?: (value: number) => void;
+}
