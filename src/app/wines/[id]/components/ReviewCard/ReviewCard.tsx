@@ -6,9 +6,9 @@ import { Up, Down, Hamburger } from '@/constants/icons';
 import StarRating from '@/components/StarRating/StarRating';
 import Mock from '@/mocks/reviewData.json';
 import Image from 'next/image';
-import AromaList from './AromaList';
-import TasteList from './TasteList';
-import HeartToggle from './HeartToggle';
+import AromaList from './AromaList/AromaList';
+import TasteList from './TasteList/TasteList';
+import HeartToggle from './HeartToggle/HeartToggle';
 import Dropdown from '@/components/DropDown/Dropdown';
 
 const ReviewCard = () => {
