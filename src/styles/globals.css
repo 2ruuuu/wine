@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @config "../../tailwind.config.ts";
 
 :root {
@@ -20,4 +20,10 @@
     word-break: keep-all;
     @apply font-sans;
   }
+}
+
+/* main swiper */
+.my-swiper {
+  --swiper-navigation-color: #fff;
+  --swiper-navigation-size: 30px;
 }

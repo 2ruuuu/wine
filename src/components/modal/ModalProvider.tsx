@@ -4,8 +4,7 @@ import { createContext, ReactNode, useContext, useState } from 'react';
 import { ModalProviderProps, ModalContextProps } from './type';
 import Modal from './ModalRoot';
 import RegisterModal from './RegisterModal';
-import NickNameModal from './RegisterModal';
-import Button from '../Button/Button';
+import Button from '@/components/Button/Button';
 import ReviewModal from './ReviewModal';
 
 const ModalContext = createContext<ModalContextProps | null>(null);

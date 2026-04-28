@@ -13,7 +13,7 @@ const Home = () => {
     <div>
       <div className="relative">
         <section className="bg-[#171A21] md:mb-20 mb-[25px]">
-          <div className="relative max-w-[1140px] md:pt-[180px] pt-[102px] mx-auto">
+          <div className="relative max-w-[1140px] md:pt-[110px] pt-[102px] mx-auto">
             <p className="md:text-title-hero text-[24px] text-white font-bold md:px-[60px] px-[22px]">
               한 곳에서 관리하는 <br /> 나만의 와인창고
             </p>
@@ -25,7 +25,7 @@ const Home = () => {
 
         <section>
           <div className="mx-auto flex md:flex-row max-w-[1140px] items-center justify-between flex-col max-[769px]:px-0 md:py-[43px] py-[21px]">
-            <div className="md:w-[280px] w-full max-[769px]:px-[20px]">
+            <div className="md:w-[280px] w-full max-[769px]:px-[20px] max-[1140px]:px-[30px]">
               <p className="font-bold leading-[1.35] text-[#111] md:text-heading-lg text-heading-sm">
                 매달 새롭게 만나는
                 <br />
@@ -62,7 +62,7 @@ const Home = () => {
 
         <section>
           <div className="mx-auto flex md:flex-row max-w-[1140px] items-center justify-between flex-col max-[756px]:px-0 md:py-[43px] py-[21px]">
-            <div className="md:w-[280px] w-full max-[756px]:px-[20px]">
+            <div className="md:w-[280px] w-full max-[756px]:px-[20px] max-[1140px]:px-[30px]">
               <p className="md:text-2xl font-bold leading-[1.35] text-[#111] text-[18px]">
                 직관적인
                 <br />

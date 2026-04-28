@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import WineRecommend from '@/assets/images/wine-product-img.png';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/swiper-bundle.css';
 
 const wines = [
@@ -60,13 +60,13 @@ const WineList = () => {
   return (
     <>
       <Swiper
-        modules={[Navigation, Pagination, Autoplay]}
+        modules={[Navigation, Autoplay]}
         slidesPerView={5}
+        navigation
         centeredSlides={true}
         autoplay={{ delay: 7000 }}
-        allowTouchMove={false}
         loop
-        className="select-none"
+        className="my-swiper"
         breakpoints={{
           0: {
             slidesPerView: 2,

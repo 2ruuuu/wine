@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-import PhotoInput from '../Input/PhotoInput';
-import TextInput from '../Input/TextInput';
-import Button from '../Button/Button';
-import Chip from '../Chip/Chip';
+import PhotoInput from '@/components/Input/PhotoInput';
+import TextInput from '@/components/Input/TextInput';
+import Button from '@/components/Button/Button';
+import Chip from '@/components/Chip/Chip';
 import {
   wineTypeRedImage,
   wineTypeWhiteImage,
