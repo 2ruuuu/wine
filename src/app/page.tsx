@@ -1,14 +1,19 @@
+'use client';
 import Header from '@/components/Header/Header';
 import Image from 'next/image';
 import { WineRecommend, WineFilter, WineReview } from '@/constants/images';
 import WineList from '@/components/Landing/WineList';
 import Link from 'next/link';
 import Button from '@/components/Button/Button';
+import { useModal } from '@/components/Modal/ModalProvider';
+import PhotoInput from '@/components/Input/PhotoInput';
+import TextInput from '@/components/Input/TextInput';
 
 const Home = () => {
+  const { openModal } = useModal();
+
   return (
     <div>
-      <Header isLogin={false} HeaderBg={false} />
       <div className="relative">
         <section className="bg-[#171A21] md:mb-20 mb-[25px]">
           <div className="relative max-w-[1140px] md:pt-[180px] pt-[102px] mx-auto">
@@ -20,6 +25,15 @@ const Home = () => {
             </div>
           </div>
         </section>
+        <button
+          onClick={() => openModal({ type: 'nickname', name: 'eunji111' })}
+        >
+          와인등록
+        </button>
+        <button onClick={() => openModal({ type: 'delete' })}>삭제</button>
+        <button onClick={() => openModal({ type: 'register' })}>
+          와인등록
+        </button>
         <section>
           <div className="mx-auto flex md:flex-row max-w-[1140px] items-center justify-between flex-col max-[769px]:px-0 md:py-[43px] py-[21px]">
             <div className="md:w-[280px] w-full max-[769px]:px-[20px]">
