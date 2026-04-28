@@ -31,7 +31,7 @@ const Header = ({ isLogin }: HeaderProps) => {
   if (isHiddenHeader) return null;
   return (
     <header
-      className={`w-full z-10 top-0 sticky transition-all duration-500 md:h-17.5 max-[756px]:h-[50px] md:px-[60px] px-5 flex justify-between items-center m-auto bg-[#171A21] ${isScrolled && 'mt-0! w-full rounded-none'} `}
+      className={`sticky w-full z-10 top-0 transition-all duration-500 md:h-17.5 max-[756px]:h-[50px] md:px-[60px] px-5 flex justify-between items-center m-auto bg-[#171A21] ${isScrolled && 'mt-0! w-full rounded-none'} `}
     >
       <h1>
         <Link href="/">
