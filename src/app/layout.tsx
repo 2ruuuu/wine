@@ -17,7 +17,7 @@ export default function RootLayout({
       </head>
       <body>
         <ModalProvider>
-          <Header isLogin={false} HeaderBg={false} />
+          <Header isLogin={false} />
           {children}
         </ModalProvider>
       </body>

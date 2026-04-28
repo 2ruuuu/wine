@@ -6,6 +6,7 @@ import Modal from './ModalRoot';
 import RegisterModal from './RegisterModal';
 import NickNameModal from './RegisterModal';
 import Button from '../Button/Button';
+import ReviewModal from './ReviewModal';
 
 const ModalContext = createContext<ModalContextProps | null>(null);
 
@@ -33,7 +34,7 @@ const ModalProvider = ({ children }: { children: ReactNode }) => {
           className="md:w-[460px] w-[375px]"
           hasHead
         >
-          <div>111</div>
+          <RegisterModal />
         </Modal>
       )}
 
@@ -44,7 +45,7 @@ const ModalProvider = ({ children }: { children: ReactNode }) => {
           className="md:w-[528px] w-[375px]"
           hasHead
         >
-          <div>리뷰등록</div>
+          <ReviewModal />
         </Modal>
       )}
 
