@@ -3,6 +3,9 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
 import { ModalProviderProps, ModalContextProps } from './type';
 import Modal from './ModalRoot';
+import RegisterModal from './RegisterModal';
+import NickNameModal from './RegisterModal';
+import Button from '../Button/Button';
 
 const ModalContext = createContext<ModalContextProps | null>(null);
 
@@ -30,7 +33,7 @@ const ModalProvider = ({ children }: { children: ReactNode }) => {
           className="md:w-[460px] w-[375px]"
           hasHead
         >
-          <div>와인등록</div>
+          <div>111</div>
         </Modal>
       )}
 
@@ -52,8 +55,18 @@ const ModalProvider = ({ children }: { children: ReactNode }) => {
           className="md:w-[353px] w-[312px]"
           hasHead={false}
         >
-          <p>삭제하시겠습니까?</p>
-          <button onClick={closeModal}>닫기</button>
+          <p className="text-center md:text-heading-md text-heading-sm">
+            정말 삭제하시겠습니까?
+          </p>
+
+          <div className="flex gap-2 mt-8">
+            <Button onClick={closeModal} variant="outline" className="w-1/2">
+              취소
+            </Button>
+            <Button onClick={closeModal} variant="primary" className="w-1/2">
+              삭제하기
+            </Button>
+          </div>
         </Modal>
       )}
 
@@ -64,12 +77,20 @@ const ModalProvider = ({ children }: { children: ReactNode }) => {
           className="md:w-[353px] w-[312px]"
           hasHead={false}
         >
-          <p>
-            ‘와인고르는중’으로
+          <p className="text-center md:text-heading-md text-heading-sm">
+            {modal.name}으로
             <br />
             닉네임을 변경할까요??
           </p>
-          <button onClick={closeModal}>닫기</button>
+
+          <div className="flex gap-2 mt-8">
+            <Button onClick={closeModal} variant="outline" className="w-1/2">
+              취소
+            </Button>
+            <Button onClick={closeModal} variant="primary" className="w-1/2">
+              변경하기
+            </Button>
+          </div>
         </Modal>
       )}
     </ModalContext.Provider>
