@@ -31,7 +31,7 @@ const Button = ({
   return (
     <button
       type={type}
-      className={`group ${commonBase} ${variants[variant]} ${widthStyle} ${className}`}
+      className={`group ${commonBase} ${variants[variant]} ${widthStyle} ${className} disabled:bg-gray-600 disabled:cursor-not-allowed`}
       {...props}
     >
       {icon && (
