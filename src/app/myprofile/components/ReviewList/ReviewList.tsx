@@ -1,5 +1,7 @@
 import ReviewListProps from './type';
 import Taste from '@/components/taste/Taste';
+import StarRating from '@/components/starRating/StarRating';
+import Button from '@/components/Button/Button';
 
 const ReviewList = ({ reviews }: ReviewListProps) => {
   return (
@@ -14,7 +16,7 @@ const ReviewList = ({ reviews }: ReviewListProps) => {
           "
         >
           <div className="flex items-center gap-2">
-            <span>{'★'.repeat(review.rating)}</span>
+            <StarRating rating={review.rating} />
             <strong>{review.rating}</strong>
             <span className="text-gray-400 text-[13px]">
               {review.createdAt}
@@ -64,17 +66,9 @@ const ReviewList = ({ reviews }: ReviewListProps) => {
             </div>
           </div>
 
-          <button
-            className="
-              mt-5
-              border border-gray-300
-              bg-white
-              rounded-[6px]
-              px-3.5 py-2
-            "
-          >
+          <Button variant="outline" className="mt-5 px-3.5 py-2">
             ♡ {review.likeCount}
-          </button>
+          </Button>
         </article>
       ))}
     </>

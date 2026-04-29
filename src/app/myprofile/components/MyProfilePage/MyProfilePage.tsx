@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import Header from '@/components/gnb/Header';
 import { useModal } from '@/components/modal/ModalProvider';
 
 import ProfileSidebar from '../ProfileSidebar/ProfileSidebar';
@@ -55,8 +54,6 @@ const MyProfilePage = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header isLogIn={true} HeaderBg={false} />
-
       <div className="h-[90px]" />
 
       <main className="w-[960px] mx-auto flex">
