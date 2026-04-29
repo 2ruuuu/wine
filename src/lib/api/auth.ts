@@ -18,3 +18,11 @@ export const signIn = async (
   const { data } = await instance.post<AuthResponse>('/auth/signIn', formData);
   return data;
 };
+
+// 토큰 갱신
+export const refreshTokenApi = async (
+  refreshToken: string,
+): Promise<{ accessToken: string }> => {
+  const { data } = await instance.post('/auth/refresh-token', { refreshToken });
+  return data;
+};
