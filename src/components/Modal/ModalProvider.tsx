@@ -78,16 +78,23 @@ const ModalProvider = ({ children }: { children: ReactNode }) => {
           hasHead={false}
         >
           <p className="text-center md:text-heading-md text-heading-sm">
-            {modal.name}으로
+            ‘{modal.nickname}’으로
             <br />
-            닉네임을 변경할까요??
+            닉네임을 변경할까요?
           </p>
 
           <div className="flex gap-2 mt-8">
             <Button onClick={closeModal} variant="outline" className="w-1/2">
               취소
             </Button>
-            <Button onClick={closeModal} variant="primary" className="w-1/2">
+            <Button
+              onClick={() => {
+                modal.onConfirm();
+                closeModal();
+              }}
+              variant="primary"
+              className="w-1/2"
+            >
               변경하기
             </Button>
           </div>
