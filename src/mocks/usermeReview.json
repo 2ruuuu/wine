@@ -1,0 +1,162 @@
+{
+  "list": [
+    {
+      "id": 13643,
+      "rating": 3,
+      "lightBold": 4,
+      "smoothTannic": 4,
+      "drySweet": 2,
+      "softAcidic": 5,
+      "aroma": [
+        "CHERRY",
+        "SPICE",
+        "APPLE"
+      ],
+      "content": "맛이좋네요",
+      "createdAt": "2026-04-29T02:06:10.531Z",
+      "updatedAt": "2026-04-29T02:06:10.531Z",
+      "likeCount": 0,
+      "user": {
+        "id": 2976,
+        "nickname": "문경",
+        "image": null
+      },
+      "wine": {
+        "id": 2597,
+        "name": "와인쓰",
+        "region": "한국",
+        "image": "https://image6.yanolja.com/leisure/zELeQzGcN5je3YRH",
+        "price": 34560,
+        "avgRating": 3,
+        "type": "RED"
+      }
+    },
+    {
+      "id": 13644,
+      "rating": 2,
+      "lightBold": 3,
+      "smoothTannic": 1,
+      "drySweet": 5,
+      "softAcidic": 5,
+      "aroma": [
+        "CHERRY",
+        "SPICE",
+        "APPLE"
+      ],
+      "content": "맛좋다~",
+      "createdAt": "2026-04-29T02:07:13.575Z",
+      "updatedAt": "2026-04-29T02:07:13.575Z",
+      "likeCount": 0,
+      "user": {
+        "id": 2976,
+        "nickname": "문경",
+        "image": null
+      },
+      "wine": {
+        "id": 2597,
+        "name": "와인쓰",
+        "region": "한국",
+        "image": "https://image6.yanolja.com/leisure/zELeQzGcN5je3YRH",
+        "price": 34560,
+        "avgRating": 3,
+        "type": "RED"
+      }
+    },
+    {
+      "id": 13645,
+      "rating": 3,
+      "lightBold": 3,
+      "smoothTannic": 1,
+      "drySweet": 4,
+      "softAcidic": 5,
+      "aroma": [
+        "CHERRY",
+        "SPICE",
+        "APPLE"
+      ],
+      "content": "맛있어욤!!",
+      "createdAt": "2026-04-29T02:07:26.526Z",
+      "updatedAt": "2026-04-29T02:07:26.526Z",
+      "likeCount": 0,
+      "user": {
+        "id": 2976,
+        "nickname": "문경",
+        "image": null
+      },
+      "wine": {
+        "id": 2597,
+        "name": "와인쓰",
+        "region": "한국",
+        "image": "https://image6.yanolja.com/leisure/zELeQzGcN5je3YRH",
+        "price": 34560,
+        "avgRating": 3,
+        "type": "RED"
+      }
+    },
+    {
+      "id": 13646,
+      "rating": 5,
+      "lightBold": 3,
+      "smoothTannic": 1,
+      "drySweet": 2,
+      "softAcidic": 4,
+      "aroma": [
+        "CHERRY",
+        "SPICE",
+        "APPLE"
+      ],
+      "content": "맛없어요",
+      "createdAt": "2026-04-29T02:07:45.240Z",
+      "updatedAt": "2026-04-29T02:07:45.240Z",
+      "likeCount": 0,
+      "user": {
+        "id": 2976,
+        "nickname": "문경",
+        "image": null
+      },
+      "wine": {
+        "id": 2597,
+        "name": "와인쓰",
+        "region": "한국",
+        "image": "https://image6.yanolja.com/leisure/zELeQzGcN5je3YRH",
+        "price": 34560,
+        "avgRating": 3,
+        "type": "RED"
+      }
+    },
+    {
+      "id": 13647,
+      "rating": 2,
+      "lightBold": 1,
+      "smoothTannic": 3,
+      "drySweet": 5,
+      "softAcidic": 4,
+      "aroma": [
+        "CHERRY",
+        "SPICE",
+        "APPLE"
+      ],
+      "content": "이 편지는 영국에서 최초로 시작되었으며, 일 년에 한 바퀴를 돌면서 받는 사람에게 행운을 준다고 전해집니다. 편지를 받은 사람은 4일(96시간) 안에 7통의 편지를 행운이 필요한 사람에게 보내야 한다는 규칙이 있습니다. 편지를 복사해서 보내는 것도 허용되며, 편지를 버리거나 낙서를 해서는 안 된다고 합니다",
+      "createdAt": "2026-04-29T02:08:17.497Z",
+      "updatedAt": "2026-04-29T02:08:17.497Z",
+      "likeCount": 0,
+      "user": {
+        "id": 2976,
+        "nickname": "문경",
+        "image": null
+      },
+      "wine": {
+        "id": 2597,
+        "name": "와인쓰",
+        "region": "한국",
+        "image": "https://image6.yanolja.com/leisure/zELeQzGcN5je3YRH",
+        "price": 34560,
+        "avgRating": 3,
+        "type": "RED"
+      }
+    }
+  ],
+  "totalCount": 5,
+  "nextCursor": 13647,
+  "totalLikeCount": 0
+}

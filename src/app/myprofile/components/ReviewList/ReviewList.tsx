@@ -1,4 +1,5 @@
 import ReviewListProps from './type';
+import Taste from '@/components/taste/Taste';
 
 const ReviewList = ({ reviews }: ReviewListProps) => {
   return (
@@ -34,6 +35,34 @@ const ReviewList = ({ reviews }: ReviewListProps) => {
           <p className="mt-5 leading-[1.7] text-[14px] whitespace-pre-line">
             {review.content}
           </p>
+
+          <div className="mt-5 w-[520px] space-y-2">
+            <div className="flex gap-8">
+              <Taste
+                variant="label-boxed-short"
+                type="lightBold"
+                value={review.lightBold}
+              />
+              <Taste
+                variant="label-boxed-short"
+                type="smoothTannic"
+                value={review.smoothTannic}
+              />
+            </div>
+
+            <div className="flex gap-8">
+              <Taste
+                variant="label-boxed-short"
+                type="drySweet"
+                value={review.drySweet}
+              />
+              <Taste
+                variant="label-boxed-short"
+                type="softAcidic"
+                value={review.softAcidic}
+              />
+            </div>
+          </div>
 
           <button
             className="

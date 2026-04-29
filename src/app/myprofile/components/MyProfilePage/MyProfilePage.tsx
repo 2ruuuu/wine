@@ -12,7 +12,7 @@ import ReviewList from '../ReviewList/ReviewList';
 import WineList from '../WineList/WineList';
 import EmptyState from '../EmptyState/EmptyState';
 
-import { mockMyReviews, mockMyWines } from './mock';
+import userMeReviewData from '@/mocks/usermeReview.json';
 import { MyProfileForm, ProfileTabType } from './type';
 
 const mockUser = {
@@ -33,8 +33,8 @@ const MyProfilePage = () => {
 
   const inputNickname = watch('nickname');
 
-  const reviews = mockMyReviews.list;
-  const wines = mockMyWines.list;
+  const reviews = userMeReviewData.list as any[];
+  const wines: any[] = [];
 
   const handleClickChange = () => {
     if (!inputNickname.trim()) {
@@ -70,8 +70,8 @@ const MyProfilePage = () => {
         <section className="flex-1 px-9 py-8">
           <ProfileTabs
             activeTab={activeTab}
-            reviewCount={mockMyReviews.totalCount}
-            wineCount={mockMyWines.totalCount}
+            reviewCount={reviews.length}
+            wineCount={wines.length}
             onChangeTab={setActiveTab}
           />
 
