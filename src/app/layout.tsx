@@ -15,10 +15,12 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
         />
       </head>
-      <body>
+      <body className="min-h-screen flex flex-col bg-white">
         <ModalProvider>
           <Header isLogin={false} HeaderBg={false} />
-          {children}
+          <main className="w-full max-w-[1140px] mx-auto px-4 md:px-8">
+            {children}
+          </main>
         </ModalProvider>
       </body>
     </html>
