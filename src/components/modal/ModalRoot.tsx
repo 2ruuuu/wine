@@ -3,6 +3,7 @@
 import { ModalRootProps } from './type';
 import Image from 'next/image';
 import { Close } from '@/constants/icons';
+import { useEffect, useState } from 'react';
 
 const Modal = ({
   title,

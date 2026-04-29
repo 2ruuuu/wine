@@ -36,7 +36,6 @@ const RegisterModal = () => {
     setSelectedWineType(wineType);
   };
 
-  console.log(WINE_TYPES);
   return (
     <div>
       <form className="flex flex-col gap-6">

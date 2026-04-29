@@ -8,7 +8,9 @@ import { useModal } from '@/components/Modal/ModalProvider';
 
 const Home = () => {
   const { openModal } = useModal();
-
+  const buttonClicks = () => {
+    console.log('1');
+  };
   return (
     <div>
       <div className="relative">
@@ -111,7 +113,14 @@ const Home = () => {
         <Button
           variant="primary"
           className="w-[283px]"
-          onClick={() => openModal({ type: 'review' })}
+          onClick={() =>
+            openModal({
+              type: 'review',
+              onSubmit: () => {
+                console.log('리뷰 등록 버튼 클릭');
+              },
+            })
+          }
         >
           리뷰등록
         </Button>
