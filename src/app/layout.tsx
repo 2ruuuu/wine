@@ -1,5 +1,6 @@
-import ModalProvider from '@/components/modal/ModalProvider';
+import ModalProvider from '@/components/Modal/ModalProvider';
 import '../styles/globals.css';
+import Header from '@/components/Header/Header';
 
 export default function RootLayout({
   children,
@@ -15,7 +16,10 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <ModalProvider>{children}</ModalProvider>
+        <ModalProvider>
+          <Header isLogin={false} HeaderBg={false} />
+          {children}
+        </ModalProvider>
       </body>
     </html>
   );
