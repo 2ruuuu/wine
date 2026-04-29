@@ -70,11 +70,10 @@ const RegisterModal = () => {
         </div>
 
         <TextInput label="원산지" placeholder="원산지 입력" />
+        <Button fullWidth className="mt-12">
+          와인 등록하기
+        </Button>
       </form>
-
-      <Button fullWidth className="mt-12">
-        와인 등록하기
-      </Button>
     </div>
   );
 };

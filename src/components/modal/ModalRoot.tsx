@@ -34,8 +34,7 @@ const Modal = ({
             </button>
           </div>
         )}
-
-        {children}
+        <div>{children}</div>
       </div>
     </div>
   );
