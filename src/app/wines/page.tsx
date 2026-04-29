@@ -1,5 +1,5 @@
 import SuggestedWineList from './components/SuggestedWineList/SuggestedWineList';
-import { suggestedWinesMockData } from '@/mocks/SuggestedWinesMockData';
+import { suggestedWinesMockData } from '@/mocks/suggestedWinesMockData';
 
 const WineList = () => {
   return (
