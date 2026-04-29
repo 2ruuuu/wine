@@ -25,6 +25,6 @@ export type Review = {
   user: {
     id: number;
     nickname: string;
-    image: string;
+    image: string | null;
   };
 };

@@ -12,7 +12,9 @@ import WineList from '../WineList/WineList';
 import EmptyState from '../EmptyState/EmptyState';
 
 import userMeReviewData from '@/mocks/usermeReview.json';
+import { Review } from '@/types/review';
 import { MyProfileForm, ProfileTabType } from './type';
+import { WineListItem } from '../WineList/type';
 
 const mockUser = {
   nickname: '주말에와인',
@@ -32,8 +34,8 @@ const MyProfilePage = () => {
 
   const inputNickname = watch('nickname');
 
-  const reviews = userMeReviewData.list as any[];
-  const wines: any[] = [];
+  const reviews = userMeReviewData.list as Review[];
+  const wines: WineListItem[] = [];
 
   const handleClickChange = () => {
     if (!inputNickname.trim()) {

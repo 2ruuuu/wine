@@ -1,7 +1,7 @@
-import { ReviewItem } from '../MyProfilePage/type';
+import { Review } from '@/types/review';
 
 interface ReviewListProps {
-  reviews: ReviewItem[];
+  reviews: Review[];
 }
 
 export default ReviewListProps;

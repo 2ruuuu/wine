@@ -1,7 +1,14 @@
-import { MyWineItem } from '../MyProfilePage/type';
+export type WineListItem = {
+  id: number;
+  name: string;
+  region: string;
+  image?: string | null;
+  avgRating: number;
+  reviewCount: number;
+};
 
 interface WineListProps {
-  wines: MyWineItem[];
+  wines: WineListItem[];
 }
 
 export default WineListProps;
