@@ -1,0 +1,9 @@
+{
+  "message": "Validation Failed",
+  "details": {
+    "aroma.$1": {
+      "message": "[['CHERRY']['BERRY']['OAK']['VANILLA']['PEPPER']['BAKING']['GRASS']['APPLE']['PEACH']['CITRUS']['TROPICAL']['MINERAL']['FLOWER']['TOBACCO']['EARTH']['CHOCOLATE']['SPICE']['CARAMEL']['LEATHER']}}]",
+      "value": "ㅇㄹㅇㄹㅇ"
+    }
+  }
+}
