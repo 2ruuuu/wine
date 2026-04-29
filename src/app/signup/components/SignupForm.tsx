@@ -9,7 +9,7 @@ import TextInput from '@/components/Input/TextInput';
 import Button from '@/components/Button/Button';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { signUp } from '@/lib/api/auth';
-import { SignupoFormValues } from './type';
+import { SignupFormValues } from './type';
 
 const signupSchema = z
   .object({
@@ -54,13 +54,13 @@ const SignupForm = () => {
     handleSubmit,
     setError,
     formState: { errors, isValid },
-  } = useForm<SignupoFormValues>({
+  } = useForm<SignupFormValues>({
     resolver: zodResolver(signupSchema),
     mode: 'onBlur',
   });
 
   // 회원가입이 완료된 후 로그인 상태로 홈 화면(/)으로 이동
-  const onSubmit = async (data: SignupoFormValues) => {
+  const onSubmit = async (data: SignupFormValues) => {
     try {
       const response = await signUp(data);
 

@@ -1,11 +1,11 @@
-import { SignupoFormValues } from '@/app/signup/components/type';
+import { SignupFormValues } from '@/app/signup/components/type';
 import { LoginFormValues } from '@/app/login/components/type';
 import { AuthResponse } from '@/stores/useAuthStore';
 import { instance } from './axios';
 
 // 회원가입
 export const signUp = async (
-  formData: SignupoFormValues,
+  formData: SignupFormValues,
 ): Promise<AuthResponse> => {
   const { data } = await instance.post<AuthResponse>('/auth/signUp', formData);
   return data;
