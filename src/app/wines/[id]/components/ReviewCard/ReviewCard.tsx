@@ -2,16 +2,16 @@
 
 import { useState } from 'react';
 import { formatTimeAgo } from '@/lib/date-fns';
-import { Up, Down, Hamburger } from '@/constants/icons';
+import { Up, Down, Hamburger, Profile } from '@/constants/icons';
 import StarRating from '@/components/StarRating/StarRating';
-import Mock from '@/mocks/reviewData.json';
 import Image from 'next/image';
 import AromaList from './AromaList/AromaList';
 import TasteList from './TasteList/TasteList';
 import HeartToggle from './HeartToggle/HeartToggle';
 import Dropdown from '@/components/DropDown/Dropdown';
+import { ReviewCardProps } from './type';
 
-const ReviewCard = () => {
+const ReviewCard = ({ review }: ReviewCardProps) => {
   const [isTasteOpen, setIsTasteOpen] = useState(false);
   const dropdownOptions = [
     { label: '수정하기', onSelect: () => console.log('수정 클릭!') },
@@ -19,13 +19,13 @@ const ReviewCard = () => {
   ];
 
   return (
-    <div className="flex flex-col gap-12 max-w-[725px] pt-10 pb-10 border-b border-gray-300">
+    <div className="flex flex-col gap-12 max-w-[725px] w-full pt-10 pb-10 border-b border-gray-300">
       <div className="flex flex-col gap-5">
-        <StarRating rating={Mock.rating} />
+        <StarRating rating={review.rating} />
         <div className="flex justify-between items-center">
           <div className="flex gap-4 justify-center items-center">
             <Image
-              src={Mock.user.image}
+              src={review.user.image || Profile}
               alt="프로필"
               width={64}
               height={64}
@@ -33,10 +33,10 @@ const ReviewCard = () => {
             />
             <div className="flex flex-col">
               <span className="text-black font-semibold">
-                {Mock.user.nickname}
+                {review.user.nickname}
               </span>
               <span className="text-gray-600">
-                {formatTimeAgo(Mock.createdAt)}
+                {formatTimeAgo(review.createdAt)}
               </span>
             </div>
           </div>
@@ -56,21 +56,21 @@ const ReviewCard = () => {
             )}
           </Dropdown>
         </div>
-        <AromaList aroma={Mock.aroma} />
-        <p className="text-black">{Mock.content}</p>
+        <AromaList aroma={review.aroma} />
+        <p className="text-black">{review.content}</p>
       </div>
       {isTasteOpen && (
         <TasteList
-          lightBold={Mock.lightBold}
-          smoothTannic={Mock.lightBold}
-          drySweet={Mock.drySweet}
-          softAcidic={Mock.softAcidic}
+          lightBold={review.lightBold}
+          smoothTannic={review.lightBold}
+          drySweet={review.drySweet}
+          softAcidic={review.softAcidic}
         />
       )}
 
       <div className="flex relative justify-center items-center">
         <div className="absolute left-0">
-          <HeartToggle isLiked={Mock.isLiked} />
+          <HeartToggle isLiked={review.isLiked} />
         </div>
         <button
           onClick={() => setIsTasteOpen(!isTasteOpen)}

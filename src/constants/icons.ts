@@ -33,6 +33,7 @@ import Down from '@/assets/icons/down.svg';
 import HeartEmpty from '@/assets/icons/heart-empty.svg';
 import HeartFill from '@/assets/icons/heart-fill.svg';
 import Hamburger from '@/assets/icons/hamburger.svg';
+import Profile from '@/assets/icons/profile.svg';
 
 export {
   Star,
@@ -70,4 +71,5 @@ export {
   HeartEmpty,
   HeartFill,
   Hamburger,
+  Profile,
 };
