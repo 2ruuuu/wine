@@ -4,9 +4,11 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import TextInput from '@/components/Input/TextInput';
 import Button from '@/components/Button/Button';
+import { useAuthStore } from '@/stores/useAuthStore';
 import { SignupoFormValues } from './type';
 
 const signupSchema = z
@@ -35,20 +37,22 @@ const signupSchema = z
     path: ['passwordConfirmation'],
   });
 
-const LoginForm = () => {
+const SignupForm = () => {
   const router = useRouter();
-  const isLogIn = false; // 로그인 상태 체크 > 추후에 전역 상태 관리
+  const { user, setAuth } = useAuthStore();
+  const isLogIn = !!user;
 
   // 로그인 상태에서 접근할 경우 홈 화면(/)으로 리다이렉트
   useEffect(() => {
     if (isLogIn) {
-      router.push('/');
+      router.replace('/');
     }
   }, [isLogIn, router]);
 
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isValid },
   } = useForm<SignupoFormValues>({
     resolver: zodResolver(signupSchema),
@@ -57,9 +61,34 @@ const LoginForm = () => {
 
   // 회원가입이 완료된 후 로그인 상태로 홈 화면(/)으로 이동
   const onSubmit = async (data: SignupoFormValues) => {
-    console.log('회원가입 데이터:', data); // 추후에 API 호출
+    try {
+      const response = await axios.post(
+        'https://winereview-api.vercel.app/23-3/auth/signUp',
+        {
+          email: data.email,
+          nickname: data.nickname,
+          password: data.password,
+          passwordConfirmation: data.passwordConfirmation,
+        },
+      );
 
-    router.push('/');
+      const { user, accessToken, refreshToken } = response.data;
+
+      if (user && accessToken && refreshToken) {
+        setAuth(user, accessToken, refreshToken);
+        router.replace('/');
+      }
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.message;
+
+      if (errorMessage?.includes('이메일')) {
+        setError('email', { message: '이미 사용 중인 이메일입니다.' });
+      } else if (errorMessage?.includes('닉네임')) {
+        setError('nickname', { message: '이미 사용 중인 닉네임입니다.' });
+      } else {
+        alert('회원가입에 실패했습니다.');
+      }
+    }
   };
 
   return (
@@ -101,4 +130,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SignupForm;
