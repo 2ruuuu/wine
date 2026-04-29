@@ -4,13 +4,13 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import TextInput from '@/components/Input/TextInput';
 import Button from '@/components/Button/Button';
 import { Kakao } from '@/constants/icons';
 import { useAuthStore } from '@/stores/useAuthStore';
+import { signIn } from '@/lib/api/auth';
 import { LoginFormValues } from './type';
 
 const loginSchema = z.object({
@@ -46,18 +46,10 @@ const LoginForm = () => {
   // 로그인 성공하면 홈 화면(/)으로 이동
   const onSubmit = async (data: LoginFormValues) => {
     try {
-      const response = await axios.post(
-        'https://winereview-api.vercel.app/23-3/auth/signIn',
-        {
-          email: data.email,
-          password: data.password,
-        },
-      );
+      const response = await signIn(data);
 
-      const { user, accessToken, refreshToken } = response.data;
-
-      if (user && accessToken && refreshToken) {
-        setAuth(user, accessToken, refreshToken);
+      if (response) {
+        setAuth(response);
         router.replace('/');
       }
     } catch (error: any) {
