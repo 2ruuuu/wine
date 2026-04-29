@@ -1,0 +1,20 @@
+{
+  "id": 13632,
+  "rating": 5,
+  "lightBold": 2,
+  "smoothTannic": 3,
+  "drySweet": 5,
+  "softAcidic": 6,
+  "aroma": ["CHERRY", "EARTH", "PEPPER", "FLOWER", "SPICE"],
+  "content": "첫 모금에서 느껴지는 진한 블랙베리와 블랙커런트의 깊은 풍미가 인상적이었어요. 입 안을 가득 채우는 묵직한 바디감과 함께, 오크 숙성에서 오는 바닐라, 스파이스, 은은한 토스트 향이 균형 있게 어우러집니다. 시간이 지날수록 다크 초콜릿과 가죽 같은 성숙한 노트가 올라오면서, 여운이 길고도 부드럽게 이어져요. 타닌은 뚜렷하지만 과하지 않고,  단단한 구조감 덕분에 고기 요리나 숙성 치즈와 특히 잘 어울리는 와인이었습니다.",
+  "createdAt": "2026-04-21T01:10:26.364Z",
+  "updatedAt": "2026-04-21T01:10:26.364Z",
+  "user": {
+    "id": 2969,
+    "nickname": "qwerqwer",
+    "image": "https://i.pinimg.com/474x/6f/7f/0b/6f7f0bbccc81c01b7f242b877c6fda6a.jpg"
+  },
+  "wineId": 2595,
+  "teamId": "23",
+  "isLiked": true
+}

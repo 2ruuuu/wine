@@ -1,5 +1,6 @@
-import "../styles/globals.css";
-import "../styles/reset.css";
+import ModalProvider from '@/components/Modal/ModalProvider';
+import '../styles/globals.css';
+import Header from '@/components/Header/Header';
 
 export default function RootLayout({
   children,
@@ -8,7 +9,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body>{children}</body>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+        />
+      </head>
+      <body>
+        <ModalProvider>
+          <Header isLogin={false} HeaderBg={false} />
+          {children}
+        </ModalProvider>
+      </body>
     </html>
   );
 }
