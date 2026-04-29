@@ -65,10 +65,12 @@ const ModalProvider = ({ children }: { children: ReactNode }) => {
           hasHead={false}
         >
           <p>
-            ‘와인고르는중’으로
+            ‘{modal.nickname}’으로
             <br />
-            닉네임을 변경할까요??
+            닉네임을 변경할까요?
           </p>
+
+          <button onClick={modal.onConfirm}>변경하기</button>
           <button onClick={closeModal}>닫기</button>
         </Modal>
       )}

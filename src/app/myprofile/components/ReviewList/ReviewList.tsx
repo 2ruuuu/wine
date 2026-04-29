@@ -1,0 +1,55 @@
+import ReviewListProps from './type';
+
+const ReviewList = ({ reviews }: ReviewListProps) => {
+  return (
+    <>
+      {reviews.map((review) => (
+        <article
+          key={review.id}
+          className="
+            border-b border-gray-300
+            pb-8 mb-8
+            -ml-9 pl-9
+          "
+        >
+          <div className="flex items-center gap-2">
+            <span>{'★'.repeat(review.rating)}</span>
+            <strong>{review.rating}</strong>
+            <span className="text-gray-400 text-[13px]">
+              {review.createdAt}
+            </span>
+          </div>
+
+          <div className="flex gap-4 mt-4">
+            <div className="w-[42px] h-[70px] bg-gray-100" />
+
+            <div>
+              <strong>{review.wine.name}</strong>
+              <p className="text-gray-400 text-[13px] mt-1">
+                {review.wine.region}
+              </p>
+            </div>
+          </div>
+
+          <p className="mt-5 leading-[1.7] text-[14px] whitespace-pre-line">
+            {review.content}
+          </p>
+
+          <button
+            className="
+              mt-5
+              border border-gray-300
+              bg-white
+              rounded-[6px]
+              px-3.5 py-2
+            "
+          >
+            ♡ {review.likeCount}
+          </button>
+        </article>
+      ))}
+    </>
+  );
+};
+
+export default ReviewList;
