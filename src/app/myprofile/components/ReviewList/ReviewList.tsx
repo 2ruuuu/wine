@@ -1,6 +1,6 @@
 import ReviewListProps from './type';
-import Taste from '@/components/taste/Taste';
-import StarRating from '@/components/starRating/StarRating';
+import Taste from '@/components/Taste/Taste';
+import StarRating from '@/components/StarRating/StarRating';
 import Button from '@/components/Button/Button';
 
 const ReviewList = ({ reviews }: ReviewListProps) => {

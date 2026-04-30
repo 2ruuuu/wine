@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { useModal } from '@/components/modal/ModalProvider';
+import { useModal } from '@/components/Modal/ModalProvider';
 
 import ProfileSidebar from '../ProfileSidebar/ProfileSidebar';
 import ProfileTabs from '../ProfileTabs/ProfileTabs';
