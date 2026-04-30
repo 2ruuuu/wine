@@ -3,7 +3,7 @@ import { WineListProps } from './type';
 
 const WineList = ({ wines }: WineListProps) => {
   return (
-    <div className="">
+    <div className="grid grid-cols-2 gap-15 max-w-[801px] mx-auto">
       {wines.map((wine) => (
         <div key={wine.id}>
           <WineCard {...wine} />
