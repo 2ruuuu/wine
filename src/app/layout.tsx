@@ -18,9 +18,7 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col bg-white">
         <ModalProvider>
           <Header isLogin={false} HeaderBg={false} />
-          <main className="w-full max-w-[1140px] mx-auto px-4 md:px-8">
-            {children}
-          </main>
+          <main>{children}</main>
         </ModalProvider>
       </body>
     </html>
