@@ -26,7 +26,13 @@ const Home = () => {
           </div>
         </section>
         <button
-          onClick={() => openModal({ type: 'nickname', name: 'eunji111' })}
+          onClick={() =>
+            openModal({
+              type: 'nickname',
+              nickname: 'eunji111',
+              onConfirm: () => {},
+            })
+          }
         >
           와인등록
         </button>
