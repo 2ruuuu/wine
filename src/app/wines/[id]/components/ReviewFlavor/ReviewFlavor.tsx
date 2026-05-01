@@ -8,7 +8,7 @@ const ReviewFlavor = () => {
         <span className="text-2xl font-semibold">어떤 맛이 나나요?</span>
         <span className="text-gray-300">(47명 참여)</span>
       </div>
-      <Taste variant="label-boxed-long" type="lightBold" value={} />
+      <Taste variant="label-boxed-long" type="lightBold" value={3} />
     </div>
   );
 };
