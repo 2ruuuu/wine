@@ -1,11 +1,7 @@
-import Flavor from './components/Flavor/Flavor';
+'use client';
 
 const Wine = () => {
-  return (
-    <div className="m-[50px]">
-      <Flavor />
-    </div>
-  );
+  return <div className="m-11"></div>;
 };
 
 export default Wine;
