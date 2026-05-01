@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @config "../../tailwind.config.ts";
 
 :root {
@@ -19,5 +19,11 @@
   html {
     word-break: keep-all;
     @apply font-sans;
+  }
+}
+
+@layer components {
+  .container-layout {
+    @apply w-full max-w-[1204px] mx-auto px-4 md:px-8;
   }
 }

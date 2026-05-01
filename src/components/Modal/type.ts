@@ -13,7 +13,7 @@ export type ModalProviderProps =
   | { type: 'register' }
   | { type: 'review' }
   | { type: 'delete' }
-  | { type: 'nickname'; name: string }
+  | { type: 'nickname'; nickname: string; onConfirm: () => void }
   | null;
 
 export type ModalContextProps = {
