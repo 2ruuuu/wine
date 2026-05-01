@@ -1,5 +1,5 @@
 import ReviewListProps from './type';
-import Taste from '@/components/Taste/Taste';
+import Taste from '@/components/Taste/TasteButton';
 import StarRating from '@/components/StarRating/StarRating';
 import Button from '@/components/Button/Button';
 
