@@ -7,7 +7,6 @@ import RegisterModal from './RegisterModal';
 import Button from '@/components/Button/Button';
 import ReviewModal from './ReviewModal';
 import FilterModal from './FilterModal';
-
 const ModalContext = createContext<ModalContextProps | null>(null);
 
 const ModalProvider = ({ children }: { children: ReactNode }) => {

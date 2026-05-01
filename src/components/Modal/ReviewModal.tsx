@@ -1,4 +1,5 @@
 'use client';
+
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Button from '../Button/Button';
@@ -53,7 +54,6 @@ const ReviewModal = () => {
   const handleRatingChange = (newRating: number) => {
     setRating(newRating);
   };
-
   const onClickFlavor = (wineFlavor: WineFlavor) => {
     setSelectedWineFlavors((prev) =>
       prev.includes(wineFlavor)
