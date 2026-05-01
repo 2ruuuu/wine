@@ -20,3 +20,8 @@ export type ModalContextProps = {
   openModal: (modal: Exclude<ModalProviderProps, null>) => void;
   closeModal: () => void;
 };
+
+export type NameChangeModalProps = {
+  name: string;
+  onClose: () => void;
+};

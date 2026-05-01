@@ -8,9 +8,6 @@ import { useModal } from '@/components/Modal/ModalProvider';
 
 const Home = () => {
   const { openModal } = useModal();
-  const buttonClicks = () => {
-    console.log('1');
-  };
   return (
     <div>
       <div className="relative">
