@@ -1,6 +1,27 @@
+import type { Metadata } from 'next';
 import ModalProvider from '@/components/Modal/ModalProvider';
 import '../styles/globals.css';
 import Header from '@/components/Header/Header';
+
+export const metadata: Metadata = {
+  title: 'WINE',
+  description: '현명한 와인 구매를 위한 리뷰 플랫폼',
+  icons: {
+    icon: '/favicon.svg',
+  },
+  openGraph: {
+    type: 'website',
+    url: 'https://wine-five-gamma.vercel.app/',
+    title: 'WINE',
+    description: '현명한 와인 구매를 위한 리뷰 플랫폼',
+    siteName: 'WINE',
+    images: [
+      {
+        url: '/og-image.png',
+      },
+    ],
+  },
+};
 
 export default function RootLayout({
   children,
