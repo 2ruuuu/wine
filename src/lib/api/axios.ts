@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { setupInterceptors } from './interceptors';
 
+const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 export const instance = axios.create({
-  baseURL: 'https://winereview-api.vercel.app/23-3',
+  baseURL: baseURL,
   headers: {
     'Content-Type': 'application/json',
   },

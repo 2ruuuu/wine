@@ -4,6 +4,9 @@ import '../styles/globals.css';
 import Header from '@/components/Header/Header';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+  ),
   title: 'WINE',
   description: '현명한 와인 구매를 위한 리뷰 플랫폼',
   icons: {
