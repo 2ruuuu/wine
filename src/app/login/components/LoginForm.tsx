@@ -11,6 +11,7 @@ import Button from '@/components/Button/Button';
 import { Kakao } from '@/constants/icons';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { signIn } from '@/lib/api/auth';
+import { useAsync } from '@/hooks/useAsync';
 import { LoginFormValues } from './type';
 
 const loginSchema = z.object({
@@ -25,6 +26,7 @@ const LoginForm = () => {
   const router = useRouter();
   const { user, setAuth } = useAuthStore();
   const isLogIn = !!user;
+  const { isLoading, runAction } = useAsync();
 
   // 로그인 상태에서 접근할 경우 홈 화면(/)으로 리다이렉트
   useEffect(() => {
@@ -45,21 +47,23 @@ const LoginForm = () => {
 
   // 로그인 성공하면 홈 화면(/)으로 이동
   const onSubmit = async (data: LoginFormValues) => {
-    try {
-      const response = await signIn(data);
+    await runAction(async () => {
+      try {
+        const response = await signIn(data);
 
-      if (response) {
-        setAuth(response);
-        router.replace('/');
+        if (response) {
+          setAuth(response);
+          router.replace('/');
+        }
+      } catch (error: any) {
+        const errorMessage = '이메일 혹은 비밀번호를 확인해주세요.';
+
+        setError('email', {
+          type: 'manual',
+          message: errorMessage,
+        });
       }
-    } catch (error: any) {
-      const errorMessage = '이메일 혹은 비밀번호를 확인해주세요.';
-
-      setError('email', {
-        type: 'manual',
-        message: errorMessage,
-      });
-    }
+    });
   };
 
   return (
@@ -81,7 +85,12 @@ const LoginForm = () => {
         />
       </div>
       <div className="flex flex-col gap-4">
-        <Button type="submit" variant="primary" fullWidth disabled={!isValid}>
+        <Button
+          type="submit"
+          variant="primary"
+          fullWidth
+          disabled={!isValid || isLoading}
+        >
           로그인
         </Button>
         <Button
