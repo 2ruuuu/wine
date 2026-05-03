@@ -7,6 +7,8 @@ import { WineCardProps } from '@/app/wines/type';
 import WineFilter from '../WineFilter/WineFilter';
 import WineList from '../WineList/WineList';
 import { WinesResultsSectionProps } from './type';
+import { Exclamation } from '@/constants/icons';
+import Image from 'next/image';
 
 const matchesRatingBucket = (
   avgRating: number,
@@ -75,7 +77,7 @@ const WinesResultsSection = ({ wines }: WinesResultsSectionProps) => {
           onChangeRating={setSelectedRating}
         />
       </div>
-      <div className="flex flex-col gap-16 max-w-[801px]">
+      <div className="flex flex-col gap-16 w-[801px]">
         <TextInput
           id="wine-catalog-search"
           label="검색"
@@ -86,7 +88,21 @@ const WinesResultsSection = ({ wines }: WinesResultsSectionProps) => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <WineList wines={filteredWines} />
+        {filteredWines.length > 0 ? (
+          <WineList wines={filteredWines} />
+        ) : (
+          <div className="flex flex-col justify-center items-center gap-6 pt-20 pb-[10px]">
+            <Image src={Exclamation} alt="정보없음 아이콘" width={136} height={136} />
+            <div className="flex flex-col gap-3 justify-center items-center">
+              <p className="text-2xl font-bold text-[#31302F]">
+                아직 아무도 모르는 와인이네요!
+              </p>
+              <p className="text-lg text-[#BABABA]">
+                지금 등록해서 다른 사람들에게 첫 번째로 소개해보세요.
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
