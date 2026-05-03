@@ -1,5 +1,5 @@
 import ReviewListProps from './type';
-import Taste from '@/components/Taste/TasteButton';
+import Taste from '@/components/Taste/Taste';
 import StarRating from '@/components/StarRating/StarRating';
 import Button from '@/components/Button/Button';
 
@@ -9,11 +9,7 @@ const ReviewList = ({ reviews }: ReviewListProps) => {
       {reviews.map((review) => (
         <article
           key={review.id}
-          className="
-            border-b border-gray-300
-            pb-8 mb-8
-            -ml-9 pl-9
-          "
+          className="border-b border-gray-300 pb-8 mb-8 -ml-9 pl-9"
         >
           <div className="flex items-center gap-2">
             <StarRating rating={review.rating} />

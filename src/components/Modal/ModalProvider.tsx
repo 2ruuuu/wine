@@ -78,7 +78,11 @@ const ModalProvider = ({ children }: { children: ReactNode }) => {
           className="md:w-[353px] w-[312px]"
           hasHead={false}
         >
-          <NameChangeModal name={modal.name} onClose={closeModal} />
+          <NameChangeModal
+            name={modal.name}
+            onClose={closeModal}
+            onConfirm={modal.onConfirm}
+          />
         </Modal>
       )}
     </ModalContext.Provider>

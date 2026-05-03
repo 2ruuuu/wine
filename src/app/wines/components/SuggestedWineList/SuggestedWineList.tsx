@@ -1,22 +1,28 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import SuggestedWine from '../SuggestedWine/SuggestedWine';
 import { SuggestedWineListProps } from './type';
 import Button from '@/components/Button/Button';
 import { ArrowLeft, ArrowRight } from '@/constants/icons';
 import Image from 'next/image';
+import { useShuffleWines } from '@/hooks/useShuffleWines';
 
 const ITEMS_PER_PAGE = 4;
 
 const SuggestedWineList = ({ wines }: SuggestedWineListProps) => {
   const [currentPage, setCurrentPage] = useState(0);
+  const orderedWines = useShuffleWines(wines);
+
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [wines]);
 
   const totalPages = useMemo(
-    () => Math.max(1, Math.ceil(wines.length / ITEMS_PER_PAGE)),
-    [wines.length],
+    () => Math.max(1, Math.ceil(orderedWines.length / ITEMS_PER_PAGE)),
+    [orderedWines.length],
   );
-  const maxStartIndex = Math.max(0, wines.length - ITEMS_PER_PAGE);
+  const maxStartIndex = Math.max(0, orderedWines.length - ITEMS_PER_PAGE);
   const startIndex = Math.min(currentPage * ITEMS_PER_PAGE, maxStartIndex);
   const trackTranslateX = `translateX(-${startIndex * (100 / ITEMS_PER_PAGE)}%)`;
 
@@ -48,7 +54,7 @@ const SuggestedWineList = ({ wines }: SuggestedWineListProps) => {
             className="flex transition-transform duration-500 ease-in-out"
             style={{ transform: trackTranslateX }}
           >
-            {wines.map((wine) => (
+            {orderedWines.map((wine) => (
               <div key={wine.id} className="w-1/4 shrink-0">
                 <div className="mx-auto w-fit">
                   <SuggestedWine {...wine} />
