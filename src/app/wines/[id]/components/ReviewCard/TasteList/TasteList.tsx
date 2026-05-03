@@ -1,4 +1,4 @@
-import Taste from '@/components/Taste/TasteButton';
+import Taste from '@/components/Taste/Taste';
 import { TasteListProps } from './type';
 
 const TasteList = ({
