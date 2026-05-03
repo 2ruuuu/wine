@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import ModalProvider from '@/components/Modal/ModalProvider';
 import '../styles/globals.css';
 import Header from '@/components/Header/Header';
+import ToastProvider from '@/components/Toast/ToastProvider';
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -40,6 +41,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col bg-white">
+        <ToastProvider />
         <ModalProvider>
           <Header isLogin={false} HeaderBg={false} />
           <main>{children}</main>
