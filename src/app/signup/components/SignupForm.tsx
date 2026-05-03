@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useRouter } from 'next/navigation';
@@ -79,7 +80,7 @@ const SignupForm = () => {
         } else if (errorMessage?.includes('닉네임')) {
           setError('nickname', { message: '이미 사용 중인 닉네임입니다.' });
         } else {
-          alert('회원가입에 실패했습니다.');
+          toast.error('회원가입에 실패했습니다.');
         }
       }
     });
