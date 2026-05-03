@@ -5,7 +5,7 @@ import { NUMBER_ARR } from '@/constants/starRating';
 import { InteractiveStarProps } from './type';
 import Image from 'next/image';
 
-const StarRating = ({ rating, onChange }: InteractiveStarProps) => {
+const StarRatingButton = ({ rating, onChange }: InteractiveStarProps) => {
   return (
     <div className="flex gap-1">
       {NUMBER_ARR.map((item) => (
@@ -34,4 +34,4 @@ const StarRating = ({ rating, onChange }: InteractiveStarProps) => {
   );
 };
 
-export default StarRating;
+export default StarRatingButton;

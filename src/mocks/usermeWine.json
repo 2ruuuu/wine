@@ -1,0 +1,54 @@
+{
+  "list": [
+    {
+      "id": 2605,
+      "name": "Sentinel Carberne 634227",
+      "region": "Western Cape, South Africa",
+      "image": "https://plus.unsplash.com/premium_photo-1679245158200-d7b700044832?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8JUVDJTk5JTgwJUVDJTlEJUI4JTIwJUVEJTk1JTlDJTIwJUVCJUIzJTkxfGVufDB8fDB8fHww",
+      "price": 45990,
+      "type": "RED",
+      "avgRating": 0,
+      "reviewCount": 0,
+      "recentReview": null,
+      "userId": 2982
+    },
+    {
+      "id": 2604,
+      "name": "Sentinel Carbernet22227",
+      "region": "Western Cape, South Africa",
+      "image": "https://plus.unsplash.com/premium_photo-1725075087044-5c76af72aaa6?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8JUVDJTk5JTgwJUVDJTlEJUI4JTIwJUVCJUIzJTkxfGVufDB8fDB8fHww",
+      "price": 15990,
+      "type": "RED",
+      "avgRating": 0,
+      "reviewCount": 0,
+      "recentReview": null,
+      "userId": 2982
+    },
+    {
+      "id": 2603,
+      "name": "Sentinel Carbernet 2027",
+      "region": "Western Cape, South Africa",
+      "image": "https://plus.unsplash.com/premium_photo-1676590905955-2dc194785dc6?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE2fHx8ZW58MHx8fHx8",
+      "price": 84990,
+      "type": "RED",
+      "avgRating": 0,
+      "reviewCount": 0,
+      "recentReview": null,
+      "userId": 2982
+    },
+    {
+      "id": 2602,
+      "name": "Sentinel Carbernet",
+      "region": "Western Cape, South Africa",
+      "image": "https://plus.unsplash.com/premium_photo-1676590905955-2dc194785dc6?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE2fHx8ZW58MHx8fHx8",
+      "price": 14990,
+      "type": "RED",
+      "avgRating": 0,
+      "reviewCount": 0,
+      "recentReview": null,
+      "userId": 2982
+    }
+  ],
+  "totalCount": 10,
+  "nextCursor": 2602
+}

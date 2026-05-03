@@ -88,5 +88,32 @@
     "3": 2,
     "4": 1,
     "5": 0
+  },
+  "reviewStats": {
+    "averageLightBold": 3.33,
+    "averageSmoothTannic": 2.67,
+    "averageDrySweet": 2.67,
+    "averageSoftAcidic": 3.33
+  },
+  "aromaStats": {
+    "CHERRY": 1,
+    "BERRY": 0,
+    "OAK": 0,
+    "VANILLA": 0,
+    "PEPPER": 0,
+    "BAKING": 4,
+    "GRASS": 0,
+    "APPLE": 0,
+    "PEACH": 3,
+    "CITRUS": 0,
+    "TROPICAL": 0,
+    "MINERAL": 0,
+    "FLOWER": 0,
+    "TOBACCO": 0,
+    "EARTH": 0,
+    "CHOCOLATE": 0,
+    "SPICE": 0,
+    "CARAMEL": 0,
+    "LEATHER": 0
   }
 }
