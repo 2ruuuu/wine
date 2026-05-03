@@ -13,10 +13,15 @@ export type ModalProviderProps =
   | { type: 'register' }
   | { type: 'review' }
   | { type: 'delete' }
-  | { type: 'nickname'; nickname: string; onConfirm: () => void }
+  | { type: 'nickname'; name: string }
   | null;
 
 export type ModalContextProps = {
   openModal: (modal: Exclude<ModalProviderProps, null>) => void;
   closeModal: () => void;
+};
+
+export type NameChangeModalProps = {
+  name: string;
+  onClose: () => void;
 };
