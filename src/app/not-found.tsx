@@ -10,6 +10,7 @@ const NotFound = () => {
           alt="404"
           fill
           className="object-contain"
+          sizes="(max-width: 768px) 100vw, 400px"
           priority
         />
       </div>
