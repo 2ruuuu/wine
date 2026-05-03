@@ -12,6 +12,7 @@ import WineList from '../WineList/WineList';
 import EmptyState from '../EmptyState/EmptyState';
 
 import userMeReviewData from '@/mocks/usermeReview.json';
+import usermeWineData from '@/mocks/usermeWine.json';
 import { Review } from '@/types/review';
 import { MyProfileForm, ProfileTabType } from './type';
 import { WineListItem } from '../WineList/type';
@@ -35,7 +36,7 @@ const MyProfilePage = () => {
   const inputNickname = watch('nickname');
 
   const reviews = userMeReviewData.list as Review[];
-  const wines: WineListItem[] = [];
+  const wines = (usermeWineData as { list: WineListItem[] }).list;
 
   const handleClickChange = () => {
     if (!inputNickname.trim()) {
@@ -67,26 +68,28 @@ const MyProfilePage = () => {
         />
 
         <section className="flex-1 px-9 py-8">
-          <ProfileTabs
-            activeTab={activeTab}
-            reviewCount={reviews.length}
-            wineCount={wines.length}
-            onChangeTab={setActiveTab}
-          />
+          <div className="w-[725px]">
+            <ProfileTabs
+              activeTab={activeTab}
+              reviewCount={reviews.length}
+              wineCount={wines.length}
+              onChangeTab={setActiveTab}
+            />
 
-          {activeTab === 'review' &&
-            (reviews.length > 0 ? (
-              <ReviewList reviews={reviews} />
-            ) : (
-              <EmptyState message="작성한 후기가 없습니다." />
-            ))}
+            {activeTab === 'review' &&
+              (reviews.length > 0 ? (
+                <ReviewList reviews={reviews} />
+              ) : (
+                <EmptyState message="작성한 후기가 없습니다." />
+              ))}
 
-          {activeTab === 'wine' &&
-            (wines.length > 0 ? (
-              <WineList wines={wines} />
-            ) : (
-              <EmptyState message="등록한 와인이 없습니다." />
-            ))}
+            {activeTab === 'wine' &&
+              (wines.length > 0 ? (
+                <WineList wines={wines} />
+              ) : (
+                <EmptyState message="등록한 와인이 없습니다." />
+              ))}
+          </div>
         </section>
       </main>
     </div>

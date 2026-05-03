@@ -7,14 +7,7 @@ const ProfileTabs = ({
   onChangeTab,
 }: ProfileTabsProps) => {
   return (
-    <div
-      className="
-        flex gap-7
-        border-b border-gray-300
-        pb-4 mb-7
-        -ml-9 pl-9
-      "
-    >
+    <div className="flex max-w-[725px] gap-7 border-b border-gray-300 pb-4 mb-7">
       <button
         onClick={() => onChangeTab('review')}
         className={`
