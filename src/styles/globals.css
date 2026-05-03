@@ -27,3 +27,9 @@
     @apply w-full max-w-[1204px] mx-auto px-4 md:px-8;
   }
 }
+
+/* main swiper */
+.my-swiper {
+  --swiper-navigation-color: #fff;
+  --swiper-navigation-size: 30px;
+}

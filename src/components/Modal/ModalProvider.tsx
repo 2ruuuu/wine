@@ -4,9 +4,10 @@ import { createContext, ReactNode, useContext, useState } from 'react';
 import { ModalProviderProps, ModalContextProps } from './type';
 import Modal from './ModalRoot';
 import RegisterModal from './RegisterModal';
-import NickNameModal from './RegisterModal';
-import Button from '../Button/Button';
-
+import Button from '@/components/Button/Button';
+import ReviewModal from './ReviewModal';
+import FilterModal from './FilterModal';
+import NameChangeModal from './NameChangeModal';
 const ModalContext = createContext<ModalContextProps | null>(null);
 
 const ModalProvider = ({ children }: { children: ReactNode }) => {
@@ -22,7 +23,7 @@ const ModalProvider = ({ children }: { children: ReactNode }) => {
 
       {modal?.type === 'filter' && (
         <Modal title="필터" onClose={closeModal} className="w-[375px]" hasHead>
-          <div>필터</div>
+          <FilterModal />
         </Modal>
       )}
 
@@ -33,7 +34,7 @@ const ModalProvider = ({ children }: { children: ReactNode }) => {
           className="md:w-[460px] w-[375px]"
           hasHead
         >
-          <div>111</div>
+          <RegisterModal />
         </Modal>
       )}
 
@@ -44,7 +45,7 @@ const ModalProvider = ({ children }: { children: ReactNode }) => {
           className="md:w-[528px] w-[375px]"
           hasHead
         >
-          <div>리뷰등록</div>
+          <ReviewModal />
         </Modal>
       )}
 
@@ -77,27 +78,7 @@ const ModalProvider = ({ children }: { children: ReactNode }) => {
           className="md:w-[353px] w-[312px]"
           hasHead={false}
         >
-          <p className="text-center md:text-heading-md text-heading-sm">
-            ‘{modal.nickname}’으로
-            <br />
-            닉네임을 변경할까요?
-          </p>
-
-          <div className="flex gap-2 mt-8">
-            <Button onClick={closeModal} variant="outline" className="w-1/2">
-              취소
-            </Button>
-            <Button
-              onClick={() => {
-                modal.onConfirm();
-                closeModal();
-              }}
-              variant="primary"
-              className="w-1/2"
-            >
-              변경하기
-            </Button>
-          </div>
+          <NameChangeModal name={modal.name} onClose={closeModal} />
         </Modal>
       )}
     </ModalContext.Provider>
