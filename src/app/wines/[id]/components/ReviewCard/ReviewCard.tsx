@@ -19,7 +19,7 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
   ];
 
   return (
-    <div className="flex flex-col gap-12 max-w-[725px] w-full pt-10 pb-10 border-b border-gray-300">
+    <div className="flex flex-col w-full gap-12 max-w-[720px] pt-10 pb-10 border-b border-gray-300">
       <div className="flex flex-col gap-5">
         <StarRating rating={review.rating} />
         <div className="flex justify-between items-center">
