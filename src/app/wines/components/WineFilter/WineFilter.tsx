@@ -13,20 +13,17 @@ const WineFilter = ({
   onChangeRating,
 }: WineFilterProps) => {
   return (
-    <div className="flex flex-col gap-16">
-      <form className="flex flex-col gap-12">
-        <WineTypeFilter
-          selectedWineTypes={selectedWineTypes}
-          onToggleWineType={onToggleWineType}
-        />
-        <WinePriceFilter value={maxPrice} onChange={onMaxPriceChange} />
-        <WineRatingFilter
-          selectedRating={selectedRating}
-          onChangeRating={onChangeRating}
-        />
-      </form>
-      <Button variant="primary" fullWidth>등록하기</Button>
-    </div>
+    <form className="flex flex-col gap-12">
+      <WineTypeFilter
+        selectedWineTypes={selectedWineTypes}
+        onToggleWineType={onToggleWineType}
+      />
+      <WinePriceFilter value={maxPrice} onChange={onMaxPriceChange} />
+      <WineRatingFilter
+        selectedRating={selectedRating}
+        onChangeRating={onChangeRating}
+      />
+    </form>
   );
 };
 
