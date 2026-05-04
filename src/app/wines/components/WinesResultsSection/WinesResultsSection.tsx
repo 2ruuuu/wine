@@ -1,14 +1,11 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import TextInput from '@/components/Input/TextInput';
 import { WineType } from '@/constants/chips';
 import { WineCardProps } from '@/app/wines/type';
-import WineFilter from '../WineFilter/WineFilter';
-import WineList from '../WineList/WineList';
 import { WinesResultsSectionProps } from './type';
-import { Exclamation } from '@/constants/icons';
-import Image from 'next/image';
+import WinesDesktopLayout from './WinesDesktopLayout';
+import WinesMobileLayout from './WinesMobileLayout';
 
 const matchesRatingBucket = (
   avgRating: number,
@@ -50,6 +47,7 @@ const WinesResultsSection = ({ wines }: WinesResultsSectionProps) => {
   const [selectedWineTypes, setSelectedWineTypes] = useState<WineType[]>([]);
   const [maxPrice, setMaxPrice] = useState(250000);
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const handleToggleWineType = (wineType: WineType) => {
     setSelectedWineTypes((prev) =>
@@ -65,44 +63,34 @@ const WinesResultsSection = ({ wines }: WinesResultsSectionProps) => {
     [wines, search, selectedWineTypes, maxPrice, selectedRating],
   );
 
+  const wineFilterProps = {
+    selectedWineTypes,
+    onToggleWineType: handleToggleWineType,
+    maxPrice,
+    onMaxPriceChange: setMaxPrice,
+    selectedRating,
+    onChangeRating: setSelectedRating,
+  };
+
   return (
-    <div className="flex gap-15 max-w-[1145px] mx-auto pt-[55px]">
-      <div className="flex-1">
-        <WineFilter
-          selectedWineTypes={selectedWineTypes}
-          onToggleWineType={handleToggleWineType}
-          maxPrice={maxPrice}
-          onMaxPriceChange={setMaxPrice}
-          selectedRating={selectedRating}
-          onChangeRating={setSelectedRating}
+    <div className="mx-auto w-full px-4 pt-[27px] md:pt-[33px] xl:pt-[55px]">
+      <div className="hidden xl:block">
+        <WinesDesktopLayout
+          {...wineFilterProps}
+          search={search}
+          onSearchChange={setSearch}
+          filteredWines={filteredWines}
         />
       </div>
-      <div className="flex flex-col gap-16 w-[801px]">
-        <TextInput
-          id="wine-catalog-search"
-          label="검색"
-          type="search"
-          placeholder="와인을 검색해 보세요"
-          isSearch
-          hideLabel
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
+      <div className="block xl:hidden">
+        <WinesMobileLayout
+          search={search}
+          onSearchChange={setSearch}
+          filteredWines={filteredWines}
+          isFilterOpen={isFilterOpen}
+          onOpenFilter={() => setIsFilterOpen(true)}
+          onCloseFilter={() => setIsFilterOpen(false)}
         />
-        {filteredWines.length > 0 ? (
-          <WineList wines={filteredWines} />
-        ) : (
-          <div className="flex flex-col justify-center items-center gap-6 pt-20 pb-[10px]">
-            <Image src={Exclamation} alt="정보없음 아이콘" width={136} height={136} />
-            <div className="flex flex-col gap-3 justify-center items-center">
-              <p className="text-2xl font-bold text-[#31302F]">
-                아직 아무도 모르는 와인이네요!
-              </p>
-              <p className="text-lg text-[#BABABA]">
-                지금 등록해서 다른 사람들에게 첫 번째로 소개해보세요.
-              </p>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
