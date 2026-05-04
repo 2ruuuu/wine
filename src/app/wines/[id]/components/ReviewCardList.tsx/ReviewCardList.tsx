@@ -1,17 +1,15 @@
 import ReviewCard from '../ReviewCard/ReviewCard';
-import Mock from '@/mocks/wineDetail.json';
+import { ReviewCardListProps } from './type';
 
-const ReviewCardList = () => {
+const ReviewCardList = ({ reviewCount, reviews }: ReviewCardListProps) => {
   return (
     <div className="flex flex-col gap-5 w-full max-w-[780px]">
       <div className="flex items-center gap-3.5">
         <span className="text-2xl font-semibold">리뷰 목록</span>
-        <span className="text-gray-600">
-          {Mock.reviewCount.toLocaleString()}개
-        </span>
+        <span className="text-gray-600">{reviewCount.toLocaleString()}개</span>
       </div>
       <div className="flex flex-col items-end">
-        {Mock.reviews.map((review) => (
+        {reviews.map((review) => (
           <ReviewCard key={review.id} review={review} />
         ))}
       </div>

@@ -20,8 +20,8 @@ import {
   Spice,
   Caramel,
 } from '@/constants/images';
-import Mock from '@/mocks/wineDetail.json';
 import IncenseCard from '../IncenseCard/IncenseCard';
+import { IncenseListProps } from './type';
 
 const AROMA_PNG: Record<string, any> = {
   CHERRY: Cherry,
@@ -46,8 +46,8 @@ const AROMA_PNG: Record<string, any> = {
   noImage: NoImage,
 };
 
-const IncenseList = () => {
-  const validAromas = Object.entries(Mock.aromaStats)
+const IncenseList = ({ aromaStats }: IncenseListProps) => {
+  const validAromas = Object.entries(aromaStats)
     .filter(([_, value]) => value > 0)
     .sort((a, b) => b[1] - a[1]);
 
