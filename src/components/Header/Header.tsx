@@ -3,11 +3,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Dropdown from '@/components/DropDown/Dropdown';
 import { LogoBlack } from '@/constants/icons';
-import { HeaderProps } from './type';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { useAuthStore } from '@/stores/useAuthStore';
 
-const Header = ({ isLogin }: HeaderProps) => {
+const Header = () => {
   const pathname = usePathname();
+  const router = useRouter();
+  const { user, clearAuth } = useAuthStore();
+  const isLogin = !!user;
   const HiddenHeaderPath = ['/login', '/signup'];
   const isHiddenHeader = HiddenHeaderPath.includes(pathname);
 
@@ -15,20 +18,22 @@ const Header = ({ isLogin }: HeaderProps) => {
     {
       label: '마이페이지',
       onSelect: () => {
-        console.log('마이페이지로 이동');
+        router.push('/myprofile');
       },
     },
     {
       label: '로그아웃',
       onSelect: () => {
-        console.log('로그아웃 실행');
+        clearAuth();
+        router.push('/login');
       },
     },
   ];
   if (isHiddenHeader) return null;
+
   return (
     <header
-      className={`fixed w-full z-10 top-0 transition-all duration-500 max-[756px]:h-[50px] md:px-[60px] px-5 flex justify-between items-center m-auto bg-[#171A21] md:h-17.5`}
+      className={`fixed w-full z-10 top-0 transition-all duration-500 h-[50px] md:px-[60px] px-5 flex justify-between items-center m-auto bg-[#171A21] md:h-17.5`}
     >
       <h1>
         <Link href="/">
