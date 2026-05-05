@@ -34,3 +34,13 @@ export interface WinesResponse {
   nextCursor: number | null;
   list: WineResponse[];
 }
+
+export type GetWinesParams = {
+  limit: number;
+  cursor?: number;
+  type?: WineType;
+  minPrice?: number;
+  maxPrice?: number;
+  rating?: number;
+  name?: string;
+};

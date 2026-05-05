@@ -1,6 +1,8 @@
 export type WinePriceFilterProps = {
-  value: number;
-  onChange: (value: number) => void;
+  minValue: number;
+  maxValue: number;
+  onChangeMin: (value: number) => void;
+  onChangeMax: (value: number) => void;
   max?: number;
   step?: number;
 };
