@@ -82,7 +82,7 @@ const LoginForm = () => {
       <div className="flex flex-col gap-8 md:gap-10">
         <TextInput
           label="이메일"
-          type="text"
+          type="email"
           placeholder="이메일을 입력해주세요"
           register={register('email')}
           error={errors.email?.message}
