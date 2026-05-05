@@ -31,7 +31,7 @@ const MyProfilePage = () => {
     },
   });
 
-  const { openModal, closeModal } = useModal();
+  const { openModal } = useModal();
 
   const inputNickname = watch('nickname');
 
@@ -46,11 +46,10 @@ const MyProfilePage = () => {
 
     openModal({
       type: 'nickname',
-      nickname: inputNickname,
+      name: inputNickname,
       onConfirm: () => {
         setNickname(inputNickname);
         setValue('nickname', '');
-        closeModal();
       },
     });
   };
