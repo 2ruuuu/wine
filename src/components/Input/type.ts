@@ -1,8 +1,7 @@
 import React from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
 
-export interface TextInputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   id?: string;
   label: string;
   error?: string;
@@ -12,12 +11,12 @@ export interface TextInputProps
   hideLabel?: boolean;
 }
 
-export interface PhotoInputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface PhotoInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   id?: string;
   label: string;
   error?: string;
   register?: UseFormRegisterReturn;
   variant?: 'circle' | 'square'; // 프로필일 경우 원형, 사진일 경우 사각형
   hideLabel?: boolean;
+  imageUrl?: string | null;
 }

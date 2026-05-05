@@ -5,9 +5,11 @@ import ProfileSidebarProps from './type';
 
 const ProfileSidebar = ({
   nickname,
+  imageUrl,
   profileRegister,
   nicknameRegister,
   onClickChange,
+  onChangeProfileImage,
 }: ProfileSidebarProps) => {
   return (
     <aside className="w-60 px-7 py-10 border-r border-gray-300">
@@ -17,6 +19,8 @@ const ProfileSidebar = ({
           hideLabel
           variant="circle"
           register={profileRegister}
+          imageUrl={imageUrl}
+          onChange={onChangeProfileImage}
         />
       </div>
 
