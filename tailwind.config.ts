@@ -42,6 +42,17 @@ const config: Config = {
         'button-md': ['16px', { lineHeight: '20px' }],
         'button-sm': ['14px', { lineHeight: '18px' }],
       },
+
+      keyframes: {
+        'text-wave': {
+          '0%, 40%, 100%': { transform: 'translateY(0)' },
+          '20%': { transform: 'translateY(-4px)' },
+        },
+      },
+
+      animation: {
+        'text-wave': 'text-wave 1.5s ease-in-out infinite',
+      },
     },
   },
   plugins: [],

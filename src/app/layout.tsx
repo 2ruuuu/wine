@@ -2,8 +2,13 @@ import type { Metadata } from 'next';
 import ModalProvider from '@/components/Modal/ModalProvider';
 import '../styles/globals.css';
 import Header from '@/components/Header/Header';
+import Loading from '@/components/Loading/Loading';
+import ToastProvider from '@/components/Toast/ToastProvider';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+  ),
   title: 'WINE',
   description: '현명한 와인 구매를 위한 리뷰 플랫폼',
   icons: {
@@ -37,6 +42,8 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col bg-white">
+        <Loading />
+        <ToastProvider />
         <ModalProvider>
           <Header />
           <main>{children}</main>

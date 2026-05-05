@@ -19,7 +19,7 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
   ];
 
   return (
-    <div className="flex flex-col gap-12 max-w-[725px] w-full pt-10 pb-10 border-b border-gray-300">
+    <div className="flex flex-col w-full gap-12 max-w-[720px] pt-10 pb-10 border-b border-gray-300">
       <div className="flex flex-col gap-5">
         <StarRating rating={review.rating} />
         <div className="flex justify-between items-center">
@@ -29,7 +29,8 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
               alt="프로필"
               width={64}
               height={64}
-              className="rounded-full"
+              style={{ width: '64px', height: '64px' }}
+              className="rounded-full object-cover"
             />
             <div className="flex flex-col">
               <span className="text-black font-semibold">
@@ -44,13 +45,15 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
             {({ toggle }) => (
               <button
                 onClick={toggle}
-                className="flex justify-center w-8 h-8 cursor-pointer"
+                className="flex justify-center w-1 h-5 cursor-pointer"
               >
                 <Image
                   src={Hamburger}
                   alt="햄버거 버튼"
                   width={4}
                   height={20}
+                  style={{ width: 'auto', height: 'auto' }}
+                  className="w-1 h-5"
                 />
               </button>
             )}
@@ -80,6 +83,7 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
             src={isTasteOpen ? Up : Down}
             alt="아로마 토글"
             fill
+            sizes="15px"
             className="object-contain"
           />
         </button>

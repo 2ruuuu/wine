@@ -1,6 +1,11 @@
 import Button from '../Button/Button';
 import { NameChangeModalProps } from './type';
-const NameChangeModal = ({ name, onClose }: NameChangeModalProps) => {
+const NameChangeModal = ({ name, onClose, onConfirm }: NameChangeModalProps) => {
+  const handleConfirm = () => {
+    onConfirm?.();
+    onClose();
+  };
+
   return (
     <div>
       <p className="text-center md:text-heading-md text-heading-sm">
@@ -13,7 +18,7 @@ const NameChangeModal = ({ name, onClose }: NameChangeModalProps) => {
         <Button variant="outline" className="w-1/2" onClick={onClose}>
           취소
         </Button>
-        <Button variant="primary" className="w-1/2">
+        <Button variant="primary" className="w-1/2" onClick={handleConfirm}>
           변경하기
         </Button>
       </div>
