@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { WineType } from '@/constants/chips';
-import { WineCardProps } from '@/app/wines/type';
+import { WineCardProps } from '@/app/wines/components/WineCard/type';
 import { WinesResultsSectionProps } from './type';
 import WinesDesktopLayout from './WinesDesktopLayout';
 import WinesMobileLayout from './WinesMobileLayout';
@@ -29,7 +29,10 @@ const filterWines = (
   const q = search.trim().toLowerCase();
 
   return wines.filter((wine) => {
-    if (selectedWineTypes.length > 0 && !selectedWineTypes.includes(wine.type)) {
+    if (
+      selectedWineTypes.length > 0 &&
+      !selectedWineTypes.some((t) => t === wine.type)
+    ) {
       return false;
     }
     if (wine.price > maxPrice) return false;

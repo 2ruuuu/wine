@@ -1,4 +1,4 @@
-import { WineCardProps } from '@/app/wines/type';
+import { WineCardProps } from '@/app/wines/components/WineCard/type';
 import {
   wineMockImage1,
   wineMockImage2,
