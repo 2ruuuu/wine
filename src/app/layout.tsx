@@ -45,7 +45,7 @@ export default function RootLayout({
         <Loading />
         <ToastProvider />
         <ModalProvider>
-          <Header isLogin={false} />
+          <Header />
           <main>{children}</main>
         </ModalProvider>
       </body>
