@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useRouter } from 'next/navigation';
@@ -53,6 +54,7 @@ const LoginForm = () => {
 
         if (response) {
           setAuth(response);
+          toast.success('로그인에 성공하였습니다.');
           router.replace('/');
         }
       } catch (error: any) {

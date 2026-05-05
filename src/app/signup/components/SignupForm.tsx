@@ -70,6 +70,7 @@ const SignupForm = () => {
 
         if (response) {
           setAuth(response);
+          toast.success('회원가입 후 로그인에 성공하였습니다.');
           router.replace('/');
         }
       } catch (error: any) {
