@@ -68,9 +68,9 @@ const LoginForm = () => {
 
   // 카카오 로그인
   const handleKakaoLogin = () => {
-    const kakaoRestApiKey = process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY;
+    const kakaoClientId = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID;
     const kakaoRedirectUri = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI;
-    const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoRestApiKey}&redirect_uri=${kakaoRedirectUri}&response_type=code`;
+    const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoClientId}&redirect_uri=${kakaoRedirectUri}&response_type=code`;
 
     window.location.href = KAKAO_AUTH_URL;
   };
