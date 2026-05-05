@@ -35,7 +35,7 @@ const WineCard = ({
           <div className="flex flex-col gap-2">
             <h3 className="text-body-md font-medium">최신 후기</h3>
             <p className="text-body-sm text-[#A3A3A3] line-clamp-2">
-              {recentReview.content}
+              {recentReview?.content ?? '아직 작성된 후기가 없습니다.'}
             </p>
           </div>
         </div>
