@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { WineCardProps } from '@/app/wines/type';
+import { WineCardProps } from '@/app/wines/components/WineCard/type';
+import { NoImage } from '@/constants/images';
 import StarRating from '@/components/StarRating/StarRating';
 
 const WineCard = ({ 
@@ -16,7 +17,7 @@ const WineCard = ({
       <div className="flex flex-col gap-6">
         <div className="flex justify-center items-center w-[332px] h-[332px] xl:w-[370px] xl:h-[360px] bg-[#F2F2F2]">
           <Image
-            src={image}
+            src={image ?? NoImage}
             alt={name}
             height={288}
             width={75}
@@ -34,7 +35,7 @@ const WineCard = ({
           <div className="flex flex-col gap-2">
             <h3 className="text-body-md font-medium">최신 후기</h3>
             <p className="text-body-sm text-[#A3A3A3] line-clamp-2">
-              {recentReview.content}
+              {recentReview?.content ?? '아직 작성된 후기가 없습니다.'}
             </p>
           </div>
         </div>
