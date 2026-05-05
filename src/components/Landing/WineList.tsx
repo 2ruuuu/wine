@@ -4,63 +4,7 @@ import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/swiper-bundle.css';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-
-// const wines = [
-//   {
-//     id: 1,
-//     name: 'Sentinel Carbernet Sauvignon 2016',
-//     tag: 'Western Cape, South Africa',
-//     imgUrl: WineRecommend,
-//   },
-//   {
-//     id: 2,
-//     name: 'Sentinel Carbernet Sauvignon 2016',
-//     tag: 'Western Cape, South Africa',
-//     imgUrl: WineRecommend,
-//   },
-//   {
-//     id: 3,
-//     name: 'Sentinel Carbernet',
-//     tag: 'Western Cape, South Africa',
-//     imgUrl: WineRecommend,
-//   },
-//   {
-//     id: 4,
-//     name: 'Sentinel',
-//     tag: 'Western Cape, South Africa',
-//     imgUrl: WineRecommend,
-//   },
-//   {
-//     id: 5,
-//     name: 'Sentinel 2016',
-//     tag: 'Western Cape, South Africa',
-//     imgUrl: WineRecommend,
-//   },
-//   {
-//     id: 6,
-//     name: 'Sentinel Carbernet Sauvignon 2016',
-//     tag: 'Western Cape, South Africa',
-//     imgUrl: WineRecommend,
-//   },
-//   {
-//     id: 7,
-//     name: 'Sentinel Carbernet Sauvignon 2016',
-//     tag: 'Western Cape, South Africa',
-//     imgUrl: WineRecommend,
-//   },
-//   {
-//     id: 8,
-//     name: 'Sentinel Carbernet Sauvignon 2016',
-//     tag: 'Western Cape, South Africa',
-//     imgUrl: WineRecommend,
-//   },
-// ];
-type Wine = {
-  id: number;
-  name: string;
-  region: string;
-  image: string;
-};
+import { Wine } from './type';
 
 const WineList = () => {
   const [wines, setWines] = useState<Wine[]>([]);
