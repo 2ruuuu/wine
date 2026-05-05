@@ -38,7 +38,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen flex flex-col bg-white">
         <ModalProvider>
-          <Header isLogin={false} />
+          <Header />
           <main>{children}</main>
         </ModalProvider>
       </body>
