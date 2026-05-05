@@ -1,11 +1,10 @@
 import type { StaticImageData } from "next/image";
 import { wineTypeRedImage, wineTypeWhiteImage, wineTypeSparklingImage } from "@/constants/images";
 
-// 와인 타입 칩에 사용되는 옵션
 export enum WineType {
-  Red = "Red",
-  White = "White",
-  Sparkling = "Sparkling",
+  Red = "RED",
+  White = "WHITE",
+  Sparkling = "SPARKLING",
 }
 
 export const WINE_TYPE_OPTIONS = [
