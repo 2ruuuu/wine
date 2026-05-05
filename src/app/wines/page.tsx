@@ -1,15 +1,15 @@
 import { wineListMockData } from '@/mocks/wineListMockData';
 import SuggestedWineList from './components/SuggestedWineList/SuggestedWineList';
 import { suggestedWinesMockData } from '@/mocks/suggestedWinesMockData';
-import WineList from './components/WineList/WineList';
+import WinesResultsSection from './components/WinesResultsSection/WinesResultsSection';
 
 const WinesPage = () => {
   return (
-    <div>
-      <div className="bg-[url(@/assets/images/suggested-wine-background.png)] pt-38.5 pb-15 rounded-b-[88px]">
+    <div className="mb-21">
+      <div className="bg-[url(@/assets/images/suggested-wine-background.png)] pt-[85px] md:pt-[127px] xl:pt-38.5 pb-7 md:pb-11 xl:pb-15 xl:rounded-b-[88px]">
         <SuggestedWineList wines={suggestedWinesMockData} />
       </div>
-      <WineList wines={wineListMockData} />
+      <WinesResultsSection wines={wineListMockData} />
     </div>
   );
 };

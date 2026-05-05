@@ -1,6 +1,6 @@
 {
   "id": 2596,
-  "name": "이것은 와인입니다",
+  "name": "이것은 와인입니다이것은 와인입니다",
   "region": "한국",
   "image": "https://pds.joongang.co.kr/news/component/joongang_sunday/202503/26/86279e32-9aa6-4f50-9772-f43015bd56be.jpg",
   "price": 1200000,
@@ -88,5 +88,32 @@
     "3": 2,
     "4": 1,
     "5": 0
+  },
+  "reviewStats": {
+    "averageLightBold": 3.33,
+    "averageSmoothTannic": 2.67,
+    "averageDrySweet": 2.67,
+    "averageSoftAcidic": 3.33
+  },
+  "aromaStats": {
+    "CHERRY": 1,
+    "BERRY": 0,
+    "OAK": 0,
+    "VANILLA": 0,
+    "PEPPER": 0,
+    "BAKING": 4,
+    "GRASS": 0,
+    "APPLE": 0,
+    "PEACH": 3,
+    "CITRUS": 0,
+    "TROPICAL": 0,
+    "MINERAL": 0,
+    "FLOWER": 0,
+    "TOBACCO": 0,
+    "EARTH": 0,
+    "CHOCOLATE": 0,
+    "SPICE": 0,
+    "CARAMEL": 0,
+    "LEATHER": 0
   }
 }

@@ -3,6 +3,12 @@ import { LoginFormValues } from '@/app/login/components/type';
 import { AuthResponse } from '@/stores/useAuthStore';
 import { instance } from './axios';
 
+export interface SocialLoginRequest {
+  state: string;
+  redirectUri: string;
+  token: string;
+}
+
 // 회원가입
 export const signUp = async (
   formData: SignupFormValues,
@@ -24,5 +30,17 @@ export const refreshTokenApi = async (
   refreshToken: string,
 ): Promise<{ accessToken: string }> => {
   const { data } = await instance.post('/auth/refresh-token', { refreshToken });
+  return data;
+};
+
+// 간편 로그인 - 카카오
+export const socialSignIn = async (
+  provider: 'KAKAO',
+  body: SocialLoginRequest,
+): Promise<AuthResponse> => {
+  const { data } = await instance.post<AuthResponse>(
+    `/auth/signIn/${provider}`,
+    body,
+  );
   return data;
 };
