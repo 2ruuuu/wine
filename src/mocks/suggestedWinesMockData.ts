@@ -1,4 +1,4 @@
-import { SuggestedWineProps } from '@/app/wines/type';
+import { SuggestedWineProps } from '@/app/wines/components/SuggestedWine/type';
 import {
   wineMockImage1,
   wineMockImage2,
