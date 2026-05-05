@@ -25,7 +25,7 @@ export interface WineResponse {
   type: WineType;
   avgRating: number;
   reviewCount: number;
-  recentReview: RecentReview;
+  recentReview: RecentReview | null;
   userId: number;
 }
 

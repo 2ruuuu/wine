@@ -1,9 +1,9 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { WineType } from '@/constants/chips';
 import { WineCardProps } from '@/app/wines/components/WineCard/type';
-import { WinesResultsSectionProps } from './type';
+import { getWines } from '@/lib/api/wine';
 import WinesDesktopLayout from './WinesDesktopLayout';
 import WinesMobileLayout from './WinesMobileLayout';
 
@@ -45,12 +45,33 @@ const filterWines = (
   });
 };
 
-const WinesResultsSection = ({ wines }: WinesResultsSectionProps) => {
+const WinesResultsSection = () => {
+  const [wines, setWines] = useState<WineCardProps[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [selectedWineTypes, setSelectedWineTypes] = useState<WineType[]>([]);
   const [maxPrice, setMaxPrice] = useState(250000);
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    getWines(10)
+      .then((data) => {
+        if (!cancelled) setWines(data.list);
+      })
+      .catch(() => {
+        if (!cancelled) setWines([]);
+      })
+      .finally(() => {
+        if (!cancelled) setIsLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const handleToggleWineType = (wineType: WineType) => {
     setSelectedWineTypes((prev) =>
@@ -74,6 +95,14 @@ const WinesResultsSection = ({ wines }: WinesResultsSectionProps) => {
     selectedRating,
     onChangeRating: setSelectedRating,
   };
+
+  if (isLoading) {
+    return (
+      <div className="mx-auto w-full px-4 pt-[27px] md:pt-[33px] xl:pt-[55px]">
+        <p className="text-center text-[#A3A3A3]">와인 목록을 불러오는 중...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto w-full px-4 pt-[27px] md:pt-[33px] xl:pt-[55px]">

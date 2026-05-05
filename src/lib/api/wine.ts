@@ -1,6 +1,16 @@
 import { instance } from './axios';
 import { WineDetailResponse } from '@/app/wines/[id]/type';
 import { SuggestedWineProps } from '@/app/wines/components/SuggestedWine/type';
+import { WinesResponse } from '@/app/wines/type';
+
+export const getWines = async (
+  limit = 10,
+): Promise<WinesResponse> => {
+  const response = await instance.get<WinesResponse>('/wines', {
+    params: { limit },
+  });
+  return response.data;
+}
 
 export const getRecommendedWines = async (
   limit = 10,
