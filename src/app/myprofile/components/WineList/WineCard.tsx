@@ -4,9 +4,10 @@ import { useModal } from '@/components/Modal/ModalProvider';
 
 interface WineCardProps {
   wine: WineListItem;
+  onDeleteWine: (wineId: number) => void;
 }
 
-const WineCard = ({ wine }: WineCardProps) => {
+const WineCard = ({ wine, onDeleteWine }: WineCardProps) => {
   const { openModal } = useModal();
 
   const dropdownOptions = [
@@ -19,7 +20,7 @@ const WineCard = ({ wine }: WineCardProps) => {
     {
       label: '삭제하기',
       onSelect: () => {
-        openModal({ type: 'delete' });
+        onDeleteWine(wine.id);
       },
     },
   ];
@@ -36,9 +37,7 @@ const WineCard = ({ wine }: WineCardProps) => {
 
       <div className="relative pr-8">
         <h3 className="text-[18px] font-bold leading-[1.35] text-black">
-          Sentinel Cabernet
-          <br />
-          Sauvignon 2016
+          {wine.name}
         </h3>
 
         <p className="mt-2 text-[13px] text-gray-400">{wine.region}</p>

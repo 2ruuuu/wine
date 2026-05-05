@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useModal } from '@/components/Modal/ModalProvider';
@@ -11,11 +10,12 @@ import ReviewList from '../ReviewList/ReviewList';
 import WineList from '../WineList/WineList';
 import EmptyState from '../EmptyState/EmptyState';
 
-import userMeReviewData from '@/mocks/usermeReview.json';
-import usermeWineData from '@/mocks/usermeWine.json';
 import { Review } from '@/types/review';
 import { MyProfileForm, ProfileTabType } from './type';
 import { WineListItem } from '../WineList/type';
+
+import { useEffect, useState } from 'react';
+import { instance } from '@/lib/api/axios';
 
 const mockUser = {
   nickname: '주말에와인',
@@ -35,8 +35,35 @@ const MyProfilePage = () => {
 
   const inputNickname = watch('nickname');
 
-  const reviews = userMeReviewData.list as Review[];
-  const wines = (usermeWineData as { list: WineListItem[] }).list;
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [wines, setWines] = useState<WineListItem[]>([]);
+
+  useEffect(() => {
+    const fetchMyProfileData = async () => {
+      try {
+        const reviewRes = await instance.get('/users/me/reviews');
+        const wineRes = await instance.get('/users/me/wines');
+
+        setReviews(reviewRes.data.list);
+        setWines(wineRes.data.list);
+      } catch (error) {
+        console.error('마이페이지 데이터 조회 실패', error);
+      }
+    };
+
+    fetchMyProfileData();
+  }, []);
+
+  const handleDeleteWine = async (wineId: number) => {
+    try {
+      await instance.delete(`/wines/${wineId}`);
+
+      // 화면에서도 제거
+      setWines((prev) => prev.filter((wine) => wine.id !== wineId));
+    } catch (error) {
+      console.error('와인 삭제 실패', error);
+    }
+  };
 
   const handleClickChange = () => {
     if (!inputNickname.trim()) {
@@ -84,7 +111,7 @@ const MyProfilePage = () => {
 
             {activeTab === 'wine' &&
               (wines.length > 0 ? (
-                <WineList wines={wines} />
+                <WineList wines={wines} onDeleteWine={handleDeleteWine} />
               ) : (
                 <EmptyState message="등록한 와인이 없습니다." />
               ))}
