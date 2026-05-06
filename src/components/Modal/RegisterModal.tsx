@@ -23,7 +23,7 @@ type WineFormData = {
   name: string;
   price: string;
   region: string;
-  winePhoto1: FileList;
+  winePhoto: FileList;
 };
 
 type RegisterModalProps = {
@@ -81,7 +81,7 @@ const RegisterModal = ({
       return;
     }
 
-    const imageFile = formData.winePhoto1?.[0];
+    const imageFile = formData.winePhoto?.[0];
 
     // Create 모드일 때 사진 필수
     if (!imageFile && mode !== 'edit') {
@@ -160,7 +160,7 @@ const RegisterModal = ({
         <PhotoInput
           label="와인 사진"
           name="winePhoto"
-          register={register('winePhoto1')}
+          register={register('winePhoto')}
         />
         <TextInput
           label="와인 이름"
