@@ -26,7 +26,10 @@ const WineCard = ({ wine, onDeleteWine, onUpdateWine }: WineCardProps) => {
     {
       label: '삭제하기',
       onSelect: () => {
-        onDeleteWine(wine.id);
+        openModal({
+          type: 'delete',
+          onConfirm: () => onDeleteWine(wine.id),
+        });
       },
     },
   ];

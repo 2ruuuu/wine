@@ -4,18 +4,28 @@ import StarRating from '@/components/StarRating/StarRating';
 import Button from '@/components/Button/Button';
 import { formatTimeAgo } from '@/lib/date-fns';
 import Dropdown from '@/components/DropDown/Dropdown';
+import { useModal } from '@/components/Modal/ModalProvider';
 
 const ReviewList = ({
   reviews,
   onDeleteReview,
   onUpdateReview,
 }: ReviewListProps) => {
+  const { openModal } = useModal();
+
   return (
     <div className="w-full">
       {reviews.map((review) => {
         const dropdownOptions = [
           { label: '수정하기', onSelect: () => onUpdateReview(review) },
-          { label: '삭제하기', onSelect: () => onDeleteReview(review.id) },
+          {
+            label: '삭제하기',
+            onSelect: () =>
+              openModal({
+                type: 'delete',
+                onConfirm: () => onDeleteReview(review.id),
+              }),
+          },
         ];
 
         return (
