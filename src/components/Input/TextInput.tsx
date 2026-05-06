@@ -10,6 +10,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       label,
       error,
       register,
+      name,
       errorType = 'default',
       isSearch = false,
       hideLabel = false,
@@ -18,7 +19,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     },
     ref,
   ) => {
-    const inputId = id || register?.name || props.name;
+    const inputId = id || name;
     const isError = !!error;
 
     return (
@@ -53,9 +54,9 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
 
           <input
             id={inputId}
-            ref={ref}
-            {...register}
             {...props}
+            {...register}
+            name={name}
             className={`
             w-full py-2 md:py-3 rounded-[4px] outline-none transition-all bg-white
             text-body-sm md:text-body-md text-[hsl(30, 2%, 19%)] 

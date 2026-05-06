@@ -16,13 +16,18 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    url: 'https://wine-five-gamma.vercel.app/',
+    url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
     title: 'WINE',
     description: '현명한 와인 구매를 위한 리뷰 플랫폼',
     siteName: 'WINE',
     images: [
       {
-        url: '/og-image.png',
+        url: `${
+          process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+        }/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: 'WINE 서비스 이미지',
       },
     ],
   },

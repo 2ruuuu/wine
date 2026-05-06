@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useRouter } from 'next/navigation';
@@ -53,6 +54,7 @@ const LoginForm = () => {
 
         if (response) {
           setAuth(response);
+          toast.success('로그인에 성공하였습니다.');
           router.replace('/');
         }
       } catch (error: any) {
@@ -80,7 +82,8 @@ const LoginForm = () => {
       <div className="flex flex-col gap-8 md:gap-10">
         <TextInput
           label="이메일"
-          type="text"
+          type="email"
+          name="email"
           placeholder="이메일을 입력해주세요"
           register={register('email')}
           error={errors.email?.message}
@@ -88,6 +91,7 @@ const LoginForm = () => {
         <TextInput
           label="비밀번호"
           type="password"
+          name="password"
           placeholder="비밀번호를 입력해주세요"
           register={register('password')}
           error={errors.password?.message}
