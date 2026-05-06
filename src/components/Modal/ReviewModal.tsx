@@ -9,17 +9,7 @@ import { WINE_FLAVOR_LABEL, WineFlavor } from '@/constants/chips';
 import { useForm } from 'react-hook-form';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useModal } from './ModalProvider';
-
-type ReviewFormData = {
-  content: string;
-};
-
-type Wine = {
-  id: number;
-  name: string;
-  region: string;
-  image: string;
-};
+import { ReviewFormData, Wine } from './type';
 
 const AROMA_MAP: Partial<Record<WineFlavor, string>> = {
   [WineFlavor.Cherry]: 'CHERRY',

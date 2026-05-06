@@ -100,31 +100,3 @@ export const useModal = () => {
 };
 
 export default ModalProvider;
-
-// 사용예시
-// <button
-//   onClick={() => openModal({ type: 'filter' })}
-// >
-//   필터
-// </button>
-
-// <button
-//   onClick={() => openModal({ type: 'register' })}
-// >
-//   와인등록
-// </button>
-// <button
-//   onClick={() => openModal({ type: 'review' })}
-// >
-//   리뷰등록
-// </button>
-// <button
-//   onClick={() => openModal({ type: 'delete' })}
-// >
-//   삭제
-// </button>
-// <button
-//   onClick={() => openModal({ type: 'nickname' })}
-// >
-//   닉네임변경
-// </button>

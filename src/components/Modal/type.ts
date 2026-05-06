@@ -26,3 +26,21 @@ export type NameChangeModalProps = {
   onClose: () => void;
   onConfirm?: () => void;
 };
+
+export type ReviewFormData = {
+  content: string;
+};
+
+export type Wine = {
+  id: number;
+  name: string;
+  region: string;
+  image: string;
+};
+
+export type WineFormData = {
+  name: string;
+  price: string;
+  region: string;
+  winePhoto1: FileList;
+};

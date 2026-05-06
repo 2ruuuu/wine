@@ -12,17 +12,10 @@ import {
 } from '@/constants/images';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useModal } from './ModalProvider';
+import { WineFormData } from './type';
 
 const WINE_TYPES = ['Red', 'White', 'Sparkling'] as const;
-type WineType = (typeof WINE_TYPES)[number];
-
-type WineFormData = {
-  name: string;
-  price: string;
-  region: string;
-  winePhoto1: FileList;
-};
-
+export type WineType = (typeof WINE_TYPES)[number];
 const RegisterModal = () => {
   const { register, handleSubmit } = useForm<WineFormData>();
 

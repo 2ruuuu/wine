@@ -3,11 +3,8 @@ import Image from 'next/image';
 import { WineRecommend, WineFilter, WineReview } from '@/constants/images';
 import WineList from '@/components/Landing/WineList';
 import Link from 'next/link';
-import Button from '@/components/Button/Button';
-import { useModal } from '@/components/Modal/ModalProvider';
 
 const Home = () => {
-  const { openModal } = useModal();
   return (
     <div>
       <div className="relative">
