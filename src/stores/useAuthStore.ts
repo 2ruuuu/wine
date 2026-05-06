@@ -37,8 +37,10 @@ export const useAuthStore = create<AuthState>()(
           accessToken: authData.accessToken,
           refreshToken: authData.refreshToken,
         }),
-      clearAuth: () =>
-        set({ user: null, accessToken: null, refreshToken: null }),
+      clearAuth: () => {
+        set({ user: null, accessToken: null, refreshToken: null });
+        useAuthStore.persist.clearStorage();
+      },
     }),
     { name: 'auth-storage' }, // localStorage에 저장될 키 이름
   ),
