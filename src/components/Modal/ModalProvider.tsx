@@ -74,7 +74,16 @@ const ModalProvider = ({ children }: { children: ReactNode }) => {
             <Button onClick={closeModal} variant="outline" className="w-1/2">
               취소
             </Button>
-            <Button onClick={closeModal} variant="primary" className="w-1/2">
+            <Button
+              onClick={() => {
+                if (modal?.type === 'delete') {
+                  modal.onConfirm?.();
+                }
+                closeModal();
+              }}
+              variant="primary"
+              className="w-1/2"
+            >
               삭제하기
             </Button>
           </div>

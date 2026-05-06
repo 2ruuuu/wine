@@ -24,7 +24,7 @@ export type ModalProviderProps =
       review?: Review;
       onUpdated?: (updatedReview: Review) => void;
     }
-  | { type: 'delete' }
+  | { type: 'delete'; onConfirm?: () => void }
   | { type: 'nickname'; name: string; onConfirm?: () => void }
   | null;
 
