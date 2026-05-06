@@ -6,26 +6,11 @@ import Chip from '../Chip/Chip';
 import StarRatingButton from '../StarRating/StarRatingButton';
 import TasteButton from '../Taste/TasteButton';
 import { WINE_FLAVOR_LABEL, WineFlavor } from '@/constants/chips';
-import { useForm } from 'react-hook-form';
-import { useAuthStore } from '@/stores/useAuthStore';
-import { useModal } from './ModalProvider';
-import { ReviewFormData, Wine } from './type';
 
-const AROMA_MAP: Partial<Record<WineFlavor, string>> = {
-  [WineFlavor.Cherry]: 'CHERRY',
-  [WineFlavor.Berry]: 'BERRY',
-  [WineFlavor.Oak]: 'OAK',
-  [WineFlavor.Vanilla]: 'VANILLA',
-  [WineFlavor.Pepper]: 'PEPPER',
-  [WineFlavor.Baking]: 'BAKING',
-  [WineFlavor.Grass]: 'GRASS',
-  [WineFlavor.Apple]: 'APPLE',
-  [WineFlavor.Peach]: 'PEACH',
-  [WineFlavor.Citrus]: 'CITRUS',
-  [WineFlavor.Tropical]: 'TROPICAL',
-  [WineFlavor.Mineral]: 'MINERAL',
-  [WineFlavor.Floral]: 'FLOWER',
-};
+import WineRecommend from '@/assets/images/wine-product-img.png';
+import { Review } from '@/types/review';
+import { instance } from '@/lib/api/axios';
+import toast from 'react-hot-toast';
 
 const TasteOption = [
   {
@@ -54,24 +39,33 @@ const TasteOption = [
   },
 ] as const;
 
-const ReviewModal = ({ wineId }: { wineId: number }) => {
-  const { register, handleSubmit } = useForm<ReviewFormData>();
 
-  const { accessToken } = useAuthStore();
+interface ReviewModalProps {
+  mode?: 'create' | 'edit';
+  review?: Review;
+  onUpdated?: (updatedReview: Review) => void;
+  onClose?: () => void;
+}
 
-  const [wine, setWine] = useState<Wine | null>(null);
-  const [rating, setRating] = useState(0);
-  const { closeModal } = useModal();
+const ReviewModal = ({
+  mode = 'create',
+  review,
+  onUpdated,
+  onClose,
+}: ReviewModalProps) => {
+  const isEditMode = mode === 'edit' && !!review;
 
-  const [tasteValues, setTasteValues] = useState({
-    lightBold: 3,
-    smoothTannic: 3,
-    drySweet: 3,
-    softAcidic: 3,
-  });
+  const [isSmallHeight, setIsSmallHeight] = useState(false);
+  const [rating, setRating] = useState(review?.rating ?? 0);
+  const [content, setContent] = useState(review?.content ?? '');
+
+  const [lightBold, setLightBold] = useState(review?.lightBold ?? 3);
+  const [smoothTannic, setSmoothTannic] = useState(review?.smoothTannic ?? 3);
+  const [drySweet, setDrySweet] = useState(review?.drySweet ?? 3);
+  const [softAcidic, setSoftAcidic] = useState(review?.softAcidic ?? 3);
 
   const [selectedWineFlavors, setSelectedWineFlavors] = useState<WineFlavor[]>(
-    [],
+    (review?.aroma ?? []) as WineFlavor[],
   );
 
   useEffect(() => {
@@ -109,92 +103,82 @@ const ReviewModal = ({ wineId }: { wineId: number }) => {
     );
   };
 
-  const onSubmit = async (formData: ReviewFormData) => {
-    if (!accessToken) {
-      alert('로그인이 필요합니다.');
+
+  const handleSubmitReview = async () => {
+    if (!isEditMode || !review) {
+      toast.error('리뷰 수정 정보가 없습니다.');
       return;
     }
 
-    if (rating === 0) {
-      alert('별점을 선택해주세요.');
+    if (!rating) {
+      toast.error('별점을 선택해주세요.');
       return;
     }
 
-    if (!formData.content.trim()) {
-      alert('후기를 작성해주세요.');
+    if (!content.trim()) {
+      toast.error('리뷰 내용을 입력해주세요.');
       return;
     }
 
-    if (selectedWineFlavors.length === 0) {
-      alert('기억에 남는 향을 하나 이상 선택해주세요.');
-      return;
+    try {
+      const res = await instance.patch(`/reviews/${review.id}`, {
+        rating,
+        lightBold,
+        smoothTannic,
+        drySweet,
+        softAcidic,
+        aroma: selectedWineFlavors,
+        content,
+      });
+
+      const updatedReview = {
+        ...review,
+        ...res.data,
+        rating,
+        lightBold,
+        smoothTannic,
+        drySweet,
+        softAcidic,
+        aroma: selectedWineFlavors,
+        content,
+      };
+
+      onUpdated?.(updatedReview);
+      toast.success('리뷰가 수정되었습니다.');
+      onClose?.();
+    } catch (error) {
+      console.error('리뷰 수정 실패', error);
+      toast.error('리뷰 수정에 실패했습니다.');
     }
-
-    const aroma = selectedWineFlavors
-      .map((flavor) => AROMA_MAP[flavor])
-      .filter((flavor): flavor is string => Boolean(flavor));
-
-    if (aroma.length !== selectedWineFlavors.length) {
-      alert('선택한 향 중 등록할 수 없는 향이 있습니다.');
-      return;
-    }
-
-    const reviewData = {
-      rating,
-      lightBold: tasteValues.lightBold,
-      smoothTannic: tasteValues.smoothTannic,
-      drySweet: tasteValues.drySweet,
-      softAcidic: tasteValues.softAcidic,
-      aroma,
-      content: formData.content,
-      wineId: wineId,
-    };
-
-    console.log('리뷰 등록 데이터:', reviewData);
-
-    const res = await fetch('https://winereview-api.vercel.app/23-3/reviews', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify(reviewData),
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      console.log('리뷰 등록 실패:', data);
-      alert(data.message || '리뷰 등록에 실패했습니다.');
-      return;
-    }
-
-    console.log(data);
-    alert('리뷰 등록이 완료되었습니다.');
-    closeModal();
   };
-
-  if (!wine) {
-    return <div>와인 정보를 불러오는 중...</div>;
-  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col gap-12">
         <div className="flex flex-col gap-5">
-          <div className="flex items-center border-b border-gray-400 pb-2">
-            <div className="relative w-[62px] h-[96px]">
-              <Image
-                src={wine.image}
-                alt={wine.name}
-                fill
-                className="object-contain"
-              />
+
+          <div className="flex items-center border-b border-gray-200 pb-2">
+            <div className="w-[62px] h-[96px]">
+              {review?.wine.image ? (
+                <img
+                  src={review.wine.image}
+                  alt={review.wine.name}
+                  className="w-full h-full object-contain"
+                />
+              ) : (
+                <Image
+                  src={WineRecommend}
+                  alt="와인 상품 이미지"
+                  className="w-full h-full object-contain"
+                />
+              )}
             </div>
 
             <div className="px-4">
-              <p>{wine.name}</p>
-              <p className="text-body-sm text-gray-400 mt-0.5">{wine.region}</p>
+              <p>{review?.wine.name ?? 'Sentinel Carbernet Sauvignon 2016'}</p>
+              <p className="text-body-sm text-gray-400 mt-0.5">
+                {review?.wine.region ?? 'Western Cape, South Africa'}
+              </p>
             </div>
           </div>
 
@@ -204,12 +188,13 @@ const ReviewModal = ({ wineId }: { wineId: number }) => {
           </div>
 
           <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
             className="w-full py-2 rounded-[4px] outline-none bg-white
-            text-body-sm md:text-body-md text-[hsl(30,2%,19%)]
-            placeholder:text-body-sm md:placeholder:text-body-md placeholder:text-[hsl(0,0%,73%)]
-            border border-gray-300 focus:border-gray-400 pr-9 pl-4 min-h-[120px]"
+
+          text-body-sm md:text-body-md text-[hsl(30, 2%, 19%)] 
+          placeholder:text-body-sm md:placeholder:text-body-md placeholder:text-[hsl(0,0%,73%)] border border-gray-300 focus:border-gray-400 pr-9 pl-4 min-h-[120px]"
             placeholder="후기를 작성해주세요"
-            {...register('content', { required: true })}
           />
         </div>
 
@@ -232,8 +217,22 @@ const ReviewModal = ({ wineId }: { wineId: number }) => {
 
                 <div className="w-full">
                   <TasteButton
-                    initialValue={tasteValues[key]}
-                    onChange={(value) => handleTasteChange(key, value)}
+
+                    initialValue={
+                      label === '바디감'
+                        ? lightBold
+                        : label === '탄닌'
+                          ? smoothTannic
+                          : label === '당도'
+                            ? drySweet
+                            : softAcidic
+                    }
+                    onChange={(value) => {
+                      if (label === '바디감') setLightBold(value);
+                      if (label === '탄닌') setSmoothTannic(value);
+                      if (label === '당도') setDrySweet(value);
+                      if (label === '산미') setSoftAcidic(value);
+                    }}
                   />
                 </div>
 
@@ -269,10 +268,10 @@ const ReviewModal = ({ wineId }: { wineId: number }) => {
               ))}
           </div>
         </div>
-      </div>
 
-      <Button type="submit" fullWidth className="mt-12">
-        리뷰 남기기
+      </form>
+      <Button fullWidth className="mt-12" onClick={handleSubmitReview}>
+        {isEditMode ? '리뷰 수정하기' : '리뷰 남기기'}
       </Button>
     </form>
   );

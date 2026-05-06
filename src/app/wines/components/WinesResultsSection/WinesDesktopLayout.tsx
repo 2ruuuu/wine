@@ -30,6 +30,7 @@ const WinesDesktopLayout = ({
       <div className="flex flex-col gap-16 w-[801px]">
         <TextInput
           id="wine-catalog-search"
+          name="search"
           label="검색"
           type="search"
           placeholder="와인을 검색해 보세요"

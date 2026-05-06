@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, forwardRef } from 'react';
+import { ChangeEvent, useEffect, useState, forwardRef } from 'react';
 import Image from 'next/image';
 import { CameraBlack, CameraGray } from '@/constants/icons';
 import { profileImage } from '@/constants/images';
@@ -15,6 +15,7 @@ const PhotoInput = forwardRef<HTMLInputElement, PhotoInputProps>(
       variant = 'square',
       hideLabel = false,
       className,
+      imageUrl,
       ...props
     },
     ref,
@@ -23,6 +24,11 @@ const PhotoInput = forwardRef<HTMLInputElement, PhotoInputProps>(
     const isError = !!error;
     const isCircle = variant === 'circle';
     const [preview, setPreview] = useState<string | null>(null);
+    const [imageError, setImageError] = useState(false);
+
+    useEffect(() => {
+      setImageError(false);
+    }, [imageUrl, preview]);
 
     // 이미지 첨부 시 미리보기
     const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -31,6 +37,7 @@ const PhotoInput = forwardRef<HTMLInputElement, PhotoInputProps>(
       if (!file) return;
 
       setPreview(URL.createObjectURL(file));
+      setImageError(false);
 
       register?.onChange(e);
       props.onChange?.(e);
@@ -82,12 +89,13 @@ const PhotoInput = forwardRef<HTMLInputElement, PhotoInputProps>(
               ${isError ? 'border-2 border-error' : 'border-gray-300'}
             `}
             >
-              {preview ? (
-                <Image
-                  src={preview}
-                  alt="미리보기"
-                  fill
-                  className="object-cover"
+              {(preview || imageUrl) && !imageError ? (
+                <img
+                  key={preview ?? imageUrl ?? ''}
+                  src={preview ?? imageUrl ?? ''}
+                  alt="프로필 이미지"
+                  className="h-full w-full object-cover"
+                  onError={() => setImageError(true)}
                 />
               ) : isCircle ? (
                 <div className="w-full h-full">

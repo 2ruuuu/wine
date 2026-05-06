@@ -34,18 +34,30 @@ const ModalProvider = ({ children }: { children: ReactNode }) => {
           className="md:w-[460px] w-[375px]"
           hasHead
         >
-          <RegisterModal />
+          <RegisterModal
+            mode={modal.mode}
+            wine={modal.wine}
+            onUpdated={modal.onUpdated}
+            onClose={closeModal}
+          />
         </Modal>
       )}
 
       {modal?.type === 'review' && (
         <Modal
-          title="리뷰등록"
+          title={modal.mode === 'edit' ? '리뷰수정' : '리뷰등록'}
           onClose={closeModal}
           className="md:w-[528px] w-[375px]"
           hasHead
         >
-          <ReviewModal wineId={modal.wineId} />
+
+          <ReviewModal
+            mode={modal.mode}
+            review={modal.review}
+            onUpdated={modal.onUpdated}
+            onClose={closeModal}
+             wineId={modal.wineId}
+          />
         </Modal>
       )}
 
@@ -64,7 +76,16 @@ const ModalProvider = ({ children }: { children: ReactNode }) => {
             <Button onClick={closeModal} variant="outline" className="w-1/2">
               취소
             </Button>
-            <Button onClick={closeModal} variant="primary" className="w-1/2">
+            <Button
+              onClick={() => {
+                if (modal?.type === 'delete') {
+                  modal.onConfirm?.();
+                }
+                closeModal();
+              }}
+              variant="primary"
+              className="w-1/2"
+            >
               삭제하기
             </Button>
           </div>
