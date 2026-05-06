@@ -7,6 +7,7 @@ import Button from '../Button/Button';
 
 const FilterModal = () => {
   const [selectedWineTypes, setSelectedWineTypes] = useState<WineType[]>([]);
+  const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(250000);
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
 
@@ -24,7 +25,12 @@ const FilterModal = () => {
           selectedWineTypes={selectedWineTypes}
           onToggleWineType={handleToggleWineType}
         />
-        <WinePriceFilter value={maxPrice} onChange={setMaxPrice} />
+        <WinePriceFilter
+          minValue={minPrice}
+          maxValue={maxPrice}
+          onChangeMin={setMinPrice}
+          onChangeMax={setMaxPrice}
+        />
         <WineRatingFilter
           selectedRating={selectedRating}
           onChangeRating={setSelectedRating}
