@@ -3,25 +3,55 @@
 import { useState } from 'react';
 import { HeartEmpty, HeartFill } from '@/constants/icons';
 import { HeartToggleProps } from './type';
+import { postReviewLike, deleteReviewLike } from '@/lib/api/review';
 import Image from 'next/image';
+import toast from 'react-hot-toast';
+import axios from 'axios';
 
-const HeartToggle = ({ isLiked }: HeartToggleProps) => {
-  const [isHeartButtonClick, setIsHeartButtonClick] = useState(isLiked);
+const HeartToggle = ({ id, isLiked }: HeartToggleProps) => {
+  const [isHeart, setIsHeart] = useState(isLiked);
 
-  const toggleHeart = () => {
-    setIsHeartButtonClick((prev) => !prev);
+  const toggleHeart = async () => {
+    const previousState = isHeart;
+    setIsHeart(!isHeart);
+
+    try {
+      if (previousState) {
+        await deleteReviewLike(id);
+        toast.success('좋아요를 취소했습니다.');
+      } else {
+        await postReviewLike(id);
+        toast.success('좋아요를 눌렀습니다!');
+      }
+    } catch (error) {
+      setIsHeart(previousState);
+
+      if (axios.isAxiosError(error) && error.response) {
+        const status = error.response.status;
+
+        if (status === 403) {
+          toast.error('본인의 리뷰에는 좋아요를 누를 수 없습니다.');
+        } else if (status === 401) {
+          toast.error('로그인이 필요한 기능입니다.');
+        } else {
+          toast.error('요청 처리에 실패했습니다.');
+        }
+      } else {
+        toast.error('알 수 없는 오류가 발생했습니다.');
+      }
+    }
   };
 
   return (
     <button
       className={`border-2 rounded-md flex justify-center items-center gap-2 w-[50px] h-9 cursor-pointer transition-colors ${
-        isHeartButtonClick ? 'border-[hsl(1,88%,40%)]' : 'border-gray-300'
+        isHeart ? 'border-[hsl(1,88%,40%)]' : 'border-gray-300'
       }`}
       onClick={toggleHeart}
     >
       <Image
-        src={isHeartButtonClick ? HeartFill : HeartEmpty}
-        alt={isHeartButtonClick ? '채워진 하트' : '빈 하트'}
+        src={isHeart ? HeartFill : HeartEmpty}
+        alt={isHeart ? '채워진 하트' : '빈 하트'}
         width={20}
         style={{ height: 'auto' }}
       />
@@ -30,5 +60,3 @@ const HeartToggle = ({ isLiked }: HeartToggleProps) => {
 };
 
 export default HeartToggle;
-
-//하트 토글이랑, 화살표 토글 만들어야함

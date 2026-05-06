@@ -10,18 +10,56 @@ import TasteList from './TasteList/TasteList';
 import HeartToggle from './HeartToggle/HeartToggle';
 import Dropdown from '@/components/DropDown/Dropdown';
 import { ReviewCardProps } from './type';
+import React from 'react';
+import { deleteReview, patchReview } from '@/lib/api/review';
+import toast from 'react-hot-toast';
+import { useModal } from '@/components/Modal/ModalProvider';
+import { useRouter } from 'next/navigation';
+import { Review } from '@/types/review';
 
-const ReviewCard = ({ review }: ReviewCardProps) => {
+const ReviewCard = ({ review, wine }: ReviewCardProps) => {
+  const router = useRouter();
   const [isTasteOpen, setIsTasteOpen] = useState(false);
+  const { openModal } = useModal();
+
+  const handleDelete = () => {
+    openModal({
+      type: 'delete',
+      onConfirm: async () => {
+        try {
+          await deleteReview(review.id);
+          toast.success('리뷰가 삭제되었습니다.');
+          router.refresh();
+        } catch (error) {
+          toast.error('삭제에 실패했습니다.');
+        }
+      },
+    });
+  };
+
+  const handleEdit = () => {
+    openModal({
+      type: 'review',
+      mode: 'edit',
+      review: {
+        ...review,
+        wine: wine,
+      } as Review,
+      onUpdated: (updatedReview) => {
+        router.refresh();
+      },
+    });
+  };
+
   const dropdownOptions = [
-    { label: '수정하기', onSelect: () => console.log('수정 클릭!') },
-    { label: '삭제하기', onSelect: () => console.log('삭제 클릭!') },
+    { label: '수정하기', onSelect: handleEdit },
+    { label: '삭제하기', onSelect: handleDelete },
   ];
 
   return (
     <div className="flex flex-col w-full gap-12 max-w-[720px] pt-10 pb-10 border-b border-gray-300">
       <div className="flex flex-col gap-5">
-        <StarRating rating={review.rating} />
+        <StarRating rating={review.rating} className="" />
         <div className="flex justify-between items-center">
           <div className="flex gap-4 justify-center items-center">
             <Image
@@ -45,7 +83,7 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
             {({ toggle }) => (
               <button
                 onClick={toggle}
-                className="flex justify-center w-1 h-5 cursor-pointer"
+                className="flex justify-center p-2 cursor-pointer"
               >
                 <Image
                   src={Hamburger}
@@ -65,7 +103,7 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
       {isTasteOpen && (
         <TasteList
           lightBold={review.lightBold}
-          smoothTannic={review.lightBold}
+          smoothTannic={review.smoothTannic}
           drySweet={review.drySweet}
           softAcidic={review.softAcidic}
         />
@@ -73,7 +111,7 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
 
       <div className="flex relative justify-center items-center">
         <div className="absolute left-0">
-          <HeartToggle isLiked={review.isLiked} />
+          <HeartToggle id={review.id} isLiked={review.isLiked} />
         </div>
         <button
           onClick={() => setIsTasteOpen(!isTasteOpen)}
@@ -92,4 +130,4 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
   );
 };
 
-export default ReviewCard;
+export default React.memo(ReviewCard);

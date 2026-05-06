@@ -39,7 +39,7 @@ const Taste = ({ variant, type, value }: TasteProps) => {
 
   const container: { [key in TasteVariant]: string } = {
     'label-boxed-long': `${LABELDEFAULT} gap-3 max-w-[500px]`,
-    'label-boxed-middle': `${LABELDEFAULT} gap-4 max-w-[320px]`,
+    'label-boxed-middle': `${LABELDEFAULT} gap-6 max-w-[320px]`,
     'label-boxed-short': `${LABELDEFAULT} gap-5 max-w-[320px]`,
     'label-bold': `${LABELDEFAULT} gap-5 max-w-[480px]`,
     'label-top': `${LABELDEFAULT} flex-col max-w-[320px]`,
@@ -59,12 +59,20 @@ const Taste = ({ variant, type, value }: TasteProps) => {
       </div>
     ),
     'label-boxed-middle': (
-      <div className={container[variant]}>
-        <span className="flex items-center justify-center shrink-0 bg-gray-100 font-bold w-[53px] h-[30px] rounded text-sm text-gray-600">
+      <div className={container[variant] + 'flex-nowrap'}>
+        <span className="flex items-center justify-center shrink-0 whitespace-nowrap bg-gray-100 font-bold w-[53px] h-[30px] rounded text-sm text-gray-600">
           {label}
         </span>
-        <Bar value={value} gapClass="gap-0.5" widthClass="w-7" />
-        <span className="text-sm font-medium">{max}</span>
+        <div className="flex-1 min-w-0 px-1">
+          <Bar
+            value={value}
+            gapClass="md:gap-0.5 gap-1"
+            widthClass="md:w-7 w-20"
+          />
+        </div>
+        <span className="text-sm font-medium whitespace-nowrap shrink-0">
+          {max}
+        </span>
       </div>
     ),
 

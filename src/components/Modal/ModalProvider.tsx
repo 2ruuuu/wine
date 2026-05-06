@@ -56,6 +56,7 @@ const ModalProvider = ({ children }: { children: ReactNode }) => {
             mode={modal.mode}
             wineId={modal.wineId}
             review={modal.review}
+            wine={modal.wine}
             onUpdated={modal.onUpdated}
             onClose={closeModal}
           />

@@ -1,16 +1,19 @@
 import StarRating from '@/components/StarRating/StarRating';
-import Mock from '@/mocks/wineDetail.json';
+import { RatingAvgProps } from './type';
 
-const RatingAvg = () => {
-  const AvgRatingFloor = Math.floor(Mock.avgRating);
-  const AvgRating = Number(Mock.avgRating.toFixed(1));
+const RatingAvg = ({ avgRating }: RatingAvgProps) => {
+  const safeRating = avgRating ?? 0;
+  const AvgRatingFloor = Math.floor(safeRating);
+  const AvgRating = safeRating.toFixed(1);
 
   return (
-    <div className="flex gap-3.5 max-w-[260px]">
-      <StarRating rating={AvgRatingFloor} />
+    <div className="flex xl:flex-row flex-col xl:gap-3.5 xl:max-w-[260px] md:flex-col md:gap-3 md:max-w-[140px] w-full items-center md:items-start xl:items-center xl:justify-start justify-center gap-3">
+      <StarRating rating={AvgRatingFloor} className="" />
       <div>
-        <span className="text-2xl font-bold">{AvgRating}</span>
-        <span className="text-2xl font-bold text-gray-600">/5.0</span>
+        <span className="md:text-2xl text-[28px] font-bold">{AvgRating} </span>
+        <span className="md:text-2xl text-[28px] font-bold text-gray-600">
+          / 5.0
+        </span>
       </div>
     </div>
   );

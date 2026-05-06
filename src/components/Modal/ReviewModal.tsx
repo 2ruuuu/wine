@@ -7,6 +7,7 @@ import { WINE_FLAVOR_LABEL, WineFlavor } from '@/constants/chips';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useModal } from './ModalProvider';
 import { ReviewFormData, Wine } from './type';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Button from '../Button/Button';
 import Chip from '../Chip/Chip';
@@ -42,6 +43,7 @@ const TasteOption = [
 interface ReviewModalProps {
   mode?: 'create' | 'edit';
   review?: Review;
+  wine?: { id: number; name: string; image: string; region: string };
   onUpdated?: (updatedReview: Review) => void;
   onClose?: () => void;
   wineId?: number;
@@ -50,16 +52,20 @@ interface ReviewModalProps {
 const ReviewModal = ({
   mode = 'create',
   review,
+  wine,
   onUpdated,
   onClose,
   wineId,
 }: ReviewModalProps) => {
+  const router = useRouter();
   const isEditMode = mode === 'edit' && !!review;
   const { register, handleSubmit, setValue } = useForm<ReviewFormData>();
   const { accessToken } = useAuthStore();
   const { closeModal } = useModal();
   const [isSmallHeight, setIsSmallHeight] = useState(false);
-  const [wine, setWine] = useState<Wine | null>(review?.wine ?? null);
+  const [fetchedWine, setFetchedWine] = useState<Wine | null>(
+    review?.wine ?? wine ?? null,
+  );
   const [rating, setRating] = useState(review?.rating ?? 0);
   const [selectedWineFlavors, setSelectedWineFlavors] = useState<WineFlavor[]>(
     (review?.aroma ?? []) as WineFlavor[],
@@ -96,7 +102,7 @@ const ReviewModal = ({
         toast.error('와인 정보를 불러오지 못했습니다.');
         return;
       }
-      setWine(data);
+      setFetchedWine(data);
     };
     getWine();
   }, [wineId, isEditMode]);
@@ -168,12 +174,13 @@ const ReviewModal = ({
         toast.error('리뷰 등록에 실패했습니다.');
         return;
       }
+      router.refresh();
       toast.success('리뷰 등록이 완료되었습니다.');
       closeModal();
     }
   };
 
-  if (!wine) return <div>와인 정보를 불러오는 중...</div>;
+  const displayWine = review?.wine || fetchedWine || wine;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -181,24 +188,37 @@ const ReviewModal = ({
         className={`flex flex-col gap-12 ${isSmallHeight ? 'max-h-[400px] overflow-auto' : ''}`}
       >
         <div className="flex flex-col gap-5">
-          <div className="flex items-center border-b border-gray-400 pb-2">
-            <div className="relative w-[62px] h-[96px]">
-              <Image
-                src={wine.image || WineRecommend}
-                alt={wine.name}
-                fill
-                className="object-contain"
-              />
+          <div className="flex items-center border-b border-gray-200 pb-2">
+            <div className="w-[62px] h-[96px]">
+              {displayWine?.image ? (
+                <img
+                  src={displayWine.image}
+                  alt={displayWine.name}
+                  className="w-full h-full object-contain"
+                />
+              ) : (
+                <Image
+                  src={WineRecommend}
+                  alt="와인 상품 이미지"
+                  className="w-full h-full object-contain"
+                />
+              )}
             </div>
             <div className="px-4">
-              <p>{wine.name}</p>
-              <p className="text-body-sm text-gray-400 mt-0.5">{wine.region}</p>
+              <p>{displayWine?.name ?? '와인 정보 로딩중...'}</p>
+              <p className="text-body-sm text-gray-400 mt-0.5">
+                {displayWine?.region ?? ''}
+              </p>
             </div>
           </div>
 
           <div className="flex gap-4 items-center">
             <h3 className="text-body-sm text-[#a3a3a3]">별점 선택</h3>
-            <StarRatingButton rating={rating} onChange={setRating} />
+            <StarRatingButton
+              rating={rating}
+              onChange={setRating}
+              className=""
+            />
           </div>
 
           <textarea

@@ -10,6 +10,13 @@ export type ModalRootProps = {
   className?: string;
 };
 
+export type ModalWineInfo = {
+  id: number;
+  name: string;
+  image: string;
+  region: string;
+};
+
 export type ModalProviderProps =
   | { type: 'filter' }
   | {
@@ -23,7 +30,8 @@ export type ModalProviderProps =
       wineId?: number;
       mode?: 'create' | 'edit';
       review?: Review;
-      onUpdated?: (updateReview: Review) => void;
+      wine?: ModalWineInfo;
+      onUpdated?: (updatedReview: Review) => void;
     }
   | { type: 'delete'; onConfirm?: () => void }
   | { type: 'nickname'; name: string; onConfirm?: () => void }

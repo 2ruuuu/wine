@@ -15,13 +15,18 @@ const Top = ({ wine }: TopProps) => {
           className="object-contain mix-blend-multiply"
         />
       </div>
-      <div className="flex flex-col justify-center  gap-8 max-w-[500px] w-full">
+      <div className="hidden md:flex flex-col justify-center gap-8 max-w-[500px] w-full">
         <div className="flex flex-col gap-3.5">
           <div className="flex items-center gap-4 h-[28px]">
-            <StarRating rating={wine.avgRating} />
-            <span className="text-gray-600">{wine.reviewCount}개의 후기</span>
+            <StarRating
+              rating={wine.avgRating}
+              className="w-5 h-5 md:w-6 md:h-6 xl:w-[27px] xl:h-[27px]"
+            />
+            <span className="text-gray-600 whitespace-nowrap">
+              {wine.reviewCount}개의 후기
+            </span>
           </div>
-          <p className="text-[40px] font-bold">{wine.name}</p>
+          <p className="xl:text-[40px] md:text-[32px] font-bold">{wine.name}</p>
           <p className="text-[18px] text-gray-600">{wine.region}</p>
         </div>
         <span className="text-end text-2xl font-semibold">

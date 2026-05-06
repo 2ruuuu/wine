@@ -15,7 +15,7 @@ const TasteList = ({
   ] as const;
 
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="flex flex-col md:grid md:grid-cols-2 md:gap-x-16 md:gap-y-4">
       {TasteArray.map((item) => (
         <Taste
           key={item.type}
