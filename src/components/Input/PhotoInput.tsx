@@ -11,6 +11,7 @@ const PhotoInput = forwardRef<HTMLInputElement, PhotoInputProps>(
       label,
       error,
       register,
+      name,
       variant = 'square',
       hideLabel = false,
       className,
@@ -18,7 +19,7 @@ const PhotoInput = forwardRef<HTMLInputElement, PhotoInputProps>(
     },
     ref,
   ) => {
-    const inputId = id || register?.name || props.name;
+    const inputId = id || name;
     const isError = !!error;
     const isCircle = variant === 'circle';
     const [preview, setPreview] = useState<string | null>(null);
@@ -31,11 +32,8 @@ const PhotoInput = forwardRef<HTMLInputElement, PhotoInputProps>(
 
       setPreview(URL.createObjectURL(file));
 
-      if (register?.onChange) {
-        register.onChange(e);
-      } else if (props.onChange) {
-        props.onChange(e);
-      }
+      register?.onChange(e);
+      props.onChange?.(e);
     };
 
     return (
@@ -59,10 +57,14 @@ const PhotoInput = forwardRef<HTMLInputElement, PhotoInputProps>(
             id={inputId}
             accept="image/*"
             className="hidden"
-            ref={ref}
             {...props}
             {...register}
+            name={name}
             onChange={handleImageChange}
+            ref={(e) => {
+              ref && (typeof ref === 'function' ? ref(e) : (ref.current = e));
+              register?.ref(e);
+            }}
           />
 
           <div className="flex items-end gap-2">
