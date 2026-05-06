@@ -78,58 +78,15 @@ const Home = () => {
           </div>
         </section>
 
-        <div className="mt-[74px] mb-[151px] text-center">
+        <div className="mt-[74px] mb-[151px] text-center sticky bottom-10">
           <Link
             href="/wines"
-            className="bg-black text-white hover:bg-[hsl(30,2%,19%)] active:bg-[hsl(30,1%,28%)] inline-flex items-center justify-center font-body-sm md:font-body-md cursor-pointer disabled:opacity-50 disabled:pointer-events-none h-10.5 md:h-12.5 font-medium md:font-bold rounded-[4px] w-[283px]"
+            className=" bg-black text-white hover:bg-[hsl(30,2%,19%)] active:bg-[hsl(30,1%,28%)] inline-flex items-center justify-center font-body-sm md:font-body-md cursor-pointer disabled:opacity-50 disabled:pointer-events-none h-10.5 md:h-12.5 font-medium md:font-bold rounded-[4px] w-[283px]"
           >
             와인 보러가기
           </Link>
         </div>
       </div>
-      <Button
-        variant="primary"
-        className="w-[283px]"
-        onClick={() => openModal({ type: 'nickname', name: 'eunji111' })}
-      >
-        닉네임변경
-      </Button>
-      <Button
-        variant="primary"
-        className="w-[283px]"
-        onClick={() => openModal({ type: 'delete' })}
-      >
-        삭제
-      </Button>
-      <Button
-        variant="primary"
-        className="w-[283px]"
-        onClick={() => openModal({ type: 'register' })}
-      >
-        와인등록
-      </Button>
-      <Button
-        variant="primary"
-        className="w-[283px]"
-        onClick={() =>
-          openModal({
-            type: 'review',
-          })
-        }
-      >
-        리뷰등록
-      </Button>
-      <Button
-        variant="primary"
-        className="w-[283px]"
-        onClick={() =>
-          openModal({
-            type: 'filter',
-          })
-        }
-      >
-        필터
-      </Button>
     </div>
   );
 };

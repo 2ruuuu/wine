@@ -11,6 +11,7 @@ import {
   wineTypeSparklingImage,
 } from '@/constants/images';
 import { useAuthStore } from '@/stores/useAuthStore';
+import { useModal } from './ModalProvider';
 
 const WINE_TYPES = ['Red', 'White', 'Sparkling'] as const;
 type WineType = (typeof WINE_TYPES)[number];
@@ -30,6 +31,7 @@ const RegisterModal = () => {
   const [selectedWineType, setSelectedWineType] = useState<WineType | null>(
     null,
   );
+  const { closeModal } = useModal();
 
   const WINE_TYPE_IMAGE = {
     Red: wineTypeRedImage,
@@ -120,23 +122,30 @@ const RegisterModal = () => {
 
     console.log(data);
     alert('와인이 등록되었습니다.');
+    closeModal();
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
-        <PhotoInput label="와인 사진" register={register('winePhoto1')} />
+        <PhotoInput
+          label="와인 사진"
+          name="winePhoto1"
+          register={register('winePhoto1')}
+        />
 
         <TextInput
           label="와인 이름"
           placeholder="와인 이름 입력"
           register={register('name')}
+          name="name"
         />
 
         <TextInput
           label="가격"
           placeholder="가격 입력"
           register={register('price')}
+          name="price"
         />
 
         <div>
@@ -168,6 +177,7 @@ const RegisterModal = () => {
           label="원산지"
           placeholder="원산지 입력"
           register={register('region')}
+          name="region"
         />
 
         <Button fullWidth className="mt-12" type="submit">

@@ -5,6 +5,7 @@ import Dropdown from '@/components/DropDown/Dropdown';
 import { LogoBlack } from '@/constants/icons';
 import { usePathname, useRouter } from 'next/navigation';
 import { useAuthStore } from '@/stores/useAuthStore';
+import { profileImage as defaultProfileImage } from '@/constants/images';
 
 const Header = () => {
   const pathname = usePathname();
@@ -13,6 +14,7 @@ const Header = () => {
   const isLogin = !!user;
   const HiddenHeaderPath = ['/login', '/signup'];
   const isHiddenHeader = HiddenHeaderPath.includes(pathname);
+  const profileImage = user?.image || defaultProfileImage;
 
   const options = [
     {
@@ -47,10 +49,10 @@ const Header = () => {
             <button
               type="button"
               onClick={toggle}
-              className="w-11.25 h-11.25 rounded-full overflow-hidden border border-white cursor-pointer max-[756px]:w-[20px] max-[756px]:h-[20px] align-middle"
+              className="w-11.25 h-11.25 rounded-full overflow-hidden border border-white cursor-pointer max-[756px]:w-[20px] max-[756px]:h-[20px] align-middle bg-gray-400"
             >
-              <img
-                src="https://i.namu.wiki/i/QMYkLdvhM3sxErXFfp6f8OooYMjrwqo7nraefN3QIGNMjAtPY3NcLS5ubG4KD70N8AOyPxTQy_-MSsrtxgJhIg.webp"
+              <Image
+                src={profileImage}
                 alt="프로필 이미지"
                 className="w-full h-full object-cover"
               />

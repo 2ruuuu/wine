@@ -11,7 +11,7 @@ export type ModalRootProps = {
 export type ModalProviderProps =
   | { type: 'filter' }
   | { type: 'register' }
-  | { type: 'review' }
+  | { type: 'review'; wineId: number }
   | { type: 'delete' }
   | { type: 'nickname'; name: string; onConfirm?: () => void }
   | null;
