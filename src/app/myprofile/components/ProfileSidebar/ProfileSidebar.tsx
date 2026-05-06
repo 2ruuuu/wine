@@ -33,6 +33,7 @@ const ProfileSidebar = ({
       <div className="mb-6 flex justify-center">
         <PhotoInput
           label="프로필 사진"
+          name="profileImage"
           hideLabel
           variant="circle"
           register={profileRegister}
@@ -64,6 +65,7 @@ const ProfileSidebar = ({
         <div className="flex-1">
           <TextInput
             label="닉네임"
+            name="nickname"
             register={nicknameRegister}
             placeholder={nickname}
           />

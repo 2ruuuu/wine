@@ -180,16 +180,22 @@ const RegisterModal = ({
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
-        <PhotoInput label="와인 사진" register={register('winePhoto1')} />
+        <PhotoInput
+          label="와인 사진"
+          name="winePhoto"
+          register={register('winePhoto1')}
+        />
 
         <TextInput
           label="와인 이름"
+          name="name"
           placeholder="와인 이름 입력"
           register={register('name')}
         />
 
         <TextInput
           label="가격"
+          name="price"
           placeholder="가격 입력"
           register={register('price')}
         />
@@ -221,6 +227,7 @@ const RegisterModal = ({
 
         <TextInput
           label="원산지"
+          name="region"
           placeholder="원산지 입력"
           register={register('region')}
         />

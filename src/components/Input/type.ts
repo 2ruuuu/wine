@@ -1,11 +1,7 @@
 import React from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
 
-<<<<<<< HEAD
-export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-=======
 interface BaseInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
->>>>>>> origin/dev
   id?: string;
   label: string;
   error?: string;
@@ -14,16 +10,6 @@ interface BaseInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   hideLabel?: boolean;
 }
 
-<<<<<<< HEAD
-export interface PhotoInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  id?: string;
-  label: string;
-  error?: string;
-  register?: UseFormRegisterReturn;
-  variant?: 'circle' | 'square'; // 프로필일 경우 원형, 사진일 경우 사각형
-  hideLabel?: boolean;
-  imageUrl?: string | null;
-=======
 export interface TextInputProps extends BaseInputProps {
   errorType?: 'default' | 'modal'; // default일 경우 인풋 하단, modal일 경우 라벨 우측에 에러 메시지 출력
   isSearch?: boolean;
@@ -31,5 +17,5 @@ export interface TextInputProps extends BaseInputProps {
 
 export interface PhotoInputProps extends BaseInputProps {
   variant?: 'circle' | 'square'; // 프로필일 경우 원형, 사진일 경우 사각형
->>>>>>> origin/dev
+  imageUrl?: string | null;
 }

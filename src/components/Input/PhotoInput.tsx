@@ -39,18 +39,8 @@ const PhotoInput = forwardRef<HTMLInputElement, PhotoInputProps>(
       setPreview(URL.createObjectURL(file));
       setImageError(false);
 
-<<<<<<< HEAD
-      if (register?.onChange) {
-        register.onChange(e);
-      }
-
-      if (props.onChange) {
-        props.onChange(e);
-      }
-=======
       register?.onChange(e);
       props.onChange?.(e);
->>>>>>> origin/dev
     };
 
     return (
