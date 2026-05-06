@@ -11,7 +11,7 @@ const ReviewList = ({
   onUpdateReview,
 }: ReviewListProps) => {
   return (
-    <div className="max-w-[725px]">
+    <div className="w-full">
       {reviews.map((review) => {
         const dropdownOptions = [
           { label: '수정하기', onSelect: () => onUpdateReview(review) },
@@ -21,7 +21,14 @@ const ReviewList = ({
         return (
           <article
             key={review.id}
-            className="relative border-b border-gray-300 pb-8 mb-8"
+            className="
+              relative
+              w-full
+              border-b
+              border-gray-300
+              pb-8
+              mb-8
+            "
           >
             <div className="relative flex items-center gap-2">
               <StarRating rating={review.rating} />
@@ -67,32 +74,43 @@ const ReviewList = ({
               {review.content}
             </p>
 
-            <div className="mt-5 w-[520px] space-y-2">
-              <div className="flex gap-8">
-                <Taste
-                  variant="label-boxed-short"
-                  type="lightBold"
-                  value={review.lightBold}
-                />
-                <Taste
-                  variant="label-boxed-short"
-                  type="smoothTannic"
-                  value={review.smoothTannic}
-                />
-              </div>
+            <div
+              className="
+                mt-5
+                flex
+                w-full
+                flex-col
+                gap-2
 
-              <div className="flex gap-8">
-                <Taste
-                  variant="label-boxed-short"
-                  type="drySweet"
-                  value={review.drySweet}
-                />
-                <Taste
-                  variant="label-boxed-short"
-                  type="softAcidic"
-                  value={review.softAcidic}
-                />
-              </div>
+                min-[744px]:grid
+                min-[744px]:grid-cols-2
+                min-[744px]:gap-x-8
+                min-[744px]:gap-y-2
+              "
+            >
+              <Taste
+                variant="label-boxed-short"
+                type="lightBold"
+                value={review.lightBold}
+              />
+
+              <Taste
+                variant="label-boxed-short"
+                type="smoothTannic"
+                value={review.smoothTannic}
+              />
+
+              <Taste
+                variant="label-boxed-short"
+                type="drySweet"
+                value={review.drySweet}
+              />
+
+              <Taste
+                variant="label-boxed-short"
+                type="softAcidic"
+                value={review.softAcidic}
+              />
             </div>
 
             <Button variant="outline" className="mt-5 px-3.5 py-2">

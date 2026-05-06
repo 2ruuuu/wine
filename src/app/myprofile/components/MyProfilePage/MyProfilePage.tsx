@@ -213,9 +213,14 @@ const MyProfilePage = () => {
       name: inputNickname,
       onConfirm: async () => {
         try {
-          const res = await instance.patch('/users/me', {
-            nickname: inputNickname,
-          });
+          const nextNickname = inputNickname.trim();
+
+          const payload =
+            profileImage === null
+              ? { nickname: nextNickname }
+              : { nickname: nextNickname, image: profileImage };
+
+          const res = await instance.patch('/users/me', payload);
 
           const updatedUser = res.data;
 
@@ -237,7 +242,9 @@ const MyProfilePage = () => {
         } catch (error: any) {
           console.error('닉네임 변경 실패', error);
           console.log('서버 에러 응답:', error.response?.data);
-          toast.error('닉네임 변경에 실패했습니다.');
+          toast.error(
+            error.response?.data?.message ?? '닉네임 변경에 실패했습니다.',
+          );
         }
       },
     });
@@ -250,7 +257,21 @@ const MyProfilePage = () => {
     <div className="min-h-screen bg-white">
       <div className="h-[90px]" />
 
-      <main className="w-[960px] mx-auto flex">
+      <main
+        className="
+          mx-auto
+          flex
+          w-full
+          max-w-[343px]
+          flex-col
+
+          min-[744px]:max-w-[704px]
+
+          min-[1280px]:w-[960px]
+          min-[1280px]:max-w-none
+          min-[1280px]:flex-row
+        "
+      >
         <ProfileSidebar
           nickname={nickname}
           imageUrl={profileImage}
@@ -260,8 +281,17 @@ const MyProfilePage = () => {
           onChangeProfileImage={handleChangeProfileImage}
         />
 
-        <section className="flex-1 px-9 py-8">
-          <div className="w-[725px]">
+        <section
+          className="
+            w-full
+            py-8
+
+            min-[1280px]:flex-1
+            min-[1280px]:px-9
+            min-[1280px]:py-8
+          "
+        >
+          <div className="w-full">
             <ProfileTabs
               activeTab={activeTab}
               reviewCount={reviews.length}
