@@ -4,5 +4,5 @@ export interface StarRatingProps {
 }
 
 export interface InteractiveStarProps extends StarRatingProps {
-  onChange: (rating: number) => void;
+  onChange?: (rating: number) => void;
 }
