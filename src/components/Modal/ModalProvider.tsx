@@ -8,6 +8,7 @@ import Button from '@/components/Button/Button';
 import ReviewModal from './ReviewModal';
 import FilterModal from './FilterModal';
 import NameChangeModal from './NameChangeModal';
+
 const ModalContext = createContext<ModalContextProps | null>(null);
 
 const ModalProvider = ({ children }: { children: ReactNode }) => {
@@ -50,8 +51,10 @@ const ModalProvider = ({ children }: { children: ReactNode }) => {
           className="md:w-[528px] w-[375px]"
           hasHead
         >
+          {/* Create(wineId)와 Edit(review) 모드를 모두 지원하도록 수정 */}
           <ReviewModal
             mode={modal.mode}
+            wineId={modal.wineId}
             review={modal.review}
             onUpdated={modal.onUpdated}
             onClose={closeModal}
@@ -119,31 +122,3 @@ export const useModal = () => {
 };
 
 export default ModalProvider;
-
-// 사용예시
-// <button
-//   onClick={() => openModal({ type: 'filter' })}
-// >
-//   필터
-// </button>
-
-// <button
-//   onClick={() => openModal({ type: 'register' })}
-// >
-//   와인등록
-// </button>
-// <button
-//   onClick={() => openModal({ type: 'review' })}
-// >
-//   리뷰등록
-// </button>
-// <button
-//   onClick={() => openModal({ type: 'delete' })}
-// >
-//   삭제
-// </button>
-// <button
-//   onClick={() => openModal({ type: 'nickname' })}
-// >
-//   닉네임변경
-// </button>

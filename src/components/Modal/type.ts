@@ -20,9 +20,10 @@ export type ModalProviderProps =
     }
   | {
       type: 'review';
+      wineId?: number;
       mode?: 'create' | 'edit';
       review?: Review;
-      onUpdated?: (updatedReview: Review) => void;
+      onUpdated?: (updateReview: Review) => void;
     }
   | { type: 'delete'; onConfirm?: () => void }
   | { type: 'nickname'; name: string; onConfirm?: () => void }
@@ -37,4 +38,22 @@ export type NameChangeModalProps = {
   name: string;
   onClose: () => void;
   onConfirm?: () => void;
+};
+
+export type ReviewFormData = {
+  content: string;
+};
+
+export type Wine = {
+  id: number;
+  name: string;
+  region: string;
+  image: string;
+};
+
+export type WineFormData = {
+  name: string;
+  price: string;
+  region: string;
+  winePhoto1: FileList;
 };
