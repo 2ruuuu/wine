@@ -99,7 +99,7 @@ const ReviewModal = ({ wineId }: { wineId: number }) => {
 
       if (!res.ok) {
         console.log(data);
-        alert('와인 정보를 불러오지 못했습니다.');
+        toast.error('와인 정보를 불러오지 못했습니다.');
         return;
       }
 
