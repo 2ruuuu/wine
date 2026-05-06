@@ -11,6 +11,8 @@ import {
   wineTypeSparklingImage,
 } from '@/constants/images';
 import { useAuthStore } from '@/stores/useAuthStore';
+import toast from 'react-hot-toast';
+import { useModal } from './ModalProvider';
 
 const WINE_TYPES = ['Red', 'White', 'Sparkling'] as const;
 type WineType = (typeof WINE_TYPES)[number];
@@ -30,6 +32,7 @@ const RegisterModal = () => {
   const [selectedWineType, setSelectedWineType] = useState<WineType | null>(
     null,
   );
+  const { closeModal } = useModal();
 
   const WINE_TYPE_IMAGE = {
     Red: wineTypeRedImage,
@@ -55,19 +58,14 @@ const RegisterModal = () => {
 
   const onSubmit = async (formData: WineFormData) => {
     if (!selectedWineType) {
-      alert('와인 타입을 선택해주세요.');
+      toast.error('와인 타입을 선택해주세요.');
       return;
     }
-
-    // if (!accessToken) {
-    //   alert('로그인이 필요합니다.');
-    //   return;
-    // }
 
     const imageFile = formData.winePhoto1?.[0];
 
     if (!imageFile) {
-      alert('와인 사진을 등록해주세요.');
+      toast.error('와인 사진을 등록해주세요.');
       return;
     }
 
@@ -89,7 +87,7 @@ const RegisterModal = () => {
 
     if (!imageRes.ok) {
       console.log(imageData);
-      alert('이미지 업로드에 실패했습니다.');
+      toast.error('이미지 업로드에 실패했습니다.');
       return;
     }
 
@@ -114,12 +112,13 @@ const RegisterModal = () => {
 
     if (!res.ok) {
       console.log(data);
-      alert('와인 등록에 실패했습니다.');
+      toast.error('와인 등록에 실패했습니다.');
       return;
     }
 
     console.log(data);
-    alert('와인이 등록되었습니다.');
+    toast.success('와인이 등록되었습니다.');
+    closeModal();
   };
 
   return (
