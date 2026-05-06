@@ -45,7 +45,7 @@ const ModalProvider = ({ children }: { children: ReactNode }) => {
           className="md:w-[528px] w-[375px]"
           hasHead
         >
-          <ReviewModal />
+          <ReviewModal wineId={modal.wineId} />
         </Modal>
       )}
 

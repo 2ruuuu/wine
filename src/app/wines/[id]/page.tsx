@@ -35,6 +35,7 @@ const Wine = async ({ params }: { params: Promise<{ id: string }> }) => {
           <RatingCard
             reviewCount={wineData.reviewCount}
             avgRatings={wineData.avgRatings}
+            wineId={Number(id)}
           />
         </div>
       </div>
