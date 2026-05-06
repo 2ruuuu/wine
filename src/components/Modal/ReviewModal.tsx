@@ -8,6 +8,9 @@ import StarRatingButton from '../StarRating/StarRatingButton';
 import TasteButton from '../Taste/TasteButton';
 import { WINE_FLAVOR_LABEL, WineFlavor } from '@/constants/chips';
 import WineRecommend from '@/assets/images/wine-product-img.png';
+import { Review } from '@/types/review';
+import { instance } from '@/lib/api/axios';
+import toast from 'react-hot-toast';
 
 const TasteOption = [
   {
@@ -32,11 +35,32 @@ const TasteOption = [
   },
 ] as const;
 
-const ReviewModal = () => {
+interface ReviewModalProps {
+  mode?: 'create' | 'edit';
+  review?: Review;
+  onUpdated?: (updatedReview: Review) => void;
+  onClose?: () => void;
+}
+
+const ReviewModal = ({
+  mode = 'create',
+  review,
+  onUpdated,
+  onClose,
+}: ReviewModalProps) => {
+  const isEditMode = mode === 'edit' && !!review;
+
   const [isSmallHeight, setIsSmallHeight] = useState(false);
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(review?.rating ?? 0);
+  const [content, setContent] = useState(review?.content ?? '');
+
+  const [lightBold, setLightBold] = useState(review?.lightBold ?? 3);
+  const [smoothTannic, setSmoothTannic] = useState(review?.smoothTannic ?? 3);
+  const [drySweet, setDrySweet] = useState(review?.drySweet ?? 3);
+  const [softAcidic, setSoftAcidic] = useState(review?.softAcidic ?? 3);
+
   const [selectedWineFlavors, setSelectedWineFlavors] = useState<WineFlavor[]>(
-    [],
+    (review?.aroma ?? []) as WineFlavor[],
   );
   useEffect(() => {
     const checkHeight = () => {
@@ -62,6 +86,54 @@ const ReviewModal = () => {
     );
   };
 
+  const handleSubmitReview = async () => {
+    if (!isEditMode || !review) {
+      toast.error('리뷰 수정 정보가 없습니다.');
+      return;
+    }
+
+    if (!rating) {
+      toast.error('별점을 선택해주세요.');
+      return;
+    }
+
+    if (!content.trim()) {
+      toast.error('리뷰 내용을 입력해주세요.');
+      return;
+    }
+
+    try {
+      const res = await instance.patch(`/reviews/${review.id}`, {
+        rating,
+        lightBold,
+        smoothTannic,
+        drySweet,
+        softAcidic,
+        aroma: selectedWineFlavors,
+        content,
+      });
+
+      const updatedReview = {
+        ...review,
+        ...res.data,
+        rating,
+        lightBold,
+        smoothTannic,
+        drySweet,
+        softAcidic,
+        aroma: selectedWineFlavors,
+        content,
+      };
+
+      onUpdated?.(updatedReview);
+      toast.success('리뷰가 수정되었습니다.');
+      onClose?.();
+    } catch (error) {
+      console.error('리뷰 수정 실패', error);
+      toast.error('리뷰 수정에 실패했습니다.');
+    }
+  };
+
   return (
     <div>
       <form
@@ -70,16 +142,25 @@ const ReviewModal = () => {
         <div className="flex flex-col gap-5">
           <div className="flex items-center border-b border-gray-200 pb-2">
             <div className="w-[62px] h-[96px]">
-              <Image
-                src={WineRecommend}
-                alt="와인 상품 이미지"
-                className="w-full h-full object-contain"
-              />
+              {review?.wine.image ? (
+                <img
+                  src={review.wine.image}
+                  alt={review.wine.name}
+                  className="w-full h-full object-contain"
+                />
+              ) : (
+                <Image
+                  src={WineRecommend}
+                  alt="와인 상품 이미지"
+                  className="w-full h-full object-contain"
+                />
+              )}
             </div>
+
             <div className="px-4">
-              <p>Sentinel Carbernet Sauvignon 2016</p>
+              <p>{review?.wine.name ?? 'Sentinel Carbernet Sauvignon 2016'}</p>
               <p className="text-body-sm text-gray-400 mt-0.5">
-                Western Cape, South Africa
+                {review?.wine.region ?? 'Western Cape, South Africa'}
               </p>
             </div>
           </div>
@@ -88,11 +169,13 @@ const ReviewModal = () => {
             <StarRatingButton rating={rating} onChange={handleRatingChange} />
           </div>
           <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
             className="w-full py-2 rounded-[4px] outline-none bg-white
-            text-body-sm md:text-body-md text-[hsl(30, 2%, 19%)] 
-            placeholder:text-body-sm md:placeholder:text-body-md placeholder:text-[hsl(0,0%,73%)] border border-gray-300 focus:border-gray-400 pr-9 pl-4 min-h-[120px]"
+          text-body-sm md:text-body-md text-[hsl(30, 2%, 19%)] 
+          placeholder:text-body-sm md:placeholder:text-body-md placeholder:text-[hsl(0,0%,73%)] border border-gray-300 focus:border-gray-400 pr-9 pl-4 min-h-[120px]"
             placeholder="후기를 작성해주세요"
-          ></textarea>
+          />
         </div>
 
         <div>
@@ -110,7 +193,23 @@ const ReviewModal = () => {
                   {min}
                 </span>
                 <div className="w-full">
-                  <TasteButton initialValue={3} />
+                  <TasteButton
+                    initialValue={
+                      label === '바디감'
+                        ? lightBold
+                        : label === '탄닌'
+                          ? smoothTannic
+                          : label === '당도'
+                            ? drySweet
+                            : softAcidic
+                    }
+                    onChange={(value) => {
+                      if (label === '바디감') setLightBold(value);
+                      if (label === '탄닌') setSmoothTannic(value);
+                      if (label === '당도') setDrySweet(value);
+                      if (label === '산미') setSoftAcidic(value);
+                    }}
+                  />
                 </div>
                 <span className="text-xs text-gray-700 w-[50px] text-center">
                   {max}
@@ -138,8 +237,8 @@ const ReviewModal = () => {
           </div>
         </div>
       </form>
-      <Button fullWidth className="mt-12">
-        리뷰 남기기
+      <Button fullWidth className="mt-12" onClick={handleSubmitReview}>
+        {isEditMode ? '리뷰 수정하기' : '리뷰 남기기'}
       </Button>
     </div>
   );

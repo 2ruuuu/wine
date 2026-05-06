@@ -1,4 +1,6 @@
 import { ReactNode } from 'react';
+import { Review } from '@/types/review';
+import type { WineListItem } from '@/app/myprofile/components/WineList/type';
 
 export type ModalRootProps = {
   title: string;
@@ -10,9 +12,19 @@ export type ModalRootProps = {
 
 export type ModalProviderProps =
   | { type: 'filter' }
-  | { type: 'register' }
-  | { type: 'review' }
-  | { type: 'delete' }
+  | {
+      type: 'register';
+      mode?: 'create' | 'edit';
+      wine?: WineListItem;
+      onUpdated?: () => void;
+    }
+  | {
+      type: 'review';
+      mode?: 'create' | 'edit';
+      review?: Review;
+      onUpdated?: (updatedReview: Review) => void;
+    }
+  | { type: 'delete'; onConfirm?: () => void }
   | { type: 'nickname'; name: string; onConfirm?: () => void }
   | null;
 

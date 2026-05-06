@@ -17,4 +17,5 @@ export interface TextInputProps extends BaseInputProps {
 
 export interface PhotoInputProps extends BaseInputProps {
   variant?: 'circle' | 'square'; // 프로필일 경우 원형, 사진일 경우 사각형
+  imageUrl?: string | null;
 }
