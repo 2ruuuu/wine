@@ -5,16 +5,22 @@ import { useModal } from '@/components/Modal/ModalProvider';
 interface WineCardProps {
   wine: WineListItem;
   onDeleteWine: (wineId: number) => void;
+  onUpdateWine: () => void;
 }
 
-const WineCard = ({ wine, onDeleteWine }: WineCardProps) => {
+const WineCard = ({ wine, onDeleteWine, onUpdateWine }: WineCardProps) => {
   const { openModal } = useModal();
 
   const dropdownOptions = [
     {
       label: '수정하기',
       onSelect: () => {
-        openModal({ type: 'register' });
+        openModal({
+          type: 'register',
+          mode: 'edit',
+          wine,
+          onUpdated: onUpdateWine,
+        });
       },
     },
     {

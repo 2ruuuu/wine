@@ -5,12 +5,16 @@ import Button from '@/components/Button/Button';
 import { formatTimeAgo } from '@/lib/date-fns';
 import Dropdown from '@/components/DropDown/Dropdown';
 
-const ReviewList = ({ reviews, onDeleteReview }: ReviewListProps) => {
+const ReviewList = ({
+  reviews,
+  onDeleteReview,
+  onUpdateReview,
+}: ReviewListProps) => {
   return (
     <div className="max-w-[725px]">
       {reviews.map((review) => {
         const dropdownOptions = [
-          { label: '수정하기', onSelect: () => console.log('수정', review.id) },
+          { label: '수정하기', onSelect: () => onUpdateReview(review) },
           { label: '삭제하기', onSelect: () => onDeleteReview(review.id) },
         ];
 

@@ -56,8 +56,6 @@ const MyProfilePage = () => {
       try {
         const meRes = await instance.get('/users/me');
 
-        console.log('내 정보 응답:', meRes.data);
-
         const myInfo = meRes.data;
 
         setNickname(myInfo.nickname ?? '');
@@ -106,6 +104,21 @@ const MyProfilePage = () => {
     }
   };
 
+  const handleUpdateWine = async () => {
+    try {
+      const wineRes = await instance.get('/users/me/wines', {
+        params: {
+          limit: 10,
+        },
+      });
+
+      setWines(wineRes.data.list);
+    } catch (error) {
+      console.error('와인 목록 갱신 실패', error);
+      toast.error('와인 목록을 다시 불러오지 못했습니다.');
+    }
+  };
+
   const handleDeleteReview = async (reviewId: number) => {
     try {
       await instance.delete(`/reviews/${reviewId}`);
@@ -115,6 +128,14 @@ const MyProfilePage = () => {
       console.error('리뷰 삭제 실패', error);
       toast.error('리뷰 삭제에 실패했습니다.');
     }
+  };
+
+  const handleUpdateReview = (updatedReview: Review) => {
+    setReviews((prev) =>
+      prev.map((review) =>
+        review.id === updatedReview.id ? updatedReview : review,
+      ),
+    );
   };
 
   const handleChangeProfileImage = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -183,7 +204,7 @@ const MyProfilePage = () => {
 
   const handleClickChange = () => {
     if (!inputNickname.trim()) {
-      alert('닉네임을 입력해주세요.');
+      toast.error('닉네임을 입력해주세요.');
       return;
     }
 
@@ -253,6 +274,14 @@ const MyProfilePage = () => {
                 <ReviewList
                   reviews={reviews}
                   onDeleteReview={handleDeleteReview}
+                  onUpdateReview={(review) =>
+                    openModal({
+                      type: 'review',
+                      mode: 'edit',
+                      review,
+                      onUpdated: handleUpdateReview,
+                    })
+                  }
                 />
               ) : (
                 <EmptyState message="작성한 후기가 없습니다." />
@@ -260,7 +289,11 @@ const MyProfilePage = () => {
 
             {activeTab === 'wine' &&
               (wines.length > 0 ? (
-                <WineList wines={wines} onDeleteWine={handleDeleteWine} />
+                <WineList
+                  wines={wines}
+                  onDeleteWine={handleDeleteWine}
+                  onUpdateWine={handleUpdateWine}
+                />
               ) : (
                 <EmptyState message="등록한 와인이 없습니다." />
               ))}

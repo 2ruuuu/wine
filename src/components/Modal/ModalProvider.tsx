@@ -34,18 +34,28 @@ const ModalProvider = ({ children }: { children: ReactNode }) => {
           className="md:w-[460px] w-[375px]"
           hasHead
         >
-          <RegisterModal />
+          <RegisterModal
+            mode={modal.mode}
+            wine={modal.wine}
+            onUpdated={modal.onUpdated}
+            onClose={closeModal}
+          />
         </Modal>
       )}
 
       {modal?.type === 'review' && (
         <Modal
-          title="리뷰등록"
+          title={modal.mode === 'edit' ? '리뷰수정' : '리뷰등록'}
           onClose={closeModal}
           className="md:w-[528px] w-[375px]"
           hasHead
         >
-          <ReviewModal />
+          <ReviewModal
+            mode={modal.mode}
+            review={modal.review}
+            onUpdated={modal.onUpdated}
+            onClose={closeModal}
+          />
         </Modal>
       )}
 
