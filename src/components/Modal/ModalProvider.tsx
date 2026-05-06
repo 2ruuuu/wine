@@ -8,6 +8,7 @@ import Button from '@/components/Button/Button';
 import ReviewModal from './ReviewModal';
 import FilterModal from './FilterModal';
 import NameChangeModal from './NameChangeModal';
+
 const ModalContext = createContext<ModalContextProps | null>(null);
 
 const ModalProvider = ({ children }: { children: ReactNode }) => {
@@ -34,18 +35,31 @@ const ModalProvider = ({ children }: { children: ReactNode }) => {
           className="md:w-[460px] w-[375px]"
           hasHead
         >
-          <RegisterModal />
+          <RegisterModal
+            mode={modal.mode}
+            wine={modal.wine}
+            onUpdated={modal.onUpdated}
+            onClose={closeModal}
+          />
         </Modal>
       )}
 
       {modal?.type === 'review' && (
         <Modal
-          title="리뷰등록"
+          title={modal.mode === 'edit' ? '리뷰수정' : '리뷰등록'}
           onClose={closeModal}
           className="md:w-[528px] w-[375px]"
           hasHead
         >
-          <ReviewModal wineId={modal.wineId} />
+          {/* Create(wineId)와 Edit(review) 모드를 모두 지원하도록 수정 */}
+          <ReviewModal
+            mode={modal.mode}
+            wineId={modal.wineId}
+            review={modal.review}
+            wine={modal.wine}
+            onUpdated={modal.onUpdated}
+            onClose={closeModal}
+          />
         </Modal>
       )}
 
@@ -64,7 +78,16 @@ const ModalProvider = ({ children }: { children: ReactNode }) => {
             <Button onClick={closeModal} variant="outline" className="w-1/2">
               취소
             </Button>
-            <Button onClick={closeModal} variant="primary" className="w-1/2">
+            <Button
+              onClick={() => {
+                if (modal?.type === 'delete') {
+                  modal.onConfirm?.();
+                }
+                closeModal();
+              }}
+              variant="primary"
+              className="w-1/2"
+            >
               삭제하기
             </Button>
           </div>
@@ -100,31 +123,3 @@ export const useModal = () => {
 };
 
 export default ModalProvider;
-
-// 사용예시
-// <button
-//   onClick={() => openModal({ type: 'filter' })}
-// >
-//   필터
-// </button>
-
-// <button
-//   onClick={() => openModal({ type: 'register' })}
-// >
-//   와인등록
-// </button>
-// <button
-//   onClick={() => openModal({ type: 'review' })}
-// >
-//   리뷰등록
-// </button>
-// <button
-//   onClick={() => openModal({ type: 'delete' })}
-// >
-//   삭제
-// </button>
-// <button
-//   onClick={() => openModal({ type: 'nickname' })}
-// >
-//   닉네임변경
-// </button>

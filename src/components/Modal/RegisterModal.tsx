@@ -1,6 +1,7 @@
 'use client';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import type { WineListItem } from '@/app/myprofile/components/WineList/type';
 import PhotoInput from '@/components/Input/PhotoInput';
 import TextInput from '@/components/Input/TextInput';
 import Button from '@/components/Button/Button';
@@ -12,6 +13,7 @@ import {
 } from '@/constants/images';
 import { useAuthStore } from '@/stores/useAuthStore';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 import { useModal } from './ModalProvider';
 
 const WINE_TYPES = ['Red', 'White', 'Sparkling'] as const;
@@ -21,18 +23,40 @@ type WineFormData = {
   name: string;
   price: string;
   region: string;
-  winePhoto1: FileList;
+  winePhoto: FileList;
 };
 
-const RegisterModal = () => {
-  const { register, handleSubmit } = useForm<WineFormData>();
+type RegisterModalProps = {
+  mode?: 'create' | 'edit';
+  wine?: WineListItem;
+  onUpdated?: () => void;
+  onClose?: () => void;
+};
 
+const RegisterModal = ({
+  mode = 'create',
+  wine,
+  onUpdated,
+  onClose,
+}: RegisterModalProps) => {
+  const router = useRouter();
+  const { register, handleSubmit, setValue } = useForm<WineFormData>();
   const { accessToken } = useAuthStore();
-
   const [selectedWineType, setSelectedWineType] = useState<WineType | null>(
     null,
   );
-  const { closeModal } = useModal();
+
+  useEffect(() => {
+    if (mode !== 'edit' || !wine) return;
+
+    setValue('name', wine.name);
+    setValue('price', String(wine.price));
+    setValue('region', wine.region);
+
+    if (wine.type === 'RED') setSelectedWineType('Red');
+    if (wine.type === 'WHITE') setSelectedWineType('White');
+    if (wine.type === 'SPARKLING') setSelectedWineType('Sparkling');
+  }, [mode, wine, setValue]);
 
   const WINE_TYPE_IMAGE = {
     Red: wineTypeRedImage,
@@ -45,16 +69,11 @@ const RegisterModal = () => {
     White: 'white',
     Sparkling: 'sparkling',
   };
-
   const WINE_TYPE_VALUE = {
     Red: 'RED',
     White: 'WHITE',
     Sparkling: 'SPARKLING',
   } as const;
-
-  const onClickType = (wineType: WineType) => {
-    setSelectedWineType(wineType);
-  };
 
   const onSubmit = async (formData: WineFormData) => {
     if (!selectedWineType) {
@@ -62,85 +81,102 @@ const RegisterModal = () => {
       return;
     }
 
-    const imageFile = formData.winePhoto1?.[0];
+    const imageFile = formData.winePhoto?.[0];
 
-    if (!imageFile) {
+    // Create 모드일 때 사진 필수
+    if (!imageFile && mode !== 'edit') {
       toast.error('와인 사진을 등록해주세요.');
       return;
     }
 
-    const imageFormData = new FormData();
-    imageFormData.append('image', imageFile);
+    let imageUrl = wine?.image ?? '';
 
-    const imageRes = await fetch(
-      'https://winereview-api.vercel.app/23-3/images/upload',
+    // 사진이 새로 업로드된 경우
+    if (imageFile) {
+      const imageFormData = new FormData();
+      imageFormData.append('image', imageFile);
+
+      const imageRes = await fetch(
+        'https://winereview-api.vercel.app/23-3/images/upload',
+        {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${accessToken}` },
+          body: imageFormData,
+        },
+      );
+
+      const imageData = await imageRes.json();
+      if (!imageRes.ok) {
+        toast.error('이미지 업로드에 실패했습니다.');
+        return;
+      }
+      imageUrl = imageData.url;
+    }
+
+    const wineBody = {
+      name: formData.name,
+      region: formData.region,
+      image: imageUrl,
+      price: Number(formData.price),
+      type: WINE_TYPE_VALUE[selectedWineType],
+    };
+
+    const isEditMode = mode === 'edit' && wine?.id;
+
+    const res = await fetch(
+      isEditMode
+        ? `https://winereview-api.vercel.app/23-3/wines/${wine.id}`
+        : 'https://winereview-api.vercel.app/23-3/wines',
       {
-        method: 'POST',
+        method: isEditMode ? 'PATCH' : 'POST',
         headers: {
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${accessToken}`,
         },
-        body: imageFormData,
+        body: JSON.stringify(wineBody),
       },
     );
 
-    const imageData = await imageRes.json();
-
-    if (!imageRes.ok) {
-      console.log(imageData);
-      toast.error('이미지 업로드에 실패했습니다.');
-      return;
-    }
-
-    const imageUrl = imageData.url;
-
-    const res = await fetch('https://winereview-api.vercel.app/23-3/wines', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify({
-        name: formData.name,
-        region: formData.region,
-        image: imageUrl,
-        price: Number(formData.price),
-        type: WINE_TYPE_VALUE[selectedWineType],
-      }),
-    });
-
     const data = await res.json();
-
     if (!res.ok) {
-      console.log(data);
-      toast.error('와인 등록에 실패했습니다.');
+      toast.error(
+        isEditMode ? '와인 수정에 실패했습니다.' : '와인 등록에 실패했습니다.',
+      );
       return;
     }
 
-    console.log(data);
-    toast.success('와인이 등록되었습니다.');
-    closeModal();
+    toast.success(
+      isEditMode ? '와인이 수정되었습니다.' : '와인이 등록되었습니다.',
+    );
+
+    if (isEditMode) onUpdated?.();
+    router.refresh();
+    onClose?.();
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
-        <PhotoInput label="와인 사진" register={register('winePhoto1')} />
-
+        <PhotoInput
+          label="와인 사진"
+          name="winePhoto"
+          register={register('winePhoto')}
+        />
         <TextInput
           label="와인 이름"
+          name="name"
           placeholder="와인 이름 입력"
           register={register('name')}
         />
-
         <TextInput
           label="가격"
+          name="price"
           placeholder="가격 입력"
           register={register('price')}
         />
 
         <div>
           <h3 className="text-body-sm font-medium text-black mb-2">타입</h3>
-
           <div className="flex gap-[10px]">
             {WINE_TYPES.map((wineType) => (
               <Chip
@@ -149,7 +185,7 @@ const RegisterModal = () => {
                 name="wineType"
                 value={wineType}
                 checked={selectedWineType === wineType}
-                onChange={() => onClickType(wineType)}
+                onChange={() => setSelectedWineType(wineType)}
                 image={{
                   src: WINE_TYPE_IMAGE[wineType],
                   alt: WINE_TYPE_LABEL[wineType],
@@ -165,12 +201,12 @@ const RegisterModal = () => {
 
         <TextInput
           label="원산지"
+          name="region"
           placeholder="원산지 입력"
           register={register('region')}
         />
-
         <Button fullWidth className="mt-12" type="submit">
-          와인 등록하기
+          {mode === 'edit' ? '와인 수정하기' : '와인 등록하기'}
         </Button>
       </form>
     </div>

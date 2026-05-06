@@ -1,14 +1,12 @@
-export type WineListItem = {
+export interface WineListItem {
   id: number;
   name: string;
   region: string;
-  image?: string | null;
+  image: string;
+  price: number;
+  type: string;
   avgRating: number;
   reviewCount: number;
-};
-
-interface WineListProps {
-  wines: WineListItem[];
+  recentReview: null | string;
+  userId: number;
 }
-
-export default WineListProps;

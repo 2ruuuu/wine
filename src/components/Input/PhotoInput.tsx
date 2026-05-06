@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, forwardRef } from 'react';
+import { ChangeEvent, useEffect, useState, forwardRef } from 'react';
 import Image from 'next/image';
 import { CameraBlack, CameraGray } from '@/constants/icons';
 import { profileImage } from '@/constants/images';
@@ -11,17 +11,24 @@ const PhotoInput = forwardRef<HTMLInputElement, PhotoInputProps>(
       label,
       error,
       register,
+      name,
       variant = 'square',
       hideLabel = false,
       className,
+      imageUrl,
       ...props
     },
     ref,
   ) => {
-    const inputId = id || register?.name || props.name;
+    const inputId = id || name;
     const isError = !!error;
     const isCircle = variant === 'circle';
     const [preview, setPreview] = useState<string | null>(null);
+    const [imageError, setImageError] = useState(false);
+
+    useEffect(() => {
+      setImageError(false);
+    }, [imageUrl, preview]);
 
     // 이미지 첨부 시 미리보기
     const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -30,12 +37,10 @@ const PhotoInput = forwardRef<HTMLInputElement, PhotoInputProps>(
       if (!file) return;
 
       setPreview(URL.createObjectURL(file));
+      setImageError(false);
 
-      if (register?.onChange) {
-        register.onChange(e);
-      } else if (props.onChange) {
-        props.onChange(e);
-      }
+      register?.onChange(e);
+      props.onChange?.(e);
     };
 
     return (
@@ -59,10 +64,14 @@ const PhotoInput = forwardRef<HTMLInputElement, PhotoInputProps>(
             id={inputId}
             accept="image/*"
             className="hidden"
-            ref={ref}
             {...props}
             {...register}
+            name={name}
             onChange={handleImageChange}
+            ref={(e) => {
+              ref && (typeof ref === 'function' ? ref(e) : (ref.current = e));
+              register?.ref(e);
+            }}
           />
 
           <div className="flex items-end gap-2">
@@ -80,12 +89,13 @@ const PhotoInput = forwardRef<HTMLInputElement, PhotoInputProps>(
               ${isError ? 'border-2 border-error' : 'border-gray-300'}
             `}
             >
-              {preview ? (
-                <Image
-                  src={preview}
-                  alt="미리보기"
-                  fill
-                  className="object-cover"
+              {(preview || imageUrl) && !imageError ? (
+                <img
+                  key={preview ?? imageUrl ?? ''}
+                  src={preview ?? imageUrl ?? ''}
+                  alt="프로필 이미지"
+                  className="h-full w-full object-cover"
+                  onError={() => setImageError(true)}
                 />
               ) : isCircle ? (
                 <div className="w-full h-full">

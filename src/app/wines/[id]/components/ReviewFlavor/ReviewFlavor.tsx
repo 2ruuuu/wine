@@ -14,5 +14,3 @@ const ReviewFlavor = () => {
 };
 
 export default ReviewFlavor;
-
-//어떤 맛이 나나요 데이터 어딨는지 물어보기
