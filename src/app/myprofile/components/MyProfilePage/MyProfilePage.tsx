@@ -238,8 +238,6 @@ const MyProfilePage = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="h-[90px]" />
-
       <main
         className="
           mx-auto
