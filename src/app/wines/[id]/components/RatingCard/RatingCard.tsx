@@ -4,6 +4,7 @@ import RatingAvg from './RatingAvg/RatingAvg';
 import RatingBar from './RatingBar/RatingBar';
 import { RatingBarProps } from './RatingBar/type';
 import { useModal } from '@/components/Modal/ModalProvider';
+import { useAuthStore } from '@/stores/useAuthStore';
 
 const RatingCard = ({
   reviewCount,
@@ -15,6 +16,9 @@ const RatingCard = ({
   id,
 }: RatingBarProps) => {
   const { openModal } = useModal();
+
+  const user = useAuthStore((state) => state.user);
+  const isLoggedIn = !!user;
 
   const handleReviewCreate = () => {
     openModal({
@@ -47,17 +51,21 @@ const RatingCard = ({
             region={region}
           />
         </div>
-        <Button fullWidth={true} onClick={handleReviewCreate}>
-          리뷰 남기기
-        </Button>
+        {isLoggedIn && (
+          <Button fullWidth={true} onClick={handleReviewCreate}>
+            리뷰 남기기
+          </Button>
+        )}
       </div>
       {/* 2. 태블릿(md) 전용 */}
       <div className="hidden md:flex xl:hidden flex-row w-full justify-between items-start">
         <div className="flex flex-col gap-4 max-w-[280px] w-full">
           <RatingAvg avgRating={avgRating} />
-          <Button fullWidth={false} onClick={handleReviewCreate}>
-            리뷰 남기기
-          </Button>
+          {isLoggedIn && (
+            <Button fullWidth={false} onClick={handleReviewCreate}>
+              리뷰 남기기
+            </Button>
+          )}
         </div>
         <div className="flex-1 max-w-[280px] w-full">
           <RatingBar
@@ -85,9 +93,11 @@ const RatingCard = ({
           image={image}
           region={region}
         />
-        <Button fullWidth={true} onClick={handleReviewCreate}>
-          리뷰 남기기
-        </Button>
+        {isLoggedIn && (
+          <Button fullWidth={true} onClick={handleReviewCreate}>
+            리뷰 남기기
+          </Button>
+        )}
       </div>
     </div>
   );
