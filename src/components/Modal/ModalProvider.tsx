@@ -30,7 +30,8 @@ const ModalProvider = ({ children }: { children: ReactNode }) => {
 
       {modal?.type === 'register' && (
         <Modal
-          title="와인등록"
+          //title="와인등록"
+          title={modal.mode === 'edit' ? '와인수정' : '와인등록'}
           onClose={closeModal}
           className="md:w-[460px] w-[375px]"
           hasHead
