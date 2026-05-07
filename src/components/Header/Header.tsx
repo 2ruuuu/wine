@@ -3,32 +3,38 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Dropdown from '@/components/DropDown/Dropdown';
 import { LogoBlack } from '@/constants/icons';
-import { HeaderProps } from './type';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { useAuthStore } from '@/stores/useAuthStore';
+import { profileImage as defaultProfileImage } from '@/constants/images';
 
-const Header = ({ isLogin }: HeaderProps) => {
+const Header = () => {
   const pathname = usePathname();
+  const router = useRouter();
+  const { user, clearAuth } = useAuthStore();
+  const isLogin = !!user;
   const HiddenHeaderPath = ['/login', '/signup'];
   const isHiddenHeader = HiddenHeaderPath.includes(pathname);
-
+  const profileImage = user?.image || defaultProfileImage;
   const options = [
     {
       label: '마이페이지',
       onSelect: () => {
-        console.log('마이페이지로 이동');
+        router.push('/myprofile');
       },
     },
     {
       label: '로그아웃',
       onSelect: () => {
-        console.log('로그아웃 실행');
+        clearAuth();
+        router.push('/');
       },
     },
   ];
   if (isHiddenHeader) return null;
+
   return (
     <header
-      className={`fixed w-full z-10 top-0 transition-all duration-500 max-[756px]:h-[50px] md:px-[60px] px-5 flex justify-between items-center m-auto bg-[#171A21] md:h-17.5`}
+      className={`fixed w-full z-10 top-0 transition-all duration-500 h-[50px] md:px-[60px] px-5 flex justify-between items-center m-auto bg-[#171A21] md:h-17.5`}
     >
       <h1>
         <Link href="/">
@@ -44,8 +50,10 @@ const Header = ({ isLogin }: HeaderProps) => {
               onClick={toggle}
               className="w-11.25 h-11.25 rounded-full overflow-hidden border border-white cursor-pointer max-[756px]:w-[20px] max-[756px]:h-[20px] align-middle"
             >
-              <img
-                src="https://i.namu.wiki/i/QMYkLdvhM3sxErXFfp6f8OooYMjrwqo7nraefN3QIGNMjAtPY3NcLS5ubG4KD70N8AOyPxTQy_-MSsrtxgJhIg.webp"
+              <Image
+                src={profileImage}
+                width={45}
+                height={45}
                 alt="프로필 이미지"
                 className="w-full h-full object-cover"
               />

@@ -1,4 +1,6 @@
 import { ReactNode } from 'react';
+import { Review } from '@/types/review';
+import type { WineListItem } from '@/app/myprofile/components/WineList/type';
 
 export type ModalRootProps = {
   title: string;
@@ -8,11 +10,30 @@ export type ModalRootProps = {
   className?: string;
 };
 
+export type ModalWineInfo = {
+  id: number;
+  name: string;
+  image: string;
+  region: string;
+};
+
 export type ModalProviderProps =
   | { type: 'filter' }
-  | { type: 'register' }
-  | { type: 'review' }
-  | { type: 'delete' }
+  | {
+      type: 'register';
+      mode?: 'create' | 'edit';
+      wine?: WineListItem;
+      onUpdated?: () => void;
+    }
+  | {
+      type: 'review';
+      wineId?: number;
+      mode?: 'create' | 'edit';
+      review?: Review;
+      wine?: ModalWineInfo;
+      onUpdated?: (updatedReview: Review) => void;
+    }
+  | { type: 'delete'; onConfirm?: () => void }
   | { type: 'nickname'; name: string; onConfirm?: () => void }
   | null;
 
@@ -25,4 +46,22 @@ export type NameChangeModalProps = {
   name: string;
   onClose: () => void;
   onConfirm?: () => void;
+};
+
+export type ReviewFormData = {
+  content: string;
+};
+
+export type Wine = {
+  id: number;
+  name: string;
+  region: string;
+  image: string;
+};
+
+export type WineFormData = {
+  name: string;
+  price: string;
+  region: string;
+  winePhoto1: FileList;
 };

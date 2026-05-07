@@ -70,6 +70,7 @@ const SignupForm = () => {
 
         if (response) {
           setAuth(response);
+          toast.success('회원가입 후 로그인에 성공하였습니다.');
           router.replace('/');
         }
       } catch (error: any) {
@@ -91,7 +92,8 @@ const SignupForm = () => {
       <div className="flex flex-col gap-8 md:gap-10">
         <TextInput
           label="이메일"
-          type="text"
+          type="email"
+          name="email"
           placeholder="이메일을 입력해주세요"
           register={register('email')}
           error={errors.email?.message}
@@ -99,6 +101,7 @@ const SignupForm = () => {
         <TextInput
           label="닉네임"
           type="text"
+          name="nickname"
           placeholder="닉네임을 입력해주세요"
           register={register('nickname')}
           error={errors.nickname?.message}
@@ -106,6 +109,7 @@ const SignupForm = () => {
         <TextInput
           label="비밀번호"
           type="password"
+          name="password"
           placeholder="영문, 숫자, 특수문자(!@#$%^&*) 제한"
           register={register('password')}
           error={errors.password?.message}
@@ -113,6 +117,7 @@ const SignupForm = () => {
         <TextInput
           label="비밀번호 확인"
           type="password"
+          name="passwordConfirmation"
           placeholder="비밀번호 확인"
           register={register('passwordConfirmation')}
           error={errors.passwordConfirmation?.message}

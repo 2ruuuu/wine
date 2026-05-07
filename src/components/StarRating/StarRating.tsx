@@ -3,7 +3,7 @@ import { StarRatingProps } from './type';
 import { NUMBER_ARR } from '@/constants/starRating';
 import Image from 'next/image';
 
-const StarRating = ({ rating }: StarRatingProps) => {
+const StarRating = ({ rating, className = 'w-5 h-5' }: StarRatingProps) => {
   return (
     <div className="flex items-center gap-0.5">
       {NUMBER_ARR.map((item) => (
@@ -11,10 +11,9 @@ const StarRating = ({ rating }: StarRatingProps) => {
           key={item}
           src={Star}
           alt="별"
-          width={20}
-          height={20}
-          style={{ width: '20px', height: '20px' }}
-          className={item > rating ? 'invert' : ''}
+          width={27}
+          height={27}
+          className={`${className} ${item > rating ? 'invert' : ''}`}
         />
       ))}
     </div>

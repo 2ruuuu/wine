@@ -24,6 +24,7 @@ const WinesMobileLayout = ({
       <div className="flex flex-col gap-6 mx-auto md:gap-10 w-full md:max-w-[680px]">
         <TextInput
           id="wine-catalog-search-mobile"
+          name="search"
           label="검색"
           type="search"
           placeholder="와인을 검색해 보세요"

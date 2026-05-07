@@ -1,11 +1,12 @@
 import Image from 'next/image';
-import { SuggestedWineProps } from '@/app/wines/type';
+import { SuggestedWineProps } from '@/app/wines/components/SuggestedWine/type';
+import { NoImage } from '@/constants/images';
 
 const SuggestedWine = ({ name, region, image }: SuggestedWineProps) => {
   return (
     <div className="flex flex-col justify-center items-center gap-3 w-[150px] h-[243px] xl:gap-4 xl:w-50 xl:h-80">
       <Image
-        src={image}
+        src={image ?? NoImage}
         alt={`${name}-image`}
         width={62}
         height={228}

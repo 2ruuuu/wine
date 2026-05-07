@@ -10,11 +10,25 @@ export interface ReviewCardProps {
     smoothTannic: number;
     drySweet: number;
     softAcidic: number;
+    isLiked: boolean;
     user: {
       id: number;
       nickname: string;
       image: string | null;
     };
-    isLiked: boolean;
+    wine?:
+      | {
+          id: number;
+          name: string;
+          image: string;
+          region: string;
+        }
+      | undefined;
+    likeCount?: number | undefined;
+  };
+  wine: {
+    name: string;
+    image: string;
+    region: string;
   };
 }

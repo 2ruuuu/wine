@@ -23,4 +23,5 @@ export interface Review {
 export interface ReviewCardListProps {
   reviewCount: number;
   reviews: Review[];
+  wine: any;
 }
