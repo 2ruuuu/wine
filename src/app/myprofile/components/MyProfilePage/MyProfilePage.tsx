@@ -15,9 +15,17 @@ import { MyProfileForm, ProfileTabType } from './type';
 import { WineListItem } from '../WineList/type';
 
 import { ChangeEvent, useEffect, useState } from 'react';
-import { instance } from '@/lib/api/axios';
 import toast from 'react-hot-toast';
 import { useAuthStore } from '@/stores/useAuthStore';
+import {
+  getMyInfo,
+  getMyReviews,
+  getMyWines,
+  updateMyProfile,
+  uploadProfileImage,
+  deleteWine,
+  deleteReview,
+} from '@/lib/api/user';
 
 const MyProfilePage = () => {
   const { user, setAuth, accessToken, refreshToken } = useAuthStore();
@@ -54,9 +62,7 @@ const MyProfilePage = () => {
 
     const fetchMyProfileData = async () => {
       try {
-        const meRes = await instance.get('/users/me');
-
-        const myInfo = meRes.data;
+        const myInfo = await getMyInfo();
 
         setNickname(myInfo.nickname ?? '');
         setProfileImage(myInfo.image ?? null);
@@ -69,20 +75,12 @@ const MyProfilePage = () => {
           });
         }
 
-        const reviewRes = await instance.get('/users/me/reviews', {
-          params: {
-            limit: 10,
-          },
-        });
+        const reviewData = await getMyReviews(10);
 
-        const wineRes = await instance.get('/users/me/wines', {
-          params: {
-            limit: 10,
-          },
-        });
+        const wineData = await getMyWines(10);
 
-        setReviews(reviewRes.data.list);
-        setWines(wineRes.data.list);
+        setReviews(reviewData.list);
+        setWines(wineData.list);
       } catch (error) {
         console.error('마이페이지 데이터 조회 실패', error);
         toast.error('마이페이지 데이터를 불러오지 못했습니다.');
@@ -94,13 +92,9 @@ const MyProfilePage = () => {
 
   const handleUpdateWine = async () => {
     try {
-      const wineRes = await instance.get('/users/me/wines', {
-        params: {
-          limit: 10,
-        },
-      });
+      const wineData = await getMyWines(10);
 
-      setWines(wineRes.data.list);
+      setWines(wineData.list);
     } catch (error) {
       console.error('와인 목록 갱신 실패', error);
       toast.error('와인 목록을 다시 불러오지 못했습니다.');
@@ -112,7 +106,7 @@ const MyProfilePage = () => {
       type: 'delete',
       onConfirm: async () => {
         try {
-          await instance.delete(`/wines/${wineId}`);
+          await deleteWine(wineId);
 
           setWines((prev) => prev.filter((wine) => wine.id !== wineId));
 
@@ -130,7 +124,7 @@ const MyProfilePage = () => {
       type: 'delete',
       onConfirm: async () => {
         try {
-          await instance.delete(`/reviews/${reviewId}`);
+          await deleteReview(reviewId);
 
           setReviews((prev) => prev.filter((review) => review.id !== reviewId));
 
@@ -167,20 +161,14 @@ const MyProfilePage = () => {
       const imageFormData = new FormData();
       imageFormData.append('image', file);
 
-      const imageRes = await instance.post('/images/upload', imageFormData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const imageData = await uploadProfileImage(imageFormData);
 
-      const imageUrl = imageRes.data.url;
+      const imageUrl = imageData.url;
 
-      const res = await instance.patch('/users/me', {
+      const updatedUser = await updateMyProfile({
         nickname,
         image: imageUrl,
       });
-
-      const updatedUser = res.data;
       const updatedImage = updatedUser.image ?? imageUrl;
 
       setProfileImage(updatedImage);
@@ -221,9 +209,7 @@ const MyProfilePage = () => {
               ? { nickname: nextNickname }
               : { nickname: nextNickname, image: profileImage };
 
-          const res = await instance.patch('/users/me', payload);
-
-          const updatedUser = res.data;
+          const updatedUser = await updateMyProfile(payload);
 
           setNickname(updatedUser.nickname ?? inputNickname);
 
