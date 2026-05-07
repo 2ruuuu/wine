@@ -9,7 +9,7 @@ const Home = () => {
     <div>
       <div className="relative">
         <section className="bg-[#171A21] md:mb-20 mb-[25px]">
-          <div className="relative max-w-[1140px] md:pt-[110px] pt-[102px] mx-auto">
+          <div className="relative max-w-[1140px] md:pt-[80px] pt-[102px] mx-auto">
             <p className="md:text-title-hero text-[24px] text-white font-bold md:px-[60px] px-[22px]">
               한 곳에서 관리하는 <br /> 나만의 와인창고
             </p>
