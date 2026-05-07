@@ -11,6 +11,7 @@ const WinesDesktopLayout = ({
   search,
   onSearchChange,
   filteredWines,
+  onWineUpdated,
   ...wineFilterProps
 }: WinesDesktopLayoutProps) => {
   const { openModal } = useModal();
@@ -27,7 +28,7 @@ const WinesDesktopLayout = ({
           type="button"
           variant="primary"
           fullWidth
-          onClick={() => openModal({ type: 'register' })}
+          onClick={() => openModal({ type: 'register', onUpdated: onWineUpdated })}
         >
           와인 등록하기
         </Button>

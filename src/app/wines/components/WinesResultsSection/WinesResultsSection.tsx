@@ -26,6 +26,7 @@ const WinesResultsSection = () => {
   const [appliedMaxPrice, setAppliedMaxPrice] = useState(DEFAULT_MAX_PRICE);
   const [appliedRating, setAppliedRating] = useState<number | null>(null);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   const nextCursorRef = useRef<number | null>(null);
   const hasMoreRef = useRef(false);
@@ -71,6 +72,10 @@ const WinesResultsSection = () => {
     [listQuery],
   );
 
+  const handleWineUpdated = useCallback(() => {
+    setRefreshTrigger((prev) => prev + 1);
+  }, []);
+
   useEffect(() => {
     let cancelled = false;
 
@@ -108,7 +113,7 @@ const WinesResultsSection = () => {
     return () => {
       cancelled = true;
     };
-  }, [buildListParams]);
+  }, [buildListParams, refreshTrigger]);
 
   const loadMore = useCallback(async () => {
     if (isFetchingMoreRef.current || !hasMoreRef.current) {
@@ -248,6 +253,7 @@ const WinesResultsSection = () => {
           search={search}
           onSearchChange={setSearch}
           filteredWines={filteredWines}
+          onWineUpdated={handleWineUpdated}
         />
       </div>
       <div className="block xl:hidden">
@@ -256,6 +262,7 @@ const WinesResultsSection = () => {
           search={search}
           onSearchChange={setSearch}
           filteredWines={filteredWines}
+          onWineUpdated={handleWineUpdated}
           isFilterOpen={isFilterOpen}
           onOpenFilter={() => setIsFilterOpen(true)}
           onCloseFilter={() => setIsFilterOpen(false)}
