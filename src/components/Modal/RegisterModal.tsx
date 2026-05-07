@@ -14,7 +14,6 @@ import {
 import { useAuthStore } from '@/stores/useAuthStore';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
-import { useModal } from './ModalProvider';
 
 const WINE_TYPES = ['Red', 'White', 'Sparkling'] as const;
 type WineType = (typeof WINE_TYPES)[number];
@@ -159,7 +158,7 @@ const RegisterModal = ({
       isEditMode ? '와인이 수정되었습니다.' : '와인이 등록되었습니다.',
     );
 
-    if (isEditMode) onUpdated?.();
+    onUpdated?.();
     router.refresh();
     onClose?.();
   };

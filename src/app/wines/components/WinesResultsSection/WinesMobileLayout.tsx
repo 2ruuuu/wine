@@ -14,6 +14,7 @@ const WinesMobileLayout = ({
   search,
   onSearchChange,
   filteredWines,
+  onWineUpdated,
   isFilterOpen,
   onOpenFilter,
   onCloseFilter,
@@ -65,7 +66,7 @@ const WinesMobileLayout = ({
               type="button"
               variant="primary"
               className="w-[228px]"
-              onClick={() => openModal({ type: 'register' })}
+              onClick={() => openModal({ type: 'register', onUpdated: onWineUpdated })}
               >
                 와인 등록하기
               </Button>
