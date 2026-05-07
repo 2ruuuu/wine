@@ -32,6 +32,7 @@ const KakaoRedirect = () => {
 
       if (response) {
         setAuth(response);
+        toast.success('카카오 로그인에 성공하였습니다.');
         router.replace('/');
       }
     } catch (error: any) {
