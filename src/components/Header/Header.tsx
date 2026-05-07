@@ -25,8 +25,9 @@ const Header = () => {
     {
       label: '로그아웃',
       onSelect: () => {
+        sessionStorage.setItem('isLogout', 'true');
         clearAuth();
-        router.push('/');
+        router.replace('/');
       },
     },
   ];
