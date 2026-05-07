@@ -2,8 +2,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { LogoBlack } from '@/constants/icons';
+import { usePathname } from 'next/navigation';
 
 const Footer = () => {
+  const pathname = usePathname();
+  const HiddenHeaderPath = ['/login', '/signup'];
+  const isHiddenHeader = HiddenHeaderPath.includes(pathname);
+  if (isHiddenHeader) return null;
+
   return (
     <footer
       className={`w-full z-10 top-0 transition-all duration-500 h-[50px] md:px-[60px] px-5 flex justify-between items-center m-auto border-1 border-gray-200 md:h-15 mt-40`}
