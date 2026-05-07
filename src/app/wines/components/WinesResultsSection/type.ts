@@ -14,4 +14,4 @@ export type WinesMobileLayoutProps = {
   isFilterOpen: boolean;
   onOpenFilter: () => void;
   onCloseFilter: () => void;
-};
+} & WineFilterProps;

@@ -1,46 +1,50 @@
 import WineTypeFilter from '@/app/wines/components/WineTypeFilter/WineTypeFilter';
 import WinePriceFilter from '@/app/wines/components/WinePriceFilter/WinePriceFilter';
 import WineRatingFilter from '@/app/wines/components/WineRatingFilter/WineRatingFilter';
-import { WineType } from '@/constants/chips';
-import { useState } from 'react';
+import { WineFilterProps } from '@/app/wines/components/WineFilter/type';
 import Button from '../Button/Button';
 
-const FilterModal = () => {
-  const [selectedWineTypes, setSelectedWineTypes] = useState<WineType[]>([]);
-  const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(250000);
-  const [selectedRating, setSelectedRating] = useState<number | null>(null);
-
-  const handleToggleWineType = (wineType: WineType) => {
-    setSelectedWineTypes((prev) =>
-      prev.includes(wineType)
-        ? prev.filter((type) => type !== wineType)
-        : [...prev, wineType],
-    );
-  };
+const FilterModal = ({
+  selectedWineTypes,
+  onToggleWineType,
+  minPrice,
+  maxPrice,
+  onMinPriceChange,
+  onMaxPriceChange,
+  selectedRating,
+  onChangeRating,
+  onResetFilters,
+  onApplyFilters,
+}: WineFilterProps) => {
   return (
     <>
-      <form className="flex flex-col gap-12 mb-10">
+      <form
+        className="flex flex-col gap-12 mb-10"
+        onSubmit={(e) => {
+          e.preventDefault();
+          onApplyFilters();
+        }}
+      >
         <WineTypeFilter
           selectedWineTypes={selectedWineTypes}
-          onToggleWineType={handleToggleWineType}
+          onToggleWineType={onToggleWineType}
         />
         <WinePriceFilter
           minValue={minPrice}
           maxValue={maxPrice}
-          onChangeMin={setMinPrice}
-          onChangeMax={setMaxPrice}
+          onChangeMin={onMinPriceChange}
+          onChangeMax={onMaxPriceChange}
         />
         <WineRatingFilter
           selectedRating={selectedRating}
-          onChangeRating={setSelectedRating}
+          onChangeRating={onChangeRating}
         />
       </form>
       <div className="flex gap-2">
-        <Button variant="outline" fullWidth>
+        <Button type="button" variant="outline" fullWidth onClick={onResetFilters}>
           초기화
         </Button>
-        <Button variant="primary" fullWidth>
+        <Button type="button" variant="primary" fullWidth onClick={onApplyFilters}>
           필터 적용하기
         </Button>
       </div>

@@ -5,7 +5,7 @@ import { TopProps } from './type';
 const Top = ({ wine }: TopProps) => {
   return (
     <div className="flex justify-center max-w-[1140px] w-full gap-12">
-      <div className="relative w-[520px] h-[410px] shrink-0">
+      <div className="relative w-[420px] h-[310px] shrink-0">
         <Image
           src={wine.image}
           alt="와인 이미지"

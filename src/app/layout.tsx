@@ -4,6 +4,7 @@ import '../styles/globals.css';
 import Header from '@/components/Header/Header';
 import Loading from '@/components/Loading/Loading';
 import ToastProvider from '@/components/Toast/ToastProvider';
+import Footer from '@/components/Footer/Footer';
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -52,6 +53,7 @@ export default function RootLayout({
         <ModalProvider>
           <Header />
           <main>{children}</main>
+          <Footer />
         </ModalProvider>
       </body>
     </html>

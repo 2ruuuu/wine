@@ -15,9 +15,17 @@ import { MyProfileForm, ProfileTabType } from './type';
 import { WineListItem } from '../WineList/type';
 
 import { ChangeEvent, useEffect, useState } from 'react';
-import { instance } from '@/lib/api/axios';
 import toast from 'react-hot-toast';
 import { useAuthStore } from '@/stores/useAuthStore';
+import {
+  getMyInfo,
+  getMyReviews,
+  getMyWines,
+  updateMyProfile,
+  uploadProfileImage,
+  deleteWine,
+  deleteReview,
+} from '@/lib/api/user';
 
 const MyProfilePage = () => {
   const { user, setAuth, accessToken, refreshToken } = useAuthStore();
@@ -54,9 +62,7 @@ const MyProfilePage = () => {
 
     const fetchMyProfileData = async () => {
       try {
-        const meRes = await instance.get('/users/me');
-
-        const myInfo = meRes.data;
+        const myInfo = await getMyInfo();
 
         setNickname(myInfo.nickname ?? '');
         setProfileImage(myInfo.image ?? null);
@@ -69,22 +75,12 @@ const MyProfilePage = () => {
           });
         }
 
-        const reviewRes = await instance.get('/users/me/reviews', {
-          params: {
-            limit: 10,
-          },
-        });
+        const reviewData = await getMyReviews(10);
+        const wineData = await getMyWines(10);
 
-        const wineRes = await instance.get('/users/me/wines', {
-          params: {
-            limit: 10,
-          },
-        });
-
-        setReviews(reviewRes.data.list);
-        setWines(wineRes.data.list);
+        setReviews(reviewData.list ?? []);
+        setWines(wineData.list ?? []);
       } catch (error) {
-        console.error('마이페이지 데이터 조회 실패', error);
         toast.error('마이페이지 데이터를 불러오지 못했습니다.');
       }
     };
@@ -94,13 +90,9 @@ const MyProfilePage = () => {
 
   const handleUpdateWine = async () => {
     try {
-      const wineRes = await instance.get('/users/me/wines', {
-        params: {
-          limit: 10,
-        },
-      });
+      const wineData = await getMyWines(10);
 
-      setWines(wineRes.data.list);
+      setWines(wineData.list);
     } catch (error) {
       console.error('와인 목록 갱신 실패', error);
       toast.error('와인 목록을 다시 불러오지 못했습니다.');
@@ -112,7 +104,7 @@ const MyProfilePage = () => {
       type: 'delete',
       onConfirm: async () => {
         try {
-          await instance.delete(`/wines/${wineId}`);
+          await deleteWine(wineId);
 
           setWines((prev) => prev.filter((wine) => wine.id !== wineId));
 
@@ -130,7 +122,7 @@ const MyProfilePage = () => {
       type: 'delete',
       onConfirm: async () => {
         try {
-          await instance.delete(`/reviews/${reviewId}`);
+          await deleteReview(reviewId);
 
           setReviews((prev) => prev.filter((review) => review.id !== reviewId));
 
@@ -167,32 +159,14 @@ const MyProfilePage = () => {
       const imageFormData = new FormData();
       imageFormData.append('image', file);
 
-      const imageRes = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/images/upload`,
-        {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          body: imageFormData,
-        },
-      );
-
-      const imageData = await imageRes.json();
-
-      if (!imageRes.ok) {
-        toast.error('이미지 업로드에 실패했습니다.');
-        return;
-      }
+      const imageData = await uploadProfileImage(imageFormData);
 
       const imageUrl = imageData.url;
 
-      const res = await instance.patch('/users/me', {
+      const updatedUser = await updateMyProfile({
         nickname,
         image: imageUrl,
       });
-
-      const updatedUser = res.data;
       const updatedImage = updatedUser.image ?? imageUrl;
 
       setProfileImage(updatedImage);
@@ -233,9 +207,7 @@ const MyProfilePage = () => {
               ? { nickname: nextNickname }
               : { nickname: nextNickname, image: profileImage };
 
-          const res = await instance.patch('/users/me', payload);
-
-          const updatedUser = res.data;
+          const updatedUser = await updateMyProfile(payload);
 
           setNickname(updatedUser.nickname ?? inputNickname);
 
@@ -254,7 +226,6 @@ const MyProfilePage = () => {
           toast.success('닉네임이 변경되었습니다.');
         } catch (error: any) {
           console.error('닉네임 변경 실패', error);
-          console.log('서버 에러 응답:', error.response?.data);
           toast.error(
             error.response?.data?.message ?? '닉네임 변경에 실패했습니다.',
           );
@@ -263,13 +234,8 @@ const MyProfilePage = () => {
     });
   };
 
-  console.log('프로필 이미지 URL:', profileImage);
-  console.log('user.image:', user?.image);
-
   return (
     <div className="min-h-screen bg-white">
-      <div className="h-[90px]" />
-
       <main
         className="
           mx-auto

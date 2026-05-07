@@ -34,7 +34,7 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed w-full z-10 top-0 transition-all duration-500 h-[50px] md:px-[60px] px-5 flex justify-between items-center m-auto bg-[#171A21] md:h-17.5`}
+      className={`sticky w-full z-10 top-0 transition-all duration-500 h-[50px] md:px-[60px] px-5 flex justify-between items-center m-auto bg-[#171A21] md:h-17.5`}
     >
       <h1>
         <Link href="/">
@@ -48,7 +48,7 @@ const Header = () => {
             <button
               type="button"
               onClick={toggle}
-              className="w-11.25 h-11.25 rounded-full overflow-hidden border border-white cursor-pointer max-[756px]:w-[20px] max-[756px]:h-[20px] align-middle"
+              className="w-11.25 h-11.25 rounded-full overflow-hidden border border-white cursor-pointer max-[756px]:w-[20px] max-[756px]:h-[20px] align-middle bg-white"
             >
               <Image
                 src={profileImage}

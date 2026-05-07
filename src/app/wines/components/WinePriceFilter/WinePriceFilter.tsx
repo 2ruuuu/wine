@@ -6,8 +6,8 @@ const WinePriceFilter = ({
   maxValue,
   onChangeMin,
   onChangeMax,
-  max = 500000,
-  step = 10000,
+  max = 5000000,
+  step = 50000,
 }: WinePriceFilterProps) => {
   const values = [
     Math.max(0, minValue),

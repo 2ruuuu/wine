@@ -16,11 +16,15 @@ import toast from 'react-hot-toast';
 import { useModal } from '@/components/Modal/ModalProvider';
 import { useRouter } from 'next/navigation';
 import { Review } from '@/types/review';
+import { useAuthStore } from '@/stores/useAuthStore';
 
 const ReviewCard = ({ review, wine }: ReviewCardProps) => {
   const router = useRouter();
   const [isTasteOpen, setIsTasteOpen] = useState(false);
   const { openModal } = useModal();
+
+  const user = useAuthStore((state) => state.user);
+  const isLoggedIn = !!user;
 
   const handleDelete = () => {
     openModal({
@@ -109,9 +113,11 @@ const ReviewCard = ({ review, wine }: ReviewCardProps) => {
         />
       )}
 
-      <div className="flex relative justify-center items-center">
+      <div className="flex relative justify-end items-center">
         <div className="absolute left-0">
-          <HeartToggle id={review.id} isLiked={review.isLiked} />
+          {isLoggedIn && (
+            <HeartToggle id={review.id} isLiked={review.isLiked} />
+          )}
         </div>
         <button
           onClick={() => setIsTasteOpen(!isTasteOpen)}
