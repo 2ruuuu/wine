@@ -28,6 +28,10 @@ const Header = () => {
         sessionStorage.setItem('isLogout', 'true');
         clearAuth();
         router.replace('/');
+
+        setTimeout(() => {
+          sessionStorage.removeItem('isLogout');
+        }, 100);
       },
     },
   ];
