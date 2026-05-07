@@ -276,10 +276,10 @@ const MyProfilePage = () => {
           className="
             w-full
             py-8
-
             min-[1280px]:flex-1
-            min-[1280px]:px-9
             min-[1280px]:py-8
+            min-[1280px]:pl-9
+            min-[1280px]:pr-0
           "
         >
           <div className="w-full">

@@ -7,7 +7,7 @@ const ProfileTabs = ({
   onChangeTab,
 }: ProfileTabsProps) => {
   return (
-    <div className="flex max-w-[725px] gap-7 border-b border-gray-300 pb-4 mb-7">
+    <div className="relative flex max-w-[725px] gap-7 pb-4 mb-7 overflow-visible after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:bg-gray-300 min-[744px]:after:w-[calc(100%+40px)] min-[1280px]:after:w-[calc(100%+80px)]">
       <button
         onClick={() => onChangeTab('review')}
         className={`bg-transparent border-none cursor-pointer ${
