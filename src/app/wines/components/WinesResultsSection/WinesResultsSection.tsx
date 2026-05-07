@@ -1,57 +1,21 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import type { GetWinesParams } from '@/app/wines/type';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { WineType } from '@/constants/chips';
 import { WineCardProps } from '@/app/wines/components/WineCard/type';
 import { getWines } from '@/lib/api/wine';
 import WinesDesktopLayout from './WinesDesktopLayout';
 import WinesMobileLayout from './WinesMobileLayout';
 
-const matchesRatingBucket = (
-  avgRating: number,
-  bucket: number | null,
-): boolean => {
-  if (bucket === null) return true;
-  if (bucket === 4.5) return avgRating >= 4.5 && avgRating <= 5;
-  if (bucket === 4.0) return avgRating >= 4.0 && avgRating < 4.5;
-  if (bucket === 3.5) return avgRating >= 3.5 && avgRating < 4.0;
-  if (bucket === 3.0) return avgRating >= 3.0 && avgRating < 3.5;
-  return true;
-};
-
-const filterWines = (
-  wines: WineCardProps[],
-  search: string,
-  selectedWineTypes: WineType[],
-  minPrice: number,
-  maxPrice: number,
-  selectedRating: number | null,
-): WineCardProps[] => {
-  const q = search.trim().toLowerCase();
-
-  return wines.filter((wine) => {
-    if (
-      selectedWineTypes.length > 0 &&
-      !selectedWineTypes.some((t) => t === wine.type)
-    ) {
-      return false;
-    }
-    if (wine.price < minPrice || wine.price > maxPrice) return false;
-    if (!matchesRatingBucket(wine.avgRating, selectedRating)) return false;
-    if (q) {
-      const haystack = `${wine.name} ${wine.region}`.toLowerCase();
-      if (!haystack.includes(q)) return false;
-    }
-    return true;
-  });
-};
+const PAGE_SIZE = 20;
+const DEFAULT_MIN_PRICE = 0;
+const DEFAULT_MAX_PRICE = 5_000_000;
 
 const WinesResultsSection = () => {
-  const DEFAULT_MIN_PRICE = 0;
-  const DEFAULT_MAX_PRICE = 250000;
-
   const [wines, setWines] = useState<WineCardProps[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [hasMore, setHasMore] = useState(false);
   const [search, setSearch] = useState('');
   const [selectedWineTypes, setSelectedWineTypes] = useState<WineType[]>([]);
   const [minPrice, setMinPrice] = useState(DEFAULT_MIN_PRICE);
@@ -63,38 +27,141 @@ const WinesResultsSection = () => {
   const [appliedRating, setAppliedRating] = useState<number | null>(null);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
+  const nextCursorRef = useRef<number | null>(null);
+  const hasMoreRef = useRef(false);
+  const isFetchingMoreRef = useRef(false);
+
+  const listQuery = useMemo(
+    () => ({
+      minPrice: appliedMinPrice,
+      maxPrice: appliedMaxPrice,
+      rating: appliedRating,
+      wineTypes: appliedWineTypes,
+    }),
+    [
+      appliedMinPrice,
+      appliedMaxPrice,
+      appliedRating,
+      appliedWineTypes,
+    ],
+  );
+
+  const buildListParams = useCallback(
+    (cursor?: number): GetWinesParams => {
+      const p: GetWinesParams = {
+        limit: PAGE_SIZE,
+        minPrice: listQuery.minPrice,
+        maxPrice: listQuery.maxPrice,
+      };
+
+      if (cursor != null) {
+        p.cursor = cursor;
+      }
+
+      if (listQuery.rating != null) {
+        p.rating = listQuery.rating;
+      }
+
+      if (listQuery.wineTypes.length === 1) {
+        p.type = listQuery.wineTypes[0];
+      }
+
+      return p;
+    },
+    [listQuery],
+  );
+
   useEffect(() => {
     let cancelled = false;
 
     setIsLoading(true);
-    const typeParam = appliedWineTypes.length === 1 ? appliedWineTypes[0] : undefined;
+    setWines([]);
+    setHasMore(false);
+    nextCursorRef.current = null;
+    hasMoreRef.current = false;
 
-    getWines({
-      limit: 10,
-      minPrice: appliedMinPrice,
-      maxPrice: appliedMaxPrice,
-      rating: appliedRating ?? undefined,
-      type: typeParam,
-    })
+    getWines(buildListParams())
       .then((data) => {
-        if (!cancelled) setWines(data.list);
+        if (cancelled) {
+          return;
+        }
+        setWines(data.list);
+        nextCursorRef.current = data.nextCursor;
+        const more = data.nextCursor != null;
+        hasMoreRef.current = more;
+        setHasMore(more);
       })
       .catch(() => {
-        if (!cancelled) setWines([]);
+        if (!cancelled) {
+          setWines([]);
+          nextCursorRef.current = null;
+          hasMoreRef.current = false;
+          setHasMore(false);
+        }
       })
       .finally(() => {
-        if (!cancelled) setIsLoading(false);
+        if (!cancelled) {
+          setIsLoading(false);
+        }
       });
 
     return () => {
       cancelled = true;
     };
-  }, [
-    appliedWineTypes,
-    appliedMinPrice,
-    appliedMaxPrice,
-    appliedRating,
-  ]);
+  }, [buildListParams]);
+
+  const loadMore = useCallback(async () => {
+    if (isFetchingMoreRef.current || !hasMoreRef.current) {
+      return;
+    }
+
+    const cursor = nextCursorRef.current;
+
+    if (cursor == null) {
+      return;
+    }
+
+    isFetchingMoreRef.current = true;
+
+    try {
+      const data = await getWines(buildListParams(cursor));
+      setWines((prev) => [...prev, ...data.list]);
+      nextCursorRef.current = data.nextCursor;
+      const more = data.nextCursor != null;
+      hasMoreRef.current = more;
+      setHasMore(more);
+    } catch {
+      hasMoreRef.current = false;
+      setHasMore(false);
+    } finally {
+      isFetchingMoreRef.current = false;
+    }
+  }, [buildListParams]);
+
+  useEffect(() => {
+    if (isLoading || !hasMore) {
+      return;
+    }
+
+    const nearBottom = () => {
+      const el = document.documentElement;
+      const remaining = el.scrollHeight - el.scrollTop - el.clientHeight;
+      return remaining < 480;
+    };
+
+    const onScroll = () => {
+      if (!nearBottom()) {
+        return;
+      }
+      
+      loadMore();
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [isLoading, hasMore, loadMore, wines.length]);
 
   const handleToggleWineType = (wineType: WineType) => {
     setSelectedWineTypes((prev) =>
@@ -133,25 +200,24 @@ const WinesResultsSection = () => {
     setAppliedRating(null);
   };
 
-  const filteredWines = useMemo(
-    () =>
-      filterWines(
-        wines,
-        search,
-        appliedWineTypes,
-        appliedMinPrice,
-        appliedMaxPrice,
-        appliedRating,
-      ),
-    [
-      wines,
-      search,
-      appliedWineTypes,
-      appliedMinPrice,
-      appliedMaxPrice,
-      appliedRating,
-    ],
-  );
+  const filteredWines = useMemo(() => {
+    let list = wines;
+    if (appliedWineTypes.length > 1) {
+      list = list.filter((w) =>
+        appliedWineTypes.some((t) => t === w.type),
+      );
+    }
+    
+    const q = search.trim().toLowerCase();
+
+    if (!q) {
+      return list;
+    }
+
+    return list.filter((w) =>
+      `${w.name} ${w.region}`.toLowerCase().includes(q),
+    );
+  }, [wines, appliedWineTypes, search]);
 
   const wineFilterProps = {
     selectedWineTypes,
