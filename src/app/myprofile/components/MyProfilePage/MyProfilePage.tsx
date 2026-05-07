@@ -76,13 +76,11 @@ const MyProfilePage = () => {
         }
 
         const reviewData = await getMyReviews(10);
-
         const wineData = await getMyWines(10);
 
-        setReviews(reviewData.list);
-        setWines(wineData.list);
+        setReviews(reviewData.list ?? []);
+        setWines(wineData.list ?? []);
       } catch (error) {
-        console.error('마이페이지 데이터 조회 실패', error);
         toast.error('마이페이지 데이터를 불러오지 못했습니다.');
       }
     };
