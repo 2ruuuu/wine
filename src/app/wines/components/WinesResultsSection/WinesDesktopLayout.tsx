@@ -5,6 +5,7 @@ import WinesEmptyState from './WinesEmptyState';
 import { WinesDesktopLayoutProps } from './type';
 import Button from '@/components/Button/Button';
 import { useModal } from '@/components/Modal/ModalProvider';
+import { useAuthStore } from '@/stores/useAuthStore';
 
 const WinesDesktopLayout = ({
   search,
@@ -14,11 +15,15 @@ const WinesDesktopLayout = ({
 }: WinesDesktopLayoutProps) => {
   const { openModal } = useModal();
 
+  const user = useAuthStore((state) => state.user);
+  const isLoggedIn = !!user;
+
   return (
     <div className="flex mx-auto w-full gap-15 max-w-[1145px]">
       <div className="flex flex-col gap-16 w-[284px]">
         <WineFilter {...wineFilterProps} />
-        <Button
+        {isLoggedIn && (
+          <Button
           type="button"
           variant="primary"
           fullWidth
@@ -26,6 +31,7 @@ const WinesDesktopLayout = ({
         >
           와인 등록하기
         </Button>
+        )}
       </div>
       <div className="flex flex-col gap-16 w-[801px]">
         <TextInput

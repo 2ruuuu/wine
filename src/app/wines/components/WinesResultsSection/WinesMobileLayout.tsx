@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { WinesMobileLayoutProps } from './type';
 import Button from '@/components/Button/Button';
 import { useModal } from '@/components/Modal/ModalProvider';
+import { useAuthStore } from '@/stores/useAuthStore';
 
 const WinesMobileLayout = ({
   search,
@@ -19,6 +20,10 @@ const WinesMobileLayout = ({
   ...wineFilterProps
 }: WinesMobileLayoutProps) => {
   const { openModal } = useModal();
+
+  const user = useAuthStore((state) => state.user);
+  const isLoggedIn = !!user;
+
   const modalWineFilterProps = {
     ...wineFilterProps,
     onResetFilters: () => {
@@ -55,14 +60,16 @@ const WinesMobileLayout = ({
             >
               <Image src={Filter} alt="filter-icon" className="h-6 w-6" />
             </button>
-            <Button
+            {isLoggedIn && (
+              <Button
               type="button"
               variant="primary"
               className="w-[228px]"
               onClick={() => openModal({ type: 'register' })}
-            >
-              와인 등록하기
-            </Button>
+              >
+                와인 등록하기
+              </Button>
+            )}
           </div>
           {filteredWines.length > 0 ? (
             <WineList wines={filteredWines} />
