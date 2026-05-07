@@ -46,6 +46,7 @@ const MyProfilePage = () => {
 
   const [reviews, setReviews] = useState<Review[]>([]);
   const [wines, setWines] = useState<WineListItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (user?.nickname) {
@@ -58,14 +59,25 @@ const MyProfilePage = () => {
   }, [user?.nickname, user?.image]);
 
   useEffect(() => {
-    if (!accessToken) return;
-
     const fetchMyProfileData = async () => {
+      if (!accessToken) {
+        setIsLoading(false);
+        return;
+      }
+
       try {
-        const myInfo = await getMyInfo();
+        setIsLoading(true);
+
+        const [myInfo, reviewData, wineData] = await Promise.all([
+          getMyInfo(),
+          getMyReviews(10),
+          getMyWines(10),
+        ]);
 
         setNickname(myInfo.nickname ?? '');
         setProfileImage(myInfo.image ?? null);
+        setReviews(reviewData.list ?? []);
+        setWines(wineData.list ?? []);
 
         if (refreshToken) {
           setAuth({
@@ -74,14 +86,10 @@ const MyProfilePage = () => {
             refreshToken,
           });
         }
-
-        const reviewData = await getMyReviews(10);
-        const wineData = await getMyWines(10);
-
-        setReviews(reviewData.list ?? []);
-        setWines(wineData.list ?? []);
       } catch (error) {
         toast.error('마이페이지 데이터를 불러오지 못했습니다.');
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -233,6 +241,10 @@ const MyProfilePage = () => {
       },
     });
   };
+
+  if (isLoading) {
+    return <div className="py-20 text-center">LOADING...</div>;
+  }
 
   return (
     <div className="min-h-screen bg-white">
