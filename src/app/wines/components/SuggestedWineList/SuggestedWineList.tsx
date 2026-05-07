@@ -80,6 +80,7 @@ const SuggestedWineList = () => {
     if (emblaApi.canScrollNext()) emblaApi.scrollNext();
     else emblaApi.scrollTo(0);
   };
+  const isSinglePage = snapCount <= 1;
 
   if (isLoading) {
     return (
@@ -140,6 +141,7 @@ const SuggestedWineList = () => {
           <Button
             variant="arrow"
             onClick={handleNext}
+            disabled={isSinglePage}
             aria-label="다음 추천 와인 보기"
             icon={
               <Image
