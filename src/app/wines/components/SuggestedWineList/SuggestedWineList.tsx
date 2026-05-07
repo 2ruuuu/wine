@@ -131,7 +131,7 @@ const SuggestedWineList = () => {
             {slides.map((wine) => (
               <div
                 key={wine.id}
-                className="flex min-w-0 shrink-0 justify-center md:basis-1/3 xl:basis-1/4"
+                className="flex min-w-0 shrink-0 justify-center py-2 md:basis-1/3 xl:basis-1/4"
               >
                 <SuggestedWine {...wine} />
               </div>
