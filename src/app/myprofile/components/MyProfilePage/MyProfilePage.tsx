@@ -167,25 +167,13 @@ const MyProfilePage = () => {
       const imageFormData = new FormData();
       imageFormData.append('image', file);
 
-      const imageRes = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/images/upload`,
-        {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          body: imageFormData,
+      const imageRes = await instance.post('/images/upload', imageFormData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      );
+      });
 
-      const imageData = await imageRes.json();
-
-      if (!imageRes.ok) {
-        toast.error('이미지 업로드에 실패했습니다.');
-        return;
-      }
-
-      const imageUrl = imageData.url;
+      const imageUrl = imageRes.data.url;
 
       const res = await instance.patch('/users/me', {
         nickname,
