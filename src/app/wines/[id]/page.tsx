@@ -16,7 +16,7 @@ const Wine = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   return (
     <div>
-      <div className="bg-gray-100 h-[410px] md:mb-[74px] mb-[24px] mt-[50px] md:mt-[70px] xl:mt-[70px] rounded-b-[90px] flex justify-center px-4 md:px-4">
+      <div className="bg-gray-100 h-[410px] md:mb-[74px] mb-[24px] rounded-b-[90px] flex justify-center px-4 md:px-4 py-10">
         <Top wine={wineData} />
       </div>
       <div className="container-layout flex md:hidden flex-col justify-center gap-8 w-full">
