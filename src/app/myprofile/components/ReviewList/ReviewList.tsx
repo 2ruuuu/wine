@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
@@ -108,14 +109,25 @@ const ReviewList = ({
             </div>
 
             <div className="mt-4 flex gap-4">
-              <img
-                src={review.wine.image}
-                alt={review.wine.name}
-                className="h-[70px] w-[42px] object-contain bg-gray-100"
-              />
+              <Link
+                href={`/wines/${review.wine.id}`}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <img
+                  src={review.wine.image}
+                  alt={review.wine.name}
+                  className="h-[70px] w-[42px] object-contain bg-gray-100 cursor-pointer"
+                />
+              </Link>
 
               <div>
-                <strong>{review.wine.name}</strong>
+                <Link
+                  href={`/wines/${review.wine.id}`}
+                  onClick={(e) => e.stopPropagation()}
+                  className="font-bold hover:underline"
+                >
+                  {review.wine.name}
+                </Link>
 
                 <p className="mt-1 text-[13px] text-gray-400">
                   {review.wine.region}
