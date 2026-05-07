@@ -45,9 +45,9 @@ const SuggestedWineList = () => {
     align: 'start',
     slidesToScroll: 'auto',
     containScroll: 'trimSnaps',
+    loop: true,
   });
 
-  const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [selectedSnap, setSelectedSnap] = useState(0);
   const [snapCount, setSnapCount] = useState(0);
 
@@ -55,7 +55,6 @@ const SuggestedWineList = () => {
     if (!emblaApi) return;
 
     const sync = () => {
-      setCanScrollPrev(emblaApi.canScrollPrev());
       setSelectedSnap(emblaApi.selectedScrollSnap());
       setSnapCount(emblaApi.scrollSnapList().length);
     };
@@ -73,12 +72,14 @@ const SuggestedWineList = () => {
     };
   }, [emblaApi, slidesKey]);
 
-  const handlePrev = () => emblaApi?.scrollPrev();
+  const handlePrev = () => {
+    if (!emblaApi) return;
+    emblaApi.scrollPrev();
+  };
 
   const handleNext = () => {
     if (!emblaApi) return;
-    if (emblaApi.canScrollNext()) emblaApi.scrollNext();
-    else emblaApi.scrollTo(0);
+    emblaApi.scrollNext();
   };
   const isSinglePage = snapCount <= 1;
 
@@ -118,7 +119,7 @@ const SuggestedWineList = () => {
           <Button
             variant="arrow"
             onClick={handlePrev}
-            disabled={!canScrollPrev}
+            disabled={isSinglePage}
             aria-label="이전 추천 와인 보기"
             icon={
               <Image src={ArrowLeft} alt="prev-wine-button" className="w-6 h-6" />
