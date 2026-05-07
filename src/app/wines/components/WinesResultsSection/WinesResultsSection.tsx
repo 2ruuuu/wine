@@ -215,7 +215,7 @@ const WinesResultsSection = () => {
     }
 
     return list.filter((w) =>
-      `${w.name} ${w.region}`.toLowerCase().includes(q),
+      `${w.name}`.toLowerCase().includes(q),
     );
   }, [wines, appliedWineTypes, search]);
 
