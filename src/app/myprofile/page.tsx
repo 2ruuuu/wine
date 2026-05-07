@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 import MyProfilePage from './components/MyProfilePage/MyProfilePage';
@@ -12,11 +12,27 @@ const MyProfile = () => {
 
   const { user, accessToken } = useAuthStore();
 
+  const [isReady, setIsReady] = useState(false);
+
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsReady(true);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (!isReady) return;
+
     if (!user || !accessToken) {
       router.replace('/login');
     }
-  }, [user, accessToken, router]);
+  }, [isReady, user, accessToken, router]);
+
+  if (!isReady) {
+    return null;
+  }
 
   if (!user || !accessToken) {
     return null;

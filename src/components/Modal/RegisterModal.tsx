@@ -173,6 +173,7 @@ const RegisterModal = ({
             label="와인 사진"
             name="winePhoto"
             register={register('winePhoto')}
+            imageUrl={wine?.image}
           />
           <TextInput
             label="와인 이름"

@@ -146,7 +146,7 @@ const ReviewModal = ({
       ...tasteValues,
       aroma,
       content: formData.content,
-      wineId: wineId ?? review?.wine.id,
+      //wineId: wineId ?? review?.wine.id, //2026-05-08 api에서 wineID가 없음
     };
 
     if (isEditMode && review) {
