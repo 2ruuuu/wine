@@ -254,7 +254,6 @@ const MyProfilePage = () => {
           toast.success('닉네임이 변경되었습니다.');
         } catch (error: any) {
           console.error('닉네임 변경 실패', error);
-          console.log('서버 에러 응답:', error.response?.data);
           toast.error(
             error.response?.data?.message ?? '닉네임 변경에 실패했습니다.',
           );
@@ -262,9 +261,6 @@ const MyProfilePage = () => {
       },
     });
   };
-
-  console.log('프로필 이미지 URL:', profileImage);
-  console.log('user.image:', user?.image);
 
   return (
     <div className="min-h-screen bg-white">
