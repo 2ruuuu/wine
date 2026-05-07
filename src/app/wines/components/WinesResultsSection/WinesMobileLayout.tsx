@@ -16,8 +16,20 @@ const WinesMobileLayout = ({
   isFilterOpen,
   onOpenFilter,
   onCloseFilter,
+  ...wineFilterProps
 }: WinesMobileLayoutProps) => {
   const { openModal } = useModal();
+  const modalWineFilterProps = {
+    ...wineFilterProps,
+    onResetFilters: () => {
+      wineFilterProps.onResetFilters();
+      onCloseFilter();
+    },
+    onApplyFilters: () => {
+      wineFilterProps.onApplyFilters();
+      onCloseFilter();
+    },
+  };
 
   return (
     <>
@@ -67,7 +79,7 @@ const WinesMobileLayout = ({
           onClose={onCloseFilter}
           className="w-full max-w-md overflow-y-auto"
         >
-          <FilterModal />
+          <FilterModal {...modalWineFilterProps} />
         </Modal>
       ) : null}
     </>

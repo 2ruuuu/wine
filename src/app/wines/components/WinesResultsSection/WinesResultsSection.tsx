@@ -252,6 +252,7 @@ const WinesResultsSection = () => {
       </div>
       <div className="block xl:hidden">
         <WinesMobileLayout
+          {...wineFilterProps}
           search={search}
           onSearchChange={setSearch}
           filteredWines={filteredWines}

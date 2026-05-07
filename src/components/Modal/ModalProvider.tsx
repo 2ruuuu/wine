@@ -24,7 +24,7 @@ const ModalProvider = ({ children }: { children: ReactNode }) => {
 
       {modal?.type === 'filter' && (
         <Modal title="필터" onClose={closeModal} className="w-[375px]" hasHead>
-          <FilterModal />
+          <FilterModal {...modal.wineFilterProps} />
         </Modal>
       )}
 

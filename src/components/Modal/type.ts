@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { Review } from '@/types/review';
 import type { WineListItem } from '@/app/myprofile/components/WineList/type';
+import type { WineFilterProps } from '@/app/wines/components/WineFilter/type';
 
 export type ModalRootProps = {
   title: string;
@@ -18,7 +19,7 @@ export type ModalWineInfo = {
 };
 
 export type ModalProviderProps =
-  | { type: 'filter' }
+  | { type: 'filter'; wineFilterProps: WineFilterProps }
   | {
       type: 'register';
       mode?: 'create' | 'edit';
