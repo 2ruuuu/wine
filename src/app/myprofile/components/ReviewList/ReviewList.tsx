@@ -6,6 +6,7 @@ import ReviewListProps from './type';
 import Taste from '@/components/Taste/Taste';
 import StarRating from '@/components/StarRating/StarRating';
 import Dropdown from '@/components/DropDown/Dropdown';
+import { HeartEmpty } from '@/constants/icons';
 
 import { formatTimeAgo } from '@/lib/date-fns';
 
@@ -105,6 +106,10 @@ const ReviewList = ({
                 type="softAcidic"
                 value={review.softAcidic}
               />
+            </div>
+            <div className="mt-4 inline-flex items-center gap-1 rounded-[6px] border border-gray-300 px-3 py-1 text-sm text-gray-500">
+              <img src={HeartEmpty.src} alt="좋아요" className="h-4 w-4" />
+              <span>{review.likeCount}</span>
             </div>
           </article>
         );
