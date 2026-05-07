@@ -43,7 +43,7 @@ const LoginForm = () => {
     formState: { errors, isValid },
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
-    mode: 'onBlur',
+    mode: 'onTouched',
   });
 
   // 로그인 성공하면 홈 화면(/)으로 이동

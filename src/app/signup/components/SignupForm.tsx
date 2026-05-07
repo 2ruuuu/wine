@@ -59,7 +59,7 @@ const SignupForm = () => {
     formState: { errors, isValid },
   } = useForm<SignupFormValues>({
     resolver: zodResolver(signupSchema),
-    mode: 'onBlur',
+    mode: 'onTouched',
   });
 
   // 회원가입이 완료된 후 로그인 상태로 홈 화면(/)으로 이동
