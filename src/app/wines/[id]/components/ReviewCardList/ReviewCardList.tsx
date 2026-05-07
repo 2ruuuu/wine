@@ -12,7 +12,7 @@ const ReviewCardList = ({
         <span className="text-2xl font-semibold">리뷰 목록</span>
         <span className="text-gray-600">{reviewCount.toLocaleString()}개</span>
       </div>
-      <div className="flex flex-col items-end">
+      <div className="flex flex-col items-start">
         {reviews.map((review) => (
           <ReviewCard key={review.id} review={review} wine={wine} />
         ))}

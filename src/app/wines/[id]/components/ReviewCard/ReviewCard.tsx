@@ -113,7 +113,7 @@ const ReviewCard = ({ review, wine }: ReviewCardProps) => {
         />
       )}
 
-      <div className="flex relative justify-center items-center">
+      <div className="flex relative justify-end items-center">
         <div className="absolute left-0">
           {isLoggedIn && (
             <HeartToggle id={review.id} isLiked={review.isLiked} />
