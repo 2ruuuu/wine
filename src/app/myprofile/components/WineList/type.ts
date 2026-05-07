@@ -10,3 +10,9 @@ export interface WineListItem {
   recentReview: null | string;
   userId: number;
 }
+
+export interface WineListProps {
+  wines: WineListItem[];
+  onDeleteWine: (wineId: number) => void;
+  onUpdateWine: () => void;
+}
