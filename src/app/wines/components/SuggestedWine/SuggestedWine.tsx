@@ -5,8 +5,11 @@ import { NoImage } from '@/constants/images';
 
 const SuggestedWine = ({ id, name, region, image }: SuggestedWineProps) => {
   return (
-    <Link href={`/wines/${id}`} className="block">
-      <div className="flex flex-col justify-center items-center gap-3 w-[150px] h-[243px] xl:gap-4 xl:w-50 xl:h-80">
+    <Link
+      href={`/wines/${id}`}
+      className="group block rounded-xl focus-visible:outline-none"
+    >
+      <div className="flex flex-col justify-center items-center gap-3 w-[150px] h-[243px] xl:gap-4 xl:w-50 xl:h-80 rounded-xl cursor-pointer transition-transform duration-200 ease-out group-hover:scale-[1.05] group-focus-visible:scale-[1.02]">
         <Image
           src={image ?? NoImage}
           alt={`${name}-image`}
