@@ -92,18 +92,6 @@ const MyProfilePage = () => {
     fetchMyProfileData();
   }, [accessToken, refreshToken, setAuth]);
 
-  const handleDeleteWine = async (wineId: number) => {
-    try {
-      await instance.delete(`/wines/${wineId}`);
-
-      // 화면에서도 제거
-      setWines((prev) => prev.filter((wine) => wine.id !== wineId));
-    } catch (error) {
-      console.error('와인 삭제 실패', error);
-      toast.error('와인 삭제에 실패했습니다.');
-    }
-  };
-
   const handleUpdateWine = async () => {
     try {
       const wineRes = await instance.get('/users/me/wines', {
@@ -119,15 +107,40 @@ const MyProfilePage = () => {
     }
   };
 
-  const handleDeleteReview = async (reviewId: number) => {
-    try {
-      await instance.delete(`/reviews/${reviewId}`);
+  const handleDeleteWine = (wineId: number) => {
+    openModal({
+      type: 'delete',
+      onConfirm: async () => {
+        try {
+          await instance.delete(`/wines/${wineId}`);
 
-      setReviews((prev) => prev.filter((review) => review.id !== reviewId));
-    } catch (error) {
-      console.error('리뷰 삭제 실패', error);
-      toast.error('리뷰 삭제에 실패했습니다.');
-    }
+          setWines((prev) => prev.filter((wine) => wine.id !== wineId));
+
+          toast.success('삭제되었습니다.');
+        } catch (error) {
+          console.error('와인 삭제 실패', error);
+          toast.error('와인 삭제에 실패했습니다.');
+        }
+      },
+    });
+  };
+
+  const handleDeleteReview = (reviewId: number) => {
+    openModal({
+      type: 'delete',
+      onConfirm: async () => {
+        try {
+          await instance.delete(`/reviews/${reviewId}`);
+
+          setReviews((prev) => prev.filter((review) => review.id !== reviewId));
+
+          toast.success('삭제되었습니다.');
+        } catch (error) {
+          console.error('리뷰 삭제 실패', error);
+          toast.error('리뷰 삭제에 실패했습니다.');
+        }
+      },
+    });
   };
 
   const handleUpdateReview = (updatedReview: Review) => {

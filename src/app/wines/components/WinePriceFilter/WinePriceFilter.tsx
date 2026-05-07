@@ -9,7 +9,10 @@ const WinePriceFilter = ({
   max = 500000,
   step = 10000,
 }: WinePriceFilterProps) => {
-  const values = [Math.max(0, minValue), Math.min(max, Math.max(minValue, maxValue))];
+  const values = [
+    Math.max(0, minValue),
+    Math.min(max, Math.max(minValue, maxValue)),
+  ];
 
   return (
     <div className="flex flex-col gap-5">
