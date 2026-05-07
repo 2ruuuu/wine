@@ -71,7 +71,7 @@ const WineCard = ({ wine, onDeleteWine, onUpdateWine }: WineCardProps) => {
                 e.stopPropagation();
                 toggle();
               }}
-              className="flex h-11 w-11 items-center justify-center text-[24px] leading-none text-gray-400"
+              className="flex h-11 w-11 cursor-pointer items-center justify-center text-[24px] leading-none text-gray-400"
               aria-label="와인 메뉴 열기"
             >
               ⋮
