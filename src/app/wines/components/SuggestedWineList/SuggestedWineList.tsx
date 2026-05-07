@@ -1,75 +1,170 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
+import { useEffect, useMemo, useState } from 'react';
 import SuggestedWine from '../SuggestedWine/SuggestedWine';
-import { SuggestedWineListProps } from './type';
 import Button from '@/components/Button/Button';
 import { ArrowLeft, ArrowRight } from '@/constants/icons';
 import Image from 'next/image';
+import { useShuffleWines } from '@/hooks/useShuffleWines';
+import { getRecommendedWines } from '@/lib/api/wine';
+import { SuggestedWineProps } from '@/app/wines/components/SuggestedWine/type';
 
-const ITEMS_PER_PAGE = 4;
+const SuggestedWineList = () => {
+  const [wines, setWines] = useState<SuggestedWineProps[]>([]);
+  const [isLoading, setIsdLoading] = useState(false);
 
-const SuggestedWineList = ({ wines }: SuggestedWineListProps) => {
-  const [currentPage, setCurrentPage] = useState(0);
+  useEffect(() => {
+    let cancelled = false;
+    setIsdLoading(true);
+    getRecommendedWines(10)
+      .then((data) => {
+        if (!cancelled) setWines(data);
+      })
+      .catch(() => {
+        if (!cancelled) setWines([]);
+      })
+      .finally(() => {
+        if (!cancelled) setIsdLoading(false);
+      });
+      
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
-  const totalPages = useMemo(
-    () => Math.max(1, Math.ceil(wines.length / ITEMS_PER_PAGE)),
-    [wines.length],
+  const orderedWines = useShuffleWines(wines);
+  const slides =
+    orderedWines.length > 0 ? orderedWines : wines;
+  const slidesKey = useMemo(
+    () => slides.map((w) => w.id).join(','),
+    [slides],
   );
-  const maxStartIndex = Math.max(0, wines.length - ITEMS_PER_PAGE);
-  const startIndex = Math.min(currentPage * ITEMS_PER_PAGE, maxStartIndex);
-  const trackTranslateX = `translateX(-${startIndex * (100 / ITEMS_PER_PAGE)}%)`;
 
-  const handlePrev = () => {
-    setCurrentPage((prev) => Math.max(prev - 1, 0));
-  };
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: 'start',
+    slidesToScroll: 'auto',
+    containScroll: 'trimSnaps',
+  });
+
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [selectedSnap, setSelectedSnap] = useState(0);
+  const [snapCount, setSnapCount] = useState(0);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    const sync = () => {
+      setCanScrollPrev(emblaApi.canScrollPrev());
+      setSelectedSnap(emblaApi.selectedScrollSnap());
+      setSnapCount(emblaApi.scrollSnapList().length);
+    };
+
+    emblaApi.reInit();
+    emblaApi.scrollTo(0, true);
+    sync();
+
+    emblaApi.on('select', sync);
+    emblaApi.on('reInit', sync);
+    
+    return () => {
+      emblaApi.off('select', sync);
+      emblaApi.off('reInit', sync);
+    };
+  }, [emblaApi, slidesKey]);
+
+  const handlePrev = () => emblaApi?.scrollPrev();
 
   const handleNext = () => {
-    setCurrentPage((prev) => (prev === totalPages - 1 ? 0 : prev + 1));
+    if (!emblaApi) return;
+    if (emblaApi.canScrollNext()) emblaApi.scrollNext();
+    else emblaApi.scrollTo(0);
   };
 
+  if (isLoading) {
+    return (
+      <div className="w-[333px] md:w-[711px] xl:w-298.75 mx-auto">
+        <h2 className="mt-[42px] md:mt-[30px] xl:mt-11 ml-[31px] md:ml-15 text-lg md:text-xl color-[hsl(var(--gray-800))] font-semibold">
+          이번 달 추천 와인
+        </h2>
+        <p className="h-[243px] md:h-[320px] w-full flex items-center justify-center text-base md:text-lg text-center text-[#A3A3A3]">
+          불러오는 중…
+        </p>
+      </div>
+    );
+  }
+
+  if (wines.length === 0) {
+    return (
+      <div className="w-[333px] md:w-[711px] xl:w-298.75 mx-auto">
+        <h2 className="mt-[42px] md:mt-[30px] xl:mt-11 ml-[31px] md:ml-15 text-lg md:text-xl color-[hsl(var(--gray-800))] font-semibold">
+          이번 달 추천 와인
+        </h2>
+        <p className="h-[243px] md:h-[320px] w-full flex items-center justify-center text-base md:text-lg text-center text-[#A3A3A3]">
+          추천 와인이 아직 없습니다.
+        </p>
+      </div>
+    );
+  }
+
   return (
-    <div className="w-298.75 mx-auto">
-      <h2 className="mt-11 ml-15 text-xl color-[hsl(var(--gray-800))] font-semibold">
+    <div className="w-[333px] md:w-[711px] xl:w-298.75 mx-auto">
+      <h2 className="mt-[42px] md:mt-[30px] xl:mt-11 ml-[31px] md:ml-15 text-lg md:text-xl color-[hsl(var(--gray-800))] font-semibold">
         이번 달 추천 와인
       </h2>
-      <div className="flex items-center gap-4 mt-9.75">
-        <Button
-          variant="arrow"
-          onClick={handlePrev}
-          disabled={currentPage === 0}
-          aria-label="이전 추천 와인 보기"
-          icon={
-            <Image src={ArrowLeft} alt="prev-wine-button" className="w-6 h-6" />
-          }
-        />
-        <div className="flex-1 overflow-hidden">
-          <div
-            className="flex transition-transform duration-500 ease-in-out"
-            style={{ transform: trackTranslateX }}
-          >
-            {wines.map((wine) => (
-              <div key={wine.id} className="w-1/4 shrink-0">
-                <div className="mx-auto w-fit">
-                  <SuggestedWine {...wine} />
-                </div>
+      <div className="flex items-center gap-0 md:gap-[3px] xl:gap-5 mt-[19px] md:mt-[33px] xl:mt-9.75">
+        <div className="hidden md:contents">
+          <Button
+            variant="arrow"
+            onClick={handlePrev}
+            disabled={!canScrollPrev}
+            aria-label="이전 추천 와인 보기"
+            icon={
+              <Image src={ArrowLeft} alt="prev-wine-button" className="w-6 h-6" />
+            }
+          />
+        </div>
+        <div className="min-w-0 flex-1 overflow-hidden" ref={emblaRef}>
+          <div className="flex gap-[32px] md:gap-0">
+            {slides.map((wine) => (
+              <div
+                key={wine.id}
+                className="flex min-w-0 shrink-0 justify-center md:basis-1/3 xl:basis-1/4"
+              >
+                <SuggestedWine {...wine} />
               </div>
             ))}
           </div>
         </div>
-        <Button
-          variant="arrow"
-          onClick={handleNext}
-          aria-label="다음 추천 와인 보기"
-          icon={
-            <Image
-              src={ArrowRight}
-              alt="next-wine-button"
-              className="w-6 h-6"
-            />
-          }
-        />
+        <div className="hidden md:contents">
+          <Button
+            variant="arrow"
+            onClick={handleNext}
+            aria-label="다음 추천 와인 보기"
+            icon={
+              <Image
+                src={ArrowRight}
+                alt="next-wine-button"
+                className="w-6 h-6"
+              />
+            }
+          />
+        </div>
       </div>
+
+      {snapCount > 1 ? (
+        <div className="mt-5 md:hidden">
+          <div className="relative h-1 w-full overflow-hidden bg-[hsl(0,0%,92%)]">
+            <div
+              className="absolute top-0 h-full bg-[hsl(var(--gray-800))] transition-[left,width] duration-300 ease-out"
+              style={{
+                width: `${100 / snapCount}%`,
+                left: `${(selectedSnap * 100) / snapCount}%`,
+              }}
+            />
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };

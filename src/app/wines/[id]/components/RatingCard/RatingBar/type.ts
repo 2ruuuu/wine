@@ -1,4 +1,10 @@
 export interface RatingBarProps {
+  id: number;
   reviewCount: number;
-  avgRatings: { [key: string]: number };
+  avgRatings: Record<string, number>;
+  avgRating: number;
+  name: string;
+  image: string;
+  region: string;
+  wineId: number;
 }

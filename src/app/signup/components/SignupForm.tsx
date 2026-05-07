@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useRouter } from 'next/navigation';
@@ -9,6 +10,7 @@ import TextInput from '@/components/Input/TextInput';
 import Button from '@/components/Button/Button';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { signUp } from '@/lib/api/auth';
+import { useAsync } from '@/hooks/useAsync';
 import { SignupFormValues } from './type';
 
 const signupSchema = z
@@ -41,6 +43,7 @@ const SignupForm = () => {
   const router = useRouter();
   const { user, setAuth } = useAuthStore();
   const isLogIn = !!user;
+  const { isLoading, runAction } = useAsync();
 
   // 로그인 상태에서 접근할 경우 홈 화면(/)으로 리다이렉트
   useEffect(() => {
@@ -61,24 +64,27 @@ const SignupForm = () => {
 
   // 회원가입이 완료된 후 로그인 상태로 홈 화면(/)으로 이동
   const onSubmit = async (data: SignupFormValues) => {
-    try {
-      const response = await signUp(data);
+    await runAction(async () => {
+      try {
+        const response = await signUp(data);
 
-      if (response) {
-        setAuth(response);
-        router.replace('/');
-      }
-    } catch (error: any) {
-      const errorMessage = error.response?.data?.message;
+        if (response) {
+          setAuth(response);
+          toast.success('회원가입 후 로그인에 성공하였습니다.');
+          router.replace('/');
+        }
+      } catch (error: any) {
+        const errorMessage = error.response?.data?.message;
 
-      if (errorMessage?.includes('이메일')) {
-        setError('email', { message: '이미 사용 중인 이메일입니다.' });
-      } else if (errorMessage?.includes('닉네임')) {
-        setError('nickname', { message: '이미 사용 중인 닉네임입니다.' });
-      } else {
-        alert('회원가입에 실패했습니다.');
+        if (errorMessage?.includes('이메일')) {
+          setError('email', { message: '이미 사용 중인 이메일입니다.' });
+        } else if (errorMessage?.includes('닉네임')) {
+          setError('nickname', { message: '이미 사용 중인 닉네임입니다.' });
+        } else {
+          toast.error('회원가입에 실패했습니다.');
+        }
       }
-    }
+    });
   };
 
   return (
@@ -86,7 +92,8 @@ const SignupForm = () => {
       <div className="flex flex-col gap-8 md:gap-10">
         <TextInput
           label="이메일"
-          type="text"
+          type="email"
+          name="email"
           placeholder="이메일을 입력해주세요"
           register={register('email')}
           error={errors.email?.message}
@@ -94,6 +101,7 @@ const SignupForm = () => {
         <TextInput
           label="닉네임"
           type="text"
+          name="nickname"
           placeholder="닉네임을 입력해주세요"
           register={register('nickname')}
           error={errors.nickname?.message}
@@ -101,6 +109,7 @@ const SignupForm = () => {
         <TextInput
           label="비밀번호"
           type="password"
+          name="password"
           placeholder="영문, 숫자, 특수문자(!@#$%^&*) 제한"
           register={register('password')}
           error={errors.password?.message}
@@ -108,12 +117,18 @@ const SignupForm = () => {
         <TextInput
           label="비밀번호 확인"
           type="password"
+          name="passwordConfirmation"
           placeholder="비밀번호 확인"
           register={register('passwordConfirmation')}
           error={errors.passwordConfirmation?.message}
         />
       </div>
-      <Button type="submit" variant="primary" fullWidth disabled={!isValid}>
+      <Button
+        type="submit"
+        variant="primary"
+        fullWidth
+        disabled={!isValid || isLoading}
+      >
         가입하기
       </Button>
     </form>

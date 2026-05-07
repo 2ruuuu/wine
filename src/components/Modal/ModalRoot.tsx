@@ -18,11 +18,13 @@ const Modal = ({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className={`rounded-2xl bg-white shadow-xl py-8 px-6 ${className}`}
+        className={`rounded-2xl bg-white shadow-xl py-8 px-6 ${className} max-h-[90vh]`}
       >
         {hasHead && (
-          <div className="mb-4 flex items-center justify-between">
-            <h2 className="md:text-[24px] text-[20px]">{title}</h2>
+          <div className="mb-7 flex items-center justify-between">
+            <h2 className="md:text-heading-lg text-heading-md font-semibold">
+              {title}
+            </h2>
             <button onClick={onClose}>
               <Image
                 src={Close}
@@ -32,8 +34,7 @@ const Modal = ({
             </button>
           </div>
         )}
-
-        {children}
+        <div>{children}</div>
       </div>
     </div>
   );

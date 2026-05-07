@@ -34,6 +34,8 @@ import HeartEmpty from '@/assets/icons/heart-empty.svg';
 import HeartFill from '@/assets/icons/heart-fill.svg';
 import Hamburger from '@/assets/icons/hamburger.svg';
 import Profile from '@/assets/icons/profile.svg';
+import Exclamation from '@/assets/icons/exclamation.svg';
+import Filter from '@/assets/icons/filter.svg';
 
 export {
   Star,
@@ -72,4 +74,6 @@ export {
   HeartFill,
   Hamburger,
   Profile,
+  Exclamation,
+  Filter,
 };
