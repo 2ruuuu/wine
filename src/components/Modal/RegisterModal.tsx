@@ -162,6 +162,7 @@ const RegisterModal = ({
     if (isEditMode) onUpdated?.();
     router.refresh();
     onClose?.();
+    window.location.reload();
   };
 
   return (
@@ -186,6 +187,7 @@ const RegisterModal = ({
             name="price"
             placeholder="가격 입력"
             register={register('price')}
+            type="number"
           />
 
           <div>

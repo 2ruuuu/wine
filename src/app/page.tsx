@@ -75,7 +75,7 @@ const Home = () => {
           </div>
         </section>
 
-        <div className="mt-[74px] mb-[34px] text-center sticky bottom-10 z-9">
+        <div className="mt-[74px] mb-[34px] text-center sticky bottom-5 z-9">
           <Link
             href="/wines"
             className="bg-black text-white hover:bg-[hsl(30,2%,19%)] active:bg-[hsl(30,1%,28%)] inline-flex items-center justify-center font-body-sm md:font-body-md cursor-pointer disabled:opacity-50 disabled:pointer-events-none h-10.5 md:h-12.5 font-medium md:font-bold rounded-[4px] w-[283px]"
