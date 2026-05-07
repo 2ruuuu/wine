@@ -21,7 +21,6 @@ const KakaoRedirect = () => {
     }
   }, [searchParams]);
 
-  // 로그인 성공 시 홈 화면(/)으로 이동
   const handleLogin = async (code: string) => {
     try {
       const response = await socialSignIn('KAKAO', {

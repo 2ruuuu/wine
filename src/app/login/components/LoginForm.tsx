@@ -29,7 +29,6 @@ const LoginForm = () => {
   const isLogIn = !!user;
   const { isLoading, runAction } = useAsync();
 
-  // 로그인 상태에서 접근할 경우 홈 화면(/)으로 리다이렉트
   useEffect(() => {
     if (isLogIn) {
       router.replace('/');
@@ -46,7 +45,6 @@ const LoginForm = () => {
     mode: 'onTouched',
   });
 
-  // 로그인 성공하면 홈 화면(/)으로 이동
   const onSubmit = async (data: LoginFormValues) => {
     await runAction(async () => {
       try {
