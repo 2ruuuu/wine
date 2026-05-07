@@ -34,7 +34,7 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed w-full z-10 top-0 transition-all duration-500 h-[50px] md:px-[60px] px-5 flex justify-between items-center m-auto bg-[#171A21] md:h-17.5`}
+      className={`sticky w-full z-10 top-0 transition-all duration-500 h-[50px] md:px-[60px] px-5 flex justify-between items-center m-auto bg-[#171A21] md:h-17.5`}
     >
       <h1>
         <Link href="/">
