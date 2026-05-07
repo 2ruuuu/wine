@@ -48,7 +48,7 @@ const Header = () => {
             <button
               type="button"
               onClick={toggle}
-              className="w-11.25 h-11.25 rounded-full overflow-hidden border border-white cursor-pointer max-[756px]:w-[20px] max-[756px]:h-[20px] align-middle"
+              className="w-11.25 h-11.25 rounded-full overflow-hidden border border-white cursor-pointer max-[756px]:w-[20px] max-[756px]:h-[20px] align-middle bg-white"
             >
               <Image
                 src={profileImage}
