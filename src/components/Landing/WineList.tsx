@@ -59,13 +59,13 @@ const WineList = () => {
           >
             <Link href="/wines">
               <div className="flex flex-col items-center justify-center text-white text-center py-[30px] px-[10px] gap-2.5 md:h-[372px] h-[250px]">
-                <img
-                  src={wine.image}
-                  alt=""
-                  width={120}
-                  height={180}
-                  className="max-[756px]:h-[100px] max-[756px]:w-auto"
-                />
+                <div className="md:max-h-[200px] md:max-w-[100px] max-h-[130px] max-w-[80px]">
+                  <img
+                    src={wine.image}
+                    alt=""
+                    className="w-full h-full object-fit"
+                  />
+                </div>
                 <div className=" max-[756px]:text-[14px]">{wine.name}</div>
                 <div className="text-[12px] max-[756px]:text-[10px] text-gray-600">
                   {wine.region}

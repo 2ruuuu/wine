@@ -42,9 +42,19 @@ const RegisterModal = ({
   const router = useRouter();
   const { register, handleSubmit, setValue } = useForm<WineFormData>();
   const { accessToken } = useAuthStore();
+  const [isSmallHeight, setIsSmallHeight] = useState(false);
   const [selectedWineType, setSelectedWineType] = useState<WineType | null>(
     null,
   );
+
+  useEffect(() => {
+    const checkHeight = () => {
+      setIsSmallHeight(window.innerHeight <= 1000);
+    };
+    checkHeight();
+    window.addEventListener('resize', checkHeight);
+    return () => window.removeEventListener('resize', checkHeight);
+  }, [setValue]);
 
   useEffect(() => {
     if (mode !== 'edit' || !wine) return;
@@ -156,55 +166,59 @@ const RegisterModal = ({
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
-        <PhotoInput
-          label="와인 사진"
-          name="winePhoto"
-          register={register('winePhoto')}
-        />
-        <TextInput
-          label="와인 이름"
-          name="name"
-          placeholder="와인 이름 입력"
-          register={register('name')}
-        />
-        <TextInput
-          label="가격"
-          name="price"
-          placeholder="가격 입력"
-          register={register('price')}
-        />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div
+          className={`flex flex-col gap-6 ${isSmallHeight ? 'max-h-[400px] overflow-auto' : ''}`}
+        >
+          <PhotoInput
+            label="와인 사진"
+            name="winePhoto"
+            register={register('winePhoto')}
+          />
+          <TextInput
+            label="와인 이름"
+            name="name"
+            placeholder="와인 이름 입력"
+            register={register('name')}
+          />
+          <TextInput
+            label="가격"
+            name="price"
+            placeholder="가격 입력"
+            register={register('price')}
+          />
 
-        <div>
-          <h3 className="text-body-sm font-medium text-black mb-2">타입</h3>
-          <div className="flex gap-[10px]">
-            {WINE_TYPES.map((wineType) => (
-              <Chip
-                key={wineType}
-                id={`wine-type-${wineType}`}
-                name="wineType"
-                value={wineType}
-                checked={selectedWineType === wineType}
-                onChange={() => setSelectedWineType(wineType)}
-                image={{
-                  src: WINE_TYPE_IMAGE[wineType],
-                  alt: WINE_TYPE_LABEL[wineType],
-                  width: 32,
-                  height: 32,
-                }}
-              >
-                <span>{wineType}</span>
-              </Chip>
-            ))}
+          <div>
+            <h3 className="text-body-sm font-medium text-black mb-2">타입</h3>
+            <div className="flex gap-[10px]">
+              {WINE_TYPES.map((wineType) => (
+                <Chip
+                  key={wineType}
+                  id={`wine-type-${wineType}`}
+                  name="wineType"
+                  value={wineType}
+                  checked={selectedWineType === wineType}
+                  onChange={() => setSelectedWineType(wineType)}
+                  image={{
+                    src: WINE_TYPE_IMAGE[wineType],
+                    alt: WINE_TYPE_LABEL[wineType],
+                    width: 32,
+                    height: 32,
+                  }}
+                >
+                  <span>{wineType}</span>
+                </Chip>
+              ))}
+            </div>
           </div>
-        </div>
 
-        <TextInput
-          label="원산지"
-          name="region"
-          placeholder="원산지 입력"
-          register={register('region')}
-        />
+          <TextInput
+            label="원산지"
+            name="region"
+            placeholder="원산지 입력"
+            register={register('region')}
+          />
+        </div>
         <Button fullWidth className="mt-12" type="submit">
           {mode === 'edit' ? '와인 수정하기' : '와인 등록하기'}
         </Button>
