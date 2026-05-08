@@ -57,7 +57,7 @@ const WineList = () => {
             [&.swiper-slide-active]:scale-100
           "
           >
-            <Link href="/wines">
+            <Link href={`/wines/${wine.id}`}>
               <div className="flex flex-col items-center justify-center text-white text-center py-[30px] px-[10px] gap-2.5 md:h-[372px] h-[250px]">
                 <div className="md:max-h-[200px] md:max-w-[100px] max-h-[130px] max-w-[80px]">
                   <img
