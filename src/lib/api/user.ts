@@ -31,7 +31,11 @@ export const updateMyProfile = async (payload: {
 };
 
 export const uploadProfileImage = async (formData: FormData) => {
-  const response = await instance.post('/images/upload', formData);
+  const response = await instance.post('/images/upload', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
 
   return response.data;
 };

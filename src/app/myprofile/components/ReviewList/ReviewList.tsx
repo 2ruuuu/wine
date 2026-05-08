@@ -26,7 +26,7 @@ const ReviewList = ({
         return (
           <article
             key={review.id}
-            className="relative mb-8 w-full border-b border-gray-300 pb-8"
+            className="relative mb-8 w-full overflow-visible pb-8 after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-px after:w-[calc(100%+80px)] after:bg-gray-300"
           >
             <div className="relative flex items-center gap-2">
               <StarRating rating={review.rating} />
@@ -46,7 +46,7 @@ const ReviewList = ({
                         e.stopPropagation();
                         toggle();
                       }}
-                      className="text-[20px] leading-none text-gray-400"
+                      className="flex h-11 w-11 cursor-pointer items-center justify-center text-[20px] leading-none text-gray-400"
                     >
                       ⋮
                     </button>

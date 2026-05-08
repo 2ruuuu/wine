@@ -21,7 +21,6 @@ const KakaoRedirect = () => {
     }
   }, [searchParams]);
 
-  // 로그인 성공 시 홈 화면(/)으로 이동
   const handleLogin = async (code: string) => {
     try {
       const response = await socialSignIn('KAKAO', {
@@ -32,6 +31,7 @@ const KakaoRedirect = () => {
 
       if (response) {
         setAuth(response);
+        toast.success('카카오 로그인에 성공하였습니다.');
         router.replace('/');
       }
     } catch (error: any) {

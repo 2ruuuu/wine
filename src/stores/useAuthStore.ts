@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -40,6 +41,7 @@ export const useAuthStore = create<AuthState>()(
       clearAuth: () => {
         set({ user: null, accessToken: null, refreshToken: null });
         useAuthStore.persist.clearStorage();
+        toast.success('로그아웃 되었습니다.');
       },
     }),
     { name: 'auth-storage' }, // localStorage에 저장될 키 이름

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { SignupFormValues } from '@/app/signup/components/type';
 import { LoginFormValues } from '@/app/login/components/type';
 import { AuthResponse } from '@/stores/useAuthStore';
@@ -29,7 +30,15 @@ export const signIn = async (
 export const refreshTokenApi = async (
   refreshToken: string,
 ): Promise<{ accessToken: string }> => {
-  const { data } = await instance.post('/auth/refresh-token', { refreshToken });
+  const { data } = await axios.post(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/refresh-token`,
+    { refreshToken },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+  );
   return data;
 };
 

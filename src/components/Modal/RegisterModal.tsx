@@ -14,7 +14,6 @@ import {
 import { useAuthStore } from '@/stores/useAuthStore';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
-import { useModal } from './ModalProvider';
 
 const WINE_TYPES = ['Red', 'White', 'Sparkling'] as const;
 type WineType = (typeof WINE_TYPES)[number];
@@ -159,9 +158,10 @@ const RegisterModal = ({
       isEditMode ? '와인이 수정되었습니다.' : '와인이 등록되었습니다.',
     );
 
-    if (isEditMode) onUpdated?.();
+    onUpdated?.();
     router.refresh();
     onClose?.();
+    window.location.reload();
   };
 
   return (
@@ -174,6 +174,7 @@ const RegisterModal = ({
             label="와인 사진"
             name="winePhoto"
             register={register('winePhoto')}
+            imageUrl={wine?.image}
           />
           <TextInput
             label="와인 이름"
@@ -186,6 +187,7 @@ const RegisterModal = ({
             name="price"
             placeholder="가격 입력"
             register={register('price')}
+            type="number"
           />
 
           <div>

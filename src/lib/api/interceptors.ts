@@ -38,6 +38,11 @@ export const setupInterceptors = (instance: AxiosInstance) => {
         _retry?: boolean;
       };
 
+      if (originalRequest.url?.includes('/auth/refresh-token')) {
+        useAuthStore.getState().clearAuth();
+        return Promise.reject(error);
+      }
+
       // 401 에러이고, 이전에 재시도한 적이 없는 요청인 경우
       if (error.response?.status === 401 && !originalRequest._retry) {
         // 이미 다른 요청 때문에 토큰 재발급이 진행 중일 때
@@ -71,9 +76,8 @@ export const setupInterceptors = (instance: AxiosInstance) => {
           }
 
           // Refresh Token으로 새 Access Token 요청
-          const { accessToken: newAccessToken } = await refreshTokenApi(
-            storedRefreshToken,
-          );
+          const { accessToken: newAccessToken } =
+            await refreshTokenApi(storedRefreshToken);
 
           // Zustand store 업데이트
           setAuth({
