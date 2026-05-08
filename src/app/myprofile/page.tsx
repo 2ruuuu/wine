@@ -26,14 +26,6 @@ const MyProfile = () => {
     if (!isReady) return;
 
     if (!user || !accessToken) {
-      const isLogout = sessionStorage.getItem('isLogout');
-
-      if (isLogout === 'true') {
-        sessionStorage.removeItem('isLogout');
-        router.replace('/');
-        return;
-      }
-
       router.replace('/login');
     }
   }, [isReady, user, accessToken, router]);
