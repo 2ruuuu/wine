@@ -86,7 +86,13 @@ const MyProfilePage = () => {
             refreshToken,
           });
         }
-      } catch (error) {
+      } catch (error: any) {
+        if (error.response?.status === 401) {
+          useAuthStore.getState().clearAuth();
+          window.location.replace('/login');
+          return;
+        }
+
         toast.error('마이페이지 데이터를 불러오지 못했습니다.');
       } finally {
         setIsLoading(false);
