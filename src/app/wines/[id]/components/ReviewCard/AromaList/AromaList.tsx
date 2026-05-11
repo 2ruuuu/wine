@@ -1,15 +1,16 @@
 import { Fragment } from 'react';
-import { AromaListProps } from './type';
+
 import Aroma from '../Aroma/Aroma';
+import { AromaListProps } from './type';
 
 const AromaList = ({ aroma }: AromaListProps) => {
   return (
-    <div className="flex">
+    <div className="flex flex-wrap">
       {aroma.map((item, index) => (
         <Fragment key={item}>
           <Aroma item={item} />
           {index !== aroma.length - 1 && (
-            <span className="text-gray-300 pr-2 pl-2">·</span>
+            <span className="pr-2 pl-2 text-gray-300">·</span>
           )}
         </Fragment>
       ))}

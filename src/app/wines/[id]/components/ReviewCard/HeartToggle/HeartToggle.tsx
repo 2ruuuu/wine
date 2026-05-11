@@ -1,12 +1,16 @@
 'use client';
 
-import { useState } from 'react';
-import { HeartEmpty, HeartFill } from '@/constants/icons';
-import { HeartToggleProps } from './type';
-import { postReviewLike, deleteReviewLike } from '@/lib/api/review';
 import Image from 'next/image';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
+
 import axios from 'axios';
+
+import { deleteReviewLike, postReviewLike } from '@/lib/api/review';
+
+import { HeartEmpty, HeartFill } from '@/constants/icons';
+
+import { HeartToggleProps } from './type';
 
 const HeartToggle = ({ id, isLiked }: HeartToggleProps) => {
   const [isHeart, setIsHeart] = useState(isLiked);
@@ -44,7 +48,7 @@ const HeartToggle = ({ id, isLiked }: HeartToggleProps) => {
 
   return (
     <button
-      className={`border-2 rounded-md flex justify-center items-center gap-2 w-[50px] h-9 cursor-pointer transition-colors ${
+      className={`flex h-9 w-[50px] cursor-pointer items-center justify-center gap-2 rounded-md border-2 transition-colors ${
         isHeart ? 'border-[hsl(1,88%,40%)]' : 'border-gray-300'
       }`}
       onClick={toggleHeart}

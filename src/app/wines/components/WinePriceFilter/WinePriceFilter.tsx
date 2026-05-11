@@ -1,4 +1,5 @@
 import { Range, getTrackBackground } from 'react-range';
+
 import { WinePriceFilterProps } from './type';
 
 const WinePriceFilter = ({

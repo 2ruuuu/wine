@@ -1,11 +1,13 @@
+import { useAuthStore } from '@/stores/useAuthStore';
+
+import Button from '@/components/Button/Button';
 import TextInput from '@/components/Input/TextInput';
+import { useModal } from '@/components/Modal/ModalProvider';
+
 import WineFilter from '../WineFilter/WineFilter';
 import WineList from '../WineList/WineList';
 import WinesEmptyState from './WinesEmptyState';
 import { WinesDesktopLayoutProps } from './type';
-import Button from '@/components/Button/Button';
-import { useModal } from '@/components/Modal/ModalProvider';
-import { useAuthStore } from '@/stores/useAuthStore';
 
 const WinesDesktopLayout = ({
   search,
@@ -25,13 +27,15 @@ const WinesDesktopLayout = ({
         <WineFilter {...wineFilterProps} />
         {isLoggedIn && (
           <Button
-          type="button"
-          variant="primary"
-          fullWidth
-          onClick={() => openModal({ type: 'register', onUpdated: onWineUpdated })}
-        >
-          와인 등록하기
-        </Button>
+            type="button"
+            variant="primary"
+            fullWidth
+            onClick={() =>
+              openModal({ type: 'register', onUpdated: onWineUpdated })
+            }
+          >
+            와인 등록하기
+          </Button>
         )}
       </div>
       <div className="flex flex-col gap-16 w-[801px]">

@@ -1,7 +1,9 @@
-import { Star } from '@/constants/icons';
-import { StarRatingProps } from './type';
-import { NUMBER_ARR } from '@/constants/starRating';
 import Image from 'next/image';
+
+import { Star } from '@/constants/icons';
+import { NUMBER_ARR } from '@/constants/starRating';
+
+import { StarRatingProps } from './type';
 
 const StarRating = ({ rating, className = 'w-5 h-5' }: StarRatingProps) => {
   return (

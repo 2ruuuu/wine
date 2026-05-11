@@ -1,4 +1,5 @@
 import { AxiosInstance } from 'axios';
+
 import { useLoadingStore } from '@/stores/useLoadingStore';
 
 export const setupLoadingInterceptor = (instance: AxiosInstance) => {

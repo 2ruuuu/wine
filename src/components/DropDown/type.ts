@@ -1,8 +1,6 @@
 import type { ReactNode } from 'react';
 
-export type DropdownVariant =
-  | 'basic'
-  | 'small';
+export type DropdownVariant = 'basic' | 'small';
 
 export type DropdownChildrenProps = {
   toggle: () => void;

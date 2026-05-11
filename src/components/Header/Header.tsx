@@ -1,11 +1,14 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import Dropdown from '@/components/DropDown/Dropdown';
-import { LogoBlack } from '@/constants/icons';
 import { usePathname, useRouter } from 'next/navigation';
+
 import { useAuthStore } from '@/stores/useAuthStore';
+
+import { LogoBlack } from '@/constants/icons';
 import { profileImage as defaultProfileImage } from '@/constants/images';
+
+import Dropdown from '@/components/DropDown/Dropdown';
 
 const Header = () => {
   const pathname = usePathname();

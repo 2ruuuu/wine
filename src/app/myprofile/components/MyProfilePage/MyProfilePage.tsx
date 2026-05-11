@@ -1,31 +1,32 @@
 'use client';
 
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-
-import { useModal } from '@/components/Modal/ModalProvider';
-
-import ProfileSidebar from '../ProfileSidebar/ProfileSidebar';
-import ProfileTabs from '../ProfileTabs/ProfileTabs';
-import ReviewList from '../ReviewList/ReviewList';
-import WineList from '../WineList/WineList';
-import EmptyState from '../EmptyState/EmptyState';
+import toast from 'react-hot-toast';
 
 import { Review } from '@/types/review';
-import { MyProfileForm, ProfileTabType } from './type';
-import { WineListItem } from '../WineList/type';
 
-import { ChangeEvent, useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
 import { useAuthStore } from '@/stores/useAuthStore';
+
 import {
+  deleteReview,
+  deleteWine,
   getMyInfo,
   getMyReviews,
   getMyWines,
   updateMyProfile,
   uploadProfileImage,
-  deleteWine,
-  deleteReview,
 } from '@/lib/api/user';
+
+import { useModal } from '@/components/Modal/ModalProvider';
+
+import EmptyState from '../EmptyState/EmptyState';
+import ProfileSidebar from '../ProfileSidebar/ProfileSidebar';
+import ProfileTabs from '../ProfileTabs/ProfileTabs';
+import ReviewList from '../ReviewList/ReviewList';
+import WineList from '../WineList/WineList';
+import { WineListItem } from '../WineList/type';
+import { MyProfileForm, ProfileTabType } from './type';
 
 const MyProfilePage = () => {
   const { user, setAuth, accessToken, refreshToken } = useAuthStore();

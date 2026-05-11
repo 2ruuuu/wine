@@ -1,21 +1,25 @@
 'use client';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+
+import WineRecommend from '@/assets/images/wine-product-img.png';
 import { Review } from '@/types/review';
-import { instance } from '@/lib/api/axios';
-import { WINE_FLAVOR_LABEL, WineFlavor } from '@/constants/chips';
+
 import { useAuthStore } from '@/stores/useAuthStore';
-import { useModal } from './ModalProvider';
-import { ReviewFormData, Wine } from './type';
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
+
+import { instance } from '@/lib/api/axios';
+
+import { WINE_FLAVOR_LABEL, WineFlavor } from '@/constants/chips';
+
 import Button from '../Button/Button';
 import Chip from '../Chip/Chip';
 import StarRatingButton from '../StarRating/StarRatingButton';
 import TasteButton from '../Taste/TasteButton';
-import WineRecommend from '@/assets/images/wine-product-img.png';
-
-import toast from 'react-hot-toast';
+import { useModal } from './ModalProvider';
+import { ReviewFormData, Wine } from './type';
 
 const AROMA_MAP: Partial<Record<WineFlavor, string>> = {
   [WineFlavor.Cherry]: 'CHERRY',

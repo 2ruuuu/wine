@@ -1,11 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-
-import MyProfilePage from './components/MyProfilePage/MyProfilePage';
+import { useEffect, useState } from 'react';
 
 import { useAuthStore } from '@/stores/useAuthStore';
+
+import MyProfilePage from './components/MyProfilePage/MyProfilePage';
 
 const MyProfile = () => {
   const router = useRouter();

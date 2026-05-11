@@ -2,13 +2,15 @@
 
 import Link from 'next/link';
 
-import ReviewListProps from './type';
-import Taste from '@/components/Taste/Taste';
-import StarRating from '@/components/StarRating/StarRating';
-import Dropdown from '@/components/DropDown/Dropdown';
+import { formatTimeAgo } from '@/lib/date-fns';
+
 import { HeartEmpty } from '@/constants/icons';
 
-import { formatTimeAgo } from '@/lib/date-fns';
+import Dropdown from '@/components/DropDown/Dropdown';
+import StarRating from '@/components/StarRating/StarRating';
+import Taste from '@/components/Taste/Taste';
+
+import ReviewListProps from './type';
 
 const ReviewList = ({
   reviews,

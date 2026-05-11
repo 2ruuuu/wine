@@ -1,14 +1,18 @@
+import Image from 'next/image';
+
+import { useAuthStore } from '@/stores/useAuthStore';
+
+import { Filter } from '@/constants/icons';
+
+import Button from '@/components/Button/Button';
 import TextInput from '@/components/Input/TextInput';
-import Modal from '@/components/Modal/ModalRoot';
 import FilterModal from '@/components/Modal/FilterModal';
+import { useModal } from '@/components/Modal/ModalProvider';
+import Modal from '@/components/Modal/ModalRoot';
+
 import WineList from '../WineList/WineList';
 import WinesEmptyState from './WinesEmptyState';
-import { Filter } from '@/constants/icons';
-import Image from 'next/image';
 import { WinesMobileLayoutProps } from './type';
-import Button from '@/components/Button/Button';
-import { useModal } from '@/components/Modal/ModalProvider';
-import { useAuthStore } from '@/stores/useAuthStore';
 
 const WinesMobileLayout = ({
   search,
@@ -63,10 +67,12 @@ const WinesMobileLayout = ({
             </button>
             {isLoggedIn && (
               <Button
-              type="button"
-              variant="primary"
-              className="w-[228px]"
-              onClick={() => openModal({ type: 'register', onUpdated: onWineUpdated })}
+                type="button"
+                variant="primary"
+                className="w-[228px]"
+                onClick={() =>
+                  openModal({ type: 'register', onUpdated: onWineUpdated })
+                }
               >
                 와인 등록하기
               </Button>

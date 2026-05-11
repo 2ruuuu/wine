@@ -1,3 +1,3 @@
-import { WineResponse } from "@/app/wines/type";
+import { WineResponse } from '@/app/wines/type';
 
 export type WineCardProps = WineResponse;

@@ -1,12 +1,15 @@
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
+
+import { getWineDetail } from '@/lib/api/wine';
+
+import StarRating from '@/components/StarRating/StarRating';
+
 import Flavor from './components/Flavor/Flavor';
 import Incense from './components/Incense/Incense';
 import RatingCard from './components/RatingCard/RatingCard';
 import ReviewCardList from './components/ReviewCardList/ReviewCardList';
 import Top from './components/Top/Top';
-import { getWineDetail } from '@/lib/api/wine';
-import { notFound } from 'next/navigation';
-import StarRating from '@/components/StarRating/StarRating';
 
 const Wine = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
@@ -16,21 +19,21 @@ const Wine = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   return (
     <div>
-      <div className="bg-gray-100 h-[410px] md:mb-[74px] mb-[24px] rounded-b-[90px] flex justify-center px-4 md:px-4 py-10">
+      <div className="mb-[24px] flex h-[410px] justify-center rounded-b-[90px] bg-gray-100 px-4 py-10 md:mb-[74px] md:px-4">
         <Top wine={wineData} />
       </div>
-      <div className="container-layout flex md:hidden flex-col justify-center gap-8 w-full">
+      <div className="container-layout flex w-full flex-col justify-center gap-8 md:hidden">
         <div className="flex flex-col gap-3.5">
-          <div className="flex items-center gap-4 h-[28px]">
+          <div className="flex h-[28px] items-center gap-4">
             <StarRating
               rating={wineData.avgRating}
-              className="w-5 h-5 md:w-6 md:h-6 xl:w-[27px] xl:h-[27px]"
+              className="h-5 w-5 md:h-6 md:w-6 xl:h-[27px] xl:w-[27px]"
             />
-            <span className="text-gray-600 whitespace-nowrap">
+            <span className="whitespace-nowrap text-gray-600">
               {wineData.reviewCount}개의 후기
             </span>
           </div>
-          <p className="text-[28px] font-bold">{wineData.name}</p>
+          <p className="text-[28px] font-bold break-all">{wineData.name}</p>
           <p className="text-[18px] text-gray-600">{wineData.region}</p>
         </div>
 
@@ -41,15 +44,19 @@ const Wine = async ({ params }: { params: Promise<{ id: string }> }) => {
       </div>
 
       <div className="container-layout md:pr-[30px] md:pl-[30px]">
-        <div className="flex xl:justify-between xl:flex-row md:flex-col flex-col md:items-center xl:items-start md:gap-24 gap-12">
-          <Flavor wine={wineData} />
-          <Incense
-            reviewCount={wineData.reviewCount}
-            aromaStats={wineData.aromaStats}
-          />
+        <div className="flex flex-col gap-12 md:flex-col md:items-stretch md:gap-24 xl:flex-row xl:items-start xl:justify-between">
+          <div className="flex w-full md:justify-center">
+            <Flavor wine={wineData} />
+          </div>
+          <div className="flex w-full md:justify-center">
+            <Incense
+              reviewCount={wineData.reviewCount}
+              aromaStats={wineData.aromaStats}
+            />
+          </div>
         </div>
-        <hr className="xl:my-20 md:my-20 my-10 border-gray-300" />
-        <div className="flex xl:flex-row xl:gap-12 xl:justify-between md:flex-col-reverse flex-col-reverse gap-10 md:gap-[77px]">
+        <hr className="my-10 border-gray-300 md:my-20 xl:my-20" />
+        <div className="flex flex-col-reverse gap-10 md:flex-col-reverse md:items-center md:gap-[77px] xl:flex-row xl:items-start xl:justify-between xl:gap-12">
           <ReviewCardList
             reviewCount={wineData.reviewCount}
             reviews={wineData.reviews}

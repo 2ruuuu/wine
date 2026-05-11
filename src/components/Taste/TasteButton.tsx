@@ -1,6 +1,7 @@
 'use client';
-import { INTENSITY } from '@/constants/taste';
 import { useState } from 'react';
+
+import { INTENSITY } from '@/constants/taste';
 
 const TasteButton = ({
   initialValue = 0,
@@ -23,7 +24,7 @@ const TasteButton = ({
           key={num}
           type="button"
           onClick={() => handleSelect(num)} //
-          className={`flex-1 h-4 rounded-full transition-all cursor-pointer duration-200 ${
+          className={`h-4 flex-1 cursor-pointer rounded-full transition-all duration-200 ${
             num <= currentValue ? 'bg-black' : 'bg-gray-100'
           }`}
         />

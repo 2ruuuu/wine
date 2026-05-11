@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { SuggestedWineProps } from '@/app/wines/components/SuggestedWine/type';
+
 import { NoImage } from '@/constants/images';
 
 const SuggestedWine = ({ id, name, region, image }: SuggestedWineProps) => {
@@ -18,8 +20,12 @@ const SuggestedWine = ({ id, name, region, image }: SuggestedWineProps) => {
           className="h-[165px] w-auto xl:h-57 xl:w-auto"
         />
         <div className="flex flex-col justify-center items-center gap-[6px] xl:gap-2 text-center">
-          <span className="text-sm xl:text-base font-normal text-[#31302F]">{name}</span>
-          <span className="text-caption xl:text-sm font-normal text-[#A3A3A3]">{region}</span>
+          <span className="text-sm xl:text-base font-normal text-[#31302F]">
+            {name}
+          </span>
+          <span className="text-caption xl:text-sm font-normal text-[#A3A3A3]">
+            {region}
+          </span>
         </div>
       </div>
     </Link>

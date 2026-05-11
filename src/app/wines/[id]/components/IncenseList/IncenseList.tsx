@@ -1,25 +1,26 @@
 import {
   Apple,
+  Baking,
+  Berry,
+  Caramel,
   Cherry,
   Chocolate,
   Citrus,
   Flower,
-  Berry,
   Grass,
-  Tobacco,
+  Leather,
+  Mineral,
   NoImage,
   Oak,
   Peach,
+  Pepper,
   Soil,
-  Mineral,
-  Baking,
+  Spice,
+  Tobacco,
   Tropical,
   Vanilla,
-  Pepper,
-  Leather,
-  Spice,
-  Caramel,
 } from '@/constants/images';
+
 import IncenseCard from '../IncenseCard/IncenseCard';
 import { IncenseListProps } from './type';
 
@@ -57,7 +58,7 @@ const IncenseList = ({ aromaStats }: IncenseListProps) => {
   }
 
   return (
-    <div className="flex xl:justify-between md:justify-between justify-between gap-[16px]">
+    <div className="flex justify-center gap-[16px] md:justify-between xl:justify-between">
       {displayAromas.map(([name, count], index) => (
         <IncenseCard
           key={`${name}-${index}`}

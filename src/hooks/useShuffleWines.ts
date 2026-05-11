@@ -7,7 +7,7 @@ const shuffleWines = <T>(items: T[]): T[] => {
     [copy[i], copy[j]] = [copy[j], copy[i]];
   }
   return copy;
-}
+};
 
 export const useShuffleWines = <T>(items: T[]): T[] => {
   const [ordered, setOrdered] = useState(() => [...items]);
@@ -17,4 +17,4 @@ export const useShuffleWines = <T>(items: T[]): T[] => {
   }, [items]);
 
   return ordered;
-}
+};

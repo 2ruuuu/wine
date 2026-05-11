@@ -1,10 +1,12 @@
 'use client';
+import { useAuthStore } from '@/stores/useAuthStore';
+
 import Button from '@/components/Button/Button';
+import { useModal } from '@/components/Modal/ModalProvider';
+
 import RatingAvg from './RatingAvg/RatingAvg';
 import RatingBar from './RatingBar/RatingBar';
 import { RatingBarProps } from './RatingBar/type';
-import { useModal } from '@/components/Modal/ModalProvider';
-import { useAuthStore } from '@/stores/useAuthStore';
 
 const RatingCard = ({
   reviewCount,
@@ -35,9 +37,9 @@ const RatingCard = ({
   };
 
   return (
-    <div className="w-full xl:max-w-[285px] md:max-w-[640px] mx-auto">
+    <div className="mx-auto w-full md:max-w-[720px] xl:max-w-[285px]">
       {/* 1. 모바일 전용 (기본값) */}
-      <div className="flex md:hidden flex-col gap-10 w-full">
+      <div className="flex w-full flex-col gap-10 md:hidden">
         <div className="flex gap-4">
           <RatingAvg avgRating={avgRating} />
           <RatingBar
@@ -58,8 +60,8 @@ const RatingCard = ({
         )}
       </div>
       {/* 2. 태블릿(md) 전용 */}
-      <div className="hidden md:flex xl:hidden flex-row w-full justify-between items-start">
-        <div className="flex flex-col gap-4 max-w-[280px] w-full">
+      <div className="hidden w-full flex-row items-start justify-between md:flex md:max-w-[720px] xl:hidden">
+        <div className="flex w-full max-w-[300px] flex-col gap-4">
           <RatingAvg avgRating={avgRating} />
           {isLoggedIn && (
             <Button fullWidth={false} onClick={handleReviewCreate}>
@@ -67,7 +69,7 @@ const RatingCard = ({
             </Button>
           )}
         </div>
-        <div className="flex-1 max-w-[280px] w-full">
+        <div className="w-full max-w-[360px] flex-1">
           <RatingBar
             id={id}
             wineId={id}
@@ -81,7 +83,7 @@ const RatingCard = ({
         </div>
       </div>
       {/* 3. 데스크탑(xl) 전용 */}
-      <div className="hidden xl:flex flex-col gap-10 w-full">
+      <div className="hidden w-full flex-col gap-10 xl:flex">
         <RatingAvg avgRating={avgRating} />
         <RatingBar
           id={id}

@@ -1,6 +1,11 @@
 import Button from '../Button/Button';
 import { NameChangeModalProps } from './type';
-const NameChangeModal = ({ name, onClose, onConfirm }: NameChangeModalProps) => {
+
+const NameChangeModal = ({
+  name,
+  onClose,
+  onConfirm,
+}: NameChangeModalProps) => {
   const handleConfirm = () => {
     onConfirm?.();
     onClose();
