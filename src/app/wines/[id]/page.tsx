@@ -33,7 +33,7 @@ const Wine = async ({ params }: { params: Promise<{ id: string }> }) => {
               {wineData.reviewCount}개의 후기
             </span>
           </div>
-          <p className="text-[28px] font-bold">{wineData.name}</p>
+          <p className="text-[28px] font-bold break-all">{wineData.name}</p>
           <p className="text-[18px] text-gray-600">{wineData.region}</p>
         </div>
 
@@ -44,15 +44,19 @@ const Wine = async ({ params }: { params: Promise<{ id: string }> }) => {
       </div>
 
       <div className="container-layout md:pr-[30px] md:pl-[30px]">
-        <div className="flex xl:justify-between xl:flex-row md:flex-col flex-col md:items-center xl:items-start md:gap-24 gap-12">
-          <Flavor wine={wineData} />
-          <Incense
-            reviewCount={wineData.reviewCount}
-            aromaStats={wineData.aromaStats}
-          />
+        <div className="flex xl:justify-between xl:flex-row md:flex-col flex-col md:items-stretch xl:items-start md:gap-24 gap-12">
+          <div className="flex w-full md:justify-center">
+            <Flavor wine={wineData} />
+          </div>
+          <div className="flex w-full md:justify-center">
+            <Incense
+              reviewCount={wineData.reviewCount}
+              aromaStats={wineData.aromaStats}
+            />
+          </div>
         </div>
         <hr className="xl:my-20 md:my-20 my-10 border-gray-300" />
-        <div className="flex xl:flex-row xl:gap-12 xl:justify-between md:flex-col-reverse flex-col-reverse gap-10 md:gap-[77px]">
+        <div className="flex xl:flex-row xl:gap-12 xl:justify-between md:flex-col-reverse flex-col-reverse gap-10 md:gap-[77px] md:items-center xl:items-start">
           <ReviewCardList
             reviewCount={wineData.reviewCount}
             reviews={wineData.reviews}
