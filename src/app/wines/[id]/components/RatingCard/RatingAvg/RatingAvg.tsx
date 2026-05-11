@@ -8,11 +8,11 @@ const RatingAvg = ({ avgRating }: RatingAvgProps) => {
   const AvgRating = safeRating.toFixed(1);
 
   return (
-    <div className="flex xl:flex-row flex-col xl:gap-3.5 xl:max-w-[260px] md:flex-col md:gap-3 md:max-w-[140px] w-full items-center md:items-start xl:items-center xl:justify-start justify-center gap-3">
+    <div className="flex w-full flex-col items-center justify-center gap-3 md:max-w-[140px] md:flex-col md:items-start md:gap-3 xl:max-w-[260px] xl:flex-row xl:items-center xl:justify-start xl:gap-3.5">
       <StarRating rating={AvgRatingFloor} className="" />
       <div>
-        <span className="md:text-2xl text-[28px] font-bold">{AvgRating} </span>
-        <span className="md:text-2xl text-[28px] font-bold text-gray-600">
+        <span className="text-[28px] font-bold md:text-2xl">{AvgRating} </span>
+        <span className="text-[28px] font-bold text-gray-600 md:text-2xl">
           / 5.0
         </span>
       </div>

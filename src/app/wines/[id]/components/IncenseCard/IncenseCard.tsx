@@ -34,8 +34,8 @@ const IncenseCard = ({ name, icon }: IncenseCardProps) => {
   const displayName = AROMA_NAME_KOR[name] || name;
 
   return (
-    <div className="flex flex-col items-center gap-6 w-[100px]">
-      <div className="relative w-full aspect-square rounded-xl overflow-hidden">
+    <div className="flex w-[100px] flex-col items-center gap-6">
+      <div className="relative aspect-square w-full overflow-hidden rounded-xl">
         <Image
           src={icon || NoImage}
           alt={displayName}
@@ -45,7 +45,7 @@ const IncenseCard = ({ name, icon }: IncenseCardProps) => {
           priority={!isNoImage}
         />
       </div>
-      <p className="w-full text-[16px] font-semibold text-gray-800 text-center">
+      <p className="w-full text-center text-[16px] font-semibold text-gray-800">
         {isNoImage ? '-' : displayName}
       </p>
     </div>

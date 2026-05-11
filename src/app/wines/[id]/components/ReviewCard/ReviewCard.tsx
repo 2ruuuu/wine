@@ -67,11 +67,11 @@ const ReviewCard = ({ review, wine }: ReviewCardProps) => {
   ];
 
   return (
-    <div className="flex flex-col w-full gap-12 max-w-[720px] pt-10 pb-10 border-b border-gray-300">
+    <div className="flex w-full max-w-[720px] flex-col gap-12 border-b border-gray-300 pt-10 pb-10">
       <div className="flex flex-col gap-5">
         <StarRating rating={review.rating} className="" />
-        <div className="flex justify-between items-center">
-          <div className="flex gap-4 justify-center items-center">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center justify-center gap-4">
             <Image
               src={review.user.image || Profile}
               alt="프로필"
@@ -81,7 +81,7 @@ const ReviewCard = ({ review, wine }: ReviewCardProps) => {
               className="rounded-full object-cover"
             />
             <div className="flex flex-col">
-              <span className="text-black font-semibold">
+              <span className="font-semibold text-black">
                 {review.user.nickname}
               </span>
               <span className="text-gray-600">
@@ -93,7 +93,7 @@ const ReviewCard = ({ review, wine }: ReviewCardProps) => {
             {({ toggle }) => (
               <button
                 onClick={toggle}
-                className="flex justify-center p-2 cursor-pointer"
+                className="flex cursor-pointer justify-center p-2"
               >
                 <Image
                   src={Hamburger}
@@ -101,7 +101,7 @@ const ReviewCard = ({ review, wine }: ReviewCardProps) => {
                   width={4}
                   height={20}
                   style={{ width: 'auto', height: 'auto' }}
-                  className="w-1 h-5"
+                  className="h-5 w-1"
                 />
               </button>
             )}
@@ -119,7 +119,7 @@ const ReviewCard = ({ review, wine }: ReviewCardProps) => {
         />
       )}
 
-      <div className="flex relative justify-end items-center">
+      <div className="relative flex items-center justify-end">
         <div className="absolute left-0">
           {isLoggedIn && (
             <HeartToggle id={review.id} isLiked={review.isLiked} />
@@ -127,7 +127,7 @@ const ReviewCard = ({ review, wine }: ReviewCardProps) => {
         </div>
         <button
           onClick={() => setIsTasteOpen(!isTasteOpen)}
-          className="relative w-[15px] h-[9px] cursor-pointer"
+          className="relative h-[9px] w-[15px] cursor-pointer"
         >
           <Image
             src={isTasteOpen ? Up : Down}
