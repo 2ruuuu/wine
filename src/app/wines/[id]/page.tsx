@@ -1,12 +1,15 @@
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
+
+import { getWineDetail } from '@/lib/api/wine';
+
+import StarRating from '@/components/StarRating/StarRating';
+
 import Flavor from './components/Flavor/Flavor';
 import Incense from './components/Incense/Incense';
 import RatingCard from './components/RatingCard/RatingCard';
 import ReviewCardList from './components/ReviewCardList/ReviewCardList';
 import Top from './components/Top/Top';
-import { getWineDetail } from '@/lib/api/wine';
-import { notFound } from 'next/navigation';
-import StarRating from '@/components/StarRating/StarRating';
 
 const Wine = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;

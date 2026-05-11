@@ -1,7 +1,8 @@
 import { ReactNode } from 'react';
-import { Review } from '@/types/review';
+
 import type { WineListItem } from '@/app/myprofile/components/WineList/type';
 import type { WineFilterProps } from '@/app/wines/components/WineFilter/type';
+import { Review } from '@/types/review';
 
 export type ModalRootProps = {
   title: string;

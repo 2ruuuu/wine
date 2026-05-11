@@ -1,4 +1,5 @@
 import Taste from '@/components/Taste/Taste';
+
 import { FlavorProps } from './type';
 
 const Flavor = ({ wine }: FlavorProps) => {

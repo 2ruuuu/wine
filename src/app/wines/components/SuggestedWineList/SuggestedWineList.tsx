@@ -1,14 +1,20 @@
 'use client';
 
-import useEmblaCarousel from 'embla-carousel-react';
-import { useEffect, useMemo, useState } from 'react';
-import SuggestedWine from '../SuggestedWine/SuggestedWine';
-import Button from '@/components/Button/Button';
-import { ArrowLeft, ArrowRight } from '@/constants/icons';
 import Image from 'next/image';
-import { useShuffleWines } from '@/hooks/useShuffleWines';
-import { getRecommendedWines } from '@/lib/api/wine';
+import { useEffect, useMemo, useState } from 'react';
+
 import { SuggestedWineProps } from '@/app/wines/components/SuggestedWine/type';
+import useEmblaCarousel from 'embla-carousel-react';
+
+import { getRecommendedWines } from '@/lib/api/wine';
+
+import { useShuffleWines } from '@/hooks/useShuffleWines';
+
+import { ArrowLeft, ArrowRight } from '@/constants/icons';
+
+import Button from '@/components/Button/Button';
+
+import SuggestedWine from '../SuggestedWine/SuggestedWine';
 
 const SuggestedWineList = () => {
   const [wines, setWines] = useState<SuggestedWineProps[]>([]);
@@ -27,19 +33,15 @@ const SuggestedWineList = () => {
       .finally(() => {
         if (!cancelled) setIsdLoading(false);
       });
-      
+
     return () => {
       cancelled = true;
     };
   }, []);
 
   const orderedWines = useShuffleWines(wines);
-  const slides =
-    orderedWines.length > 0 ? orderedWines : wines;
-  const slidesKey = useMemo(
-    () => slides.map((w) => w.id).join(','),
-    [slides],
-  );
+  const slides = orderedWines.length > 0 ? orderedWines : wines;
+  const slidesKey = useMemo(() => slides.map((w) => w.id).join(','), [slides]);
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'start',
@@ -65,7 +67,7 @@ const SuggestedWineList = () => {
 
     emblaApi.on('select', sync);
     emblaApi.on('reInit', sync);
-    
+
     return () => {
       emblaApi.off('select', sync);
       emblaApi.off('reInit', sync);
@@ -122,7 +124,11 @@ const SuggestedWineList = () => {
             disabled={isSinglePage}
             aria-label="이전 추천 와인 보기"
             icon={
-              <Image src={ArrowLeft} alt="prev-wine-button" className="w-6 h-6" />
+              <Image
+                src={ArrowLeft}
+                alt="prev-wine-button"
+                className="w-6 h-6"
+              />
             }
           />
         </div>

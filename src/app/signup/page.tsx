@@ -1,5 +1,6 @@
-import AuthLayout from '@/components/Auth/AuthLayout';
 import AuthFooter from '@/components/Auth/AuthFooter';
+import AuthLayout from '@/components/Auth/AuthLayout';
+
 import SignupForm from './components/SignupForm';
 
 const Signup = () => {

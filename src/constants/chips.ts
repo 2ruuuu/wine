@@ -1,8 +1,9 @@
 import type { StaticImageData } from 'next/image';
+
 import {
   wineTypeRedImage,
-  wineTypeWhiteImage,
   wineTypeSparklingImage,
+  wineTypeWhiteImage,
 } from '@/constants/images';
 
 export enum WineType {

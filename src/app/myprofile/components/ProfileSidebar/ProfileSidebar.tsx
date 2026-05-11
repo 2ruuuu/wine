@@ -1,6 +1,7 @@
+import Button from '@/components/Button/Button';
 import PhotoInput from '@/components/Input/PhotoInput';
 import TextInput from '@/components/Input/TextInput';
-import Button from '@/components/Button/Button';
+
 import ProfileSidebarProps from './type';
 
 const ProfileSidebar = ({

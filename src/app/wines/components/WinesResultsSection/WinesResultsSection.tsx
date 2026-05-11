@@ -1,10 +1,14 @@
 'use client';
 
-import type { GetWinesParams } from '@/app/wines/type';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { WineType } from '@/constants/chips';
+
 import { WineCardProps } from '@/app/wines/components/WineCard/type';
+import type { GetWinesParams } from '@/app/wines/type';
+
 import { getWines } from '@/lib/api/wine';
+
+import { WineType } from '@/constants/chips';
+
 import WinesDesktopLayout from './WinesDesktopLayout';
 import WinesMobileLayout from './WinesMobileLayout';
 
@@ -39,12 +43,7 @@ const WinesResultsSection = () => {
       rating: appliedRating,
       wineTypes: appliedWineTypes,
     }),
-    [
-      appliedMinPrice,
-      appliedMaxPrice,
-      appliedRating,
-      appliedWineTypes,
-    ],
+    [appliedMinPrice, appliedMaxPrice, appliedRating, appliedWineTypes],
   );
 
   const buildListParams = useCallback(
@@ -158,7 +157,7 @@ const WinesResultsSection = () => {
       if (!nearBottom()) {
         return;
       }
-      
+
       loadMore();
     };
 
@@ -208,20 +207,16 @@ const WinesResultsSection = () => {
   const filteredWines = useMemo(() => {
     let list = wines;
     if (appliedWineTypes.length > 1) {
-      list = list.filter((w) =>
-        appliedWineTypes.some((t) => t === w.type),
-      );
+      list = list.filter((w) => appliedWineTypes.some((t) => t === w.type));
     }
-    
+
     const q = search.trim().toLowerCase();
 
     if (!q) {
       return list;
     }
 
-    return list.filter((w) =>
-      `${w.name}`.toLowerCase().includes(q),
-    );
+    return list.filter((w) => `${w.name}`.toLowerCase().includes(q));
   }, [wines, appliedWineTypes, search]);
 
   const wineFilterProps = {

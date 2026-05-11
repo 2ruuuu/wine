@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
-import { AromaListProps } from './type';
+
 import Aroma from '../Aroma/Aroma';
+import { AromaListProps } from './type';
 
 const AromaList = ({ aroma }: AromaListProps) => {
   return (

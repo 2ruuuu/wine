@@ -1,6 +1,8 @@
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
+
 import { LogoBlack } from '@/constants/icons';
+
 import { AuthLayoutProps } from './type';
 
 const AuthLayout = ({ children }: AuthLayoutProps) => {

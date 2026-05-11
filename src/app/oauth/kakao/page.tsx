@@ -1,4 +1,5 @@
 import { Suspense } from 'react';
+
 import KakaoRedirect from './components/KakaoRedirect';
 
 export default function KakaoPage() {

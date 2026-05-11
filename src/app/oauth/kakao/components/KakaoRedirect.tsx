@@ -1,10 +1,12 @@
 'use client';
 
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 import toast from 'react-hot-toast';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { socialSignIn } from '@/lib/api/auth';
+
 import { useAuthStore } from '@/stores/useAuthStore';
+
+import { socialSignIn } from '@/lib/api/auth';
 
 const KakaoRedirect = () => {
   const router = useRouter();

@@ -1,4 +1,5 @@
 import WineCard from '@/app/wines/components/WineCard/WineCard';
+
 import { WineListProps } from './type';
 
 const WineList = ({ wines }: WineListProps) => {

@@ -1,4 +1,5 @@
 import StarRating from '@/components/StarRating/StarRating';
+
 import { RatingAvgProps } from './type';
 
 const RatingAvg = ({ avgRating }: RatingAvgProps) => {

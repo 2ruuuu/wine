@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
-import ModalProvider from '@/components/Modal/ModalProvider';
-import '../styles/globals.css';
+
+import Footer from '@/components/Footer/Footer';
 import Header from '@/components/Header/Header';
 import Loading from '@/components/Loading/Loading';
+import ModalProvider from '@/components/Modal/ModalProvider';
 import ToastProvider from '@/components/Toast/ToastProvider';
-import Footer from '@/components/Footer/Footer';
+
+import '../styles/globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL(

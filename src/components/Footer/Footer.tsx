@@ -1,8 +1,9 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { LogoBlack } from '@/constants/icons';
 import { usePathname } from 'next/navigation';
+
+import { LogoBlack } from '@/constants/icons';
 
 const Footer = () => {
   const pathname = usePathname();

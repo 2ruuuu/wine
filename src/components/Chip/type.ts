@@ -1,5 +1,5 @@
-import type { StaticImageData } from "next/image";
-import type { ReactNode } from "react";
+import type { StaticImageData } from 'next/image';
+import type { ReactNode } from 'react';
 
 export type ChipProps = {
   id: string;

@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { setupLoadingInterceptor } from './loadingInterceptor';
+
 import { setupInterceptors } from './interceptors';
+import { setupLoadingInterceptor } from './loadingInterceptor';
 
 const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 

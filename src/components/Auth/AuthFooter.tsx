@@ -1,4 +1,5 @@
 import Link from 'next/link';
+
 import { AuthFooterProps } from './type';
 
 const AuthFooter = ({ type }: AuthFooterProps) => {

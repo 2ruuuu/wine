@@ -1,7 +1,8 @@
-import WineTypeFilter from '@/app/wines/components/WineTypeFilter/WineTypeFilter';
+import { WineFilterProps } from '@/app/wines/components/WineFilter/type';
 import WinePriceFilter from '@/app/wines/components/WinePriceFilter/WinePriceFilter';
 import WineRatingFilter from '@/app/wines/components/WineRatingFilter/WineRatingFilter';
-import { WineFilterProps } from '@/app/wines/components/WineFilter/type';
+import WineTypeFilter from '@/app/wines/components/WineTypeFilter/WineTypeFilter';
+
 import Button from '../Button/Button';
 
 const FilterModal = ({
@@ -41,10 +42,20 @@ const FilterModal = ({
         />
       </form>
       <div className="flex gap-2">
-        <Button type="button" variant="outline" fullWidth onClick={onResetFilters}>
+        <Button
+          type="button"
+          variant="outline"
+          fullWidth
+          onClick={onResetFilters}
+        >
           초기화
         </Button>
-        <Button type="button" variant="primary" fullWidth onClick={onApplyFilters}>
+        <Button
+          type="button"
+          variant="primary"
+          fullWidth
+          onClick={onApplyFilters}
+        >
           필터 적용하기
         </Button>
       </div>
