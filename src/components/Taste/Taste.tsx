@@ -42,29 +42,29 @@ const Taste = ({ variant, type, value }: TasteProps) => {
   const LAYOUTS: { [key in TasteVariant]: React.ReactNode } = {
     'label-boxed-long': (
       <div className={container[variant]}>
-        <div className="flex justify-between items-center gap-3.5">
-          <span className="bg-gray-100 px-[5px] py-[7px] rounded text-sm font-bold min-w-[50px] text-center text-gray-600">
+        <div className="flex items-center justify-between gap-3.5">
+          <span className="min-w-[50px] rounded bg-gray-100 px-[5px] py-[7px] text-center text-sm font-bold text-gray-600">
             {label}
           </span>
-          <div className="h-[30px] w-px bg-gray-100 mx-1" />
+          <div className="mx-1 h-[30px] w-px bg-gray-100" />
         </div>
         <div className="flex-1">
           <Bar value={value} gapClass="gap-1" />
         </div>
-        <span className="text-sm font-medium whitespace-nowrap shrink-0 min-w-[65px] text-right">
+        <span className="min-w-[65px] shrink-0 text-right text-sm font-medium whitespace-nowrap">
           {max}
         </span>
       </div>
     ),
     'label-boxed-middle': (
       <div className={`${container[variant]} flex-nowrap`}>
-        <span className="flex items-center justify-center shrink-0 whitespace-nowrap bg-gray-100 font-bold w-[53px] h-[30px] rounded text-sm text-gray-600">
+        <span className="flex h-[30px] w-[53px] shrink-0 items-center justify-center rounded bg-gray-100 text-sm font-bold whitespace-nowrap text-gray-600">
           {label}
         </span>
-        <div className="flex-1 px-1 min-w-0">
+        <div className="min-w-0 flex-1 px-1">
           <Bar value={value} gapClass="md:gap-0.5 gap-1" />
         </div>
-        <span className="text-sm font-medium whitespace-nowrap shrink-0 min-w-[55px] text-right">
+        <span className="min-w-[55px] shrink-0 text-right text-sm font-medium whitespace-nowrap">
           {max}
         </span>
       </div>
@@ -72,39 +72,39 @@ const Taste = ({ variant, type, value }: TasteProps) => {
 
     'label-boxed-short': (
       <div className={`${container[variant]} flex-nowrap`}>
-        <span className="flex items-center justify-center shrink-0 whitespace-nowrap bg-gray-100 font-bold w-[53px] h-[30px] rounded text-sm text-gray-600">
+        <span className="flex h-[30px] w-[53px] shrink-0 items-center justify-center rounded bg-gray-100 text-sm font-bold whitespace-nowrap text-gray-600">
           {label}
         </span>
-        <div className="flex-1 min-w-0">
+        <div className="min-w-0 flex-1">
           <Bar value={value} gapClass="gap-0.5" />
         </div>
-        <span className="text-sm font-medium text-gray-800 whitespace-nowrap shrink-0 min-w-[65px] text-right">
+        <span className="min-w-[65px] shrink-0 text-right text-sm font-medium whitespace-nowrap text-gray-800">
           {min === '부드러워요' ? min : max}
         </span>
       </div>
     ),
     'label-bold': (
       <div className={container[variant]}>
-        <div className="flex justify-center items-center">
-          <span className="text-xl font-bold mr-2 text-gray-800">{label}</span>
-          <div className="h-6 w-px bg-gray-100 mx-0.5" />
+        <div className="flex items-center justify-center">
+          <span className="mr-2 text-xl font-bold text-gray-800">{label}</span>
+          <div className="mx-0.5 h-6 w-px bg-gray-100" />
         </div>
-        <span className="text-gray-600 text-sm">{min}</span>
+        <span className="text-sm text-gray-600">{min}</span>
         <div className="flex-1">
           <Bar value={value} gapClass="gap-1" />
         </div>
-        <span className="text-gray-600 text-sm">{max}</span>
+        <span className="text-sm text-gray-600">{max}</span>
       </div>
     ),
     'label-top': (
       <div className={container[variant]}>
         <span className="font-bold text-gray-800">{label}</span>
         <div className="flex items-center gap-3">
-          <span className="text-gray-600 text-sm">{min}</span>
+          <span className="text-sm text-gray-600">{min}</span>
           <div className="flex-1">
             <Bar value={value} gapClass="gap-0.5" />
           </div>
-          <span className="text-gray-600 text-sm">{max}</span>
+          <span className="text-sm text-gray-600">{max}</span>
         </div>
       </div>
     ),

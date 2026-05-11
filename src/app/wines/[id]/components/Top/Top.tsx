@@ -6,8 +6,8 @@ import { TopProps } from './type';
 
 const Top = ({ wine }: TopProps) => {
   return (
-    <div className="flex justify-center items-center max-w-[1140px] w-full md:gap-12">
-      <div className="relative w-full max-w-[280px] md:max-w-[300px] xl:max-w-[420px] h-[250px] md:h-[310px] shrink-0">
+    <div className="flex w-full max-w-[1140px] items-center justify-center md:gap-12">
+      <div className="relative h-[250px] w-full max-w-[280px] shrink-0 md:h-[310px] md:max-w-[300px] xl:max-w-[420px]">
         <Image
           src={wine.image}
           alt="와인 이미지"
@@ -17,18 +17,18 @@ const Top = ({ wine }: TopProps) => {
           className="object-contain mix-blend-multiply"
         />
       </div>
-      <div className="hidden md:flex flex-col justify-center gap-8 max-w-[500px] w-full">
+      <div className="hidden w-full max-w-[500px] flex-col justify-center gap-8 md:flex">
         <div className="flex flex-col gap-3.5">
-          <div className="flex items-center gap-4 h-[28px]">
+          <div className="flex h-[28px] items-center gap-4">
             <StarRating
               rating={wine.avgRating}
-              className="w-5 h-5 md:w-6 md:h-6 xl:w-[27px] xl:h-[27px]"
+              className="h-5 w-5 md:h-6 md:w-6 xl:h-[27px] xl:w-[27px]"
             />
-            <span className="text-gray-600 whitespace-nowrap">
+            <span className="whitespace-nowrap text-gray-600">
               {wine.reviewCount}개의 후기
             </span>
           </div>
-          <p className="xl:text-[40px] md:text-[32px] font-bold break-all">
+          <p className="font-bold break-all md:text-[32px] xl:text-[40px]">
             {wine.name}
           </p>
           <p className="text-[18px] text-gray-600">{wine.region}</p>
