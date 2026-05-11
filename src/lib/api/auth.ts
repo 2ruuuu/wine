@@ -1,7 +1,9 @@
-import axios from 'axios';
-import { SignupFormValues } from '@/app/signup/components/type';
 import { LoginFormValues } from '@/app/login/components/type';
+import { SignupFormValues } from '@/app/signup/components/type';
+import axios from 'axios';
+
 import { AuthResponse } from '@/stores/useAuthStore';
+
 import { instance } from './axios';
 
 export interface SocialLoginRequest {

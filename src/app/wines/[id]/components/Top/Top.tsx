@@ -1,5 +1,7 @@
 import Image from 'next/image';
+
 import StarRating from '@/components/StarRating/StarRating';
+
 import { TopProps } from './type';
 
 const Top = ({ wine }: TopProps) => {

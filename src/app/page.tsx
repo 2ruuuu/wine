@@ -1,8 +1,10 @@
 'use client';
 import Image from 'next/image';
-import { WineRecommend, WineFilter, WineReview } from '@/constants/images';
-import WineList from '@/components/Landing/WineList';
 import Link from 'next/link';
+
+import { WineFilter, WineRecommend, WineReview } from '@/constants/images';
+
+import WineList from '@/components/Landing/WineList';
 
 const Home = () => {
   return (

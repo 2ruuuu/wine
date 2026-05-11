@@ -1,6 +1,8 @@
-import { AROMA_DATA, AromaKey } from '@/constants/aroma';
-import { AromaProps } from './type';
 import Image from 'next/image';
+
+import { AROMA_DATA, AromaKey } from '@/constants/aroma';
+
+import { AromaProps } from './type';
 
 const Aroma = ({ item }: AromaProps) => {
   const data = AROMA_DATA[item as AromaKey];

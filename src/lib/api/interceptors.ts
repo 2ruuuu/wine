@@ -1,5 +1,7 @@
-import { AxiosInstance, AxiosError, InternalAxiosRequestConfig } from 'axios';
+import { AxiosError, AxiosInstance, InternalAxiosRequestConfig } from 'axios';
+
 import { useAuthStore } from '@/stores/useAuthStore';
+
 import { refreshTokenApi } from './auth';
 
 interface FailedRequest {

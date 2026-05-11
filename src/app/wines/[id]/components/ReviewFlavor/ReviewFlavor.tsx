@@ -1,5 +1,6 @@
-import Taste from '@/components/Taste/Taste';
 import Mock from '@/mocks/wineDetail.json';
+
+import Taste from '@/components/Taste/Taste';
 
 const ReviewFlavor = () => {
   return (

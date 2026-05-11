@@ -1,6 +1,8 @@
-import { forwardRef } from 'react';
 import Image from 'next/image';
+import { forwardRef } from 'react';
+
 import { Alert, Search } from '@/constants/icons';
+
 import { TextInputProps } from './type';
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(

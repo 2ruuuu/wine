@@ -1,9 +1,9 @@
+import Button from '@/components/Button/Button';
 
-import Button from "@/components/Button/Button";
-import WineTypeFilter from "../WineTypeFilter/WineTypeFilter";
-import WinePriceFilter from "../WinePriceFilter/WinePriceFilter";
-import WineRatingFilter from "../WineRatingFilter/WineRatingFilter";
-import { WineFilterProps } from "./type";
+import WinePriceFilter from '../WinePriceFilter/WinePriceFilter';
+import WineRatingFilter from '../WineRatingFilter/WineRatingFilter';
+import WineTypeFilter from '../WineTypeFilter/WineTypeFilter';
+import { WineFilterProps } from './type';
 
 const WineFilter = ({
   selectedWineTypes,
@@ -40,7 +40,12 @@ const WineFilter = ({
         onChangeRating={onChangeRating}
       />
       <div className="flex gap-2">
-        <Button type="button" variant="outline" fullWidth onClick={onResetFilters}>
+        <Button
+          type="button"
+          variant="outline"
+          fullWidth
+          onClick={onResetFilters}
+        >
           초기화
         </Button>
         <Button type="submit" variant="primary" fullWidth>

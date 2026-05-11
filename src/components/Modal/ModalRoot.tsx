@@ -1,8 +1,10 @@
 'use client';
 
-import { ModalRootProps } from './type';
 import Image from 'next/image';
+
 import { Close } from '@/constants/icons';
+
+import { ModalRootProps } from './type';
 
 const Modal = ({
   title,

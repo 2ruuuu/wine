@@ -1,6 +1,7 @@
 'use client';
-import { INTENSITY } from '@/constants/taste';
 import { useState } from 'react';
+
+import { INTENSITY } from '@/constants/taste';
 
 const TasteButton = ({
   initialValue = 0,

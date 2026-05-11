@@ -1,7 +1,9 @@
 import Link from 'next/link';
+
 import Dropdown from '@/components/DropDown/Dropdown';
-import { WineListItem } from './type';
 import { useModal } from '@/components/Modal/ModalProvider';
+
+import { WineListItem } from './type';
 
 interface WineCardProps {
   wine: WineListItem;

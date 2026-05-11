@@ -1,16 +1,22 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { useRouter } from 'next/navigation';
-import TextInput from '@/components/Input/TextInput';
-import Button from '@/components/Button/Button';
+
 import { useAuthStore } from '@/stores/useAuthStore';
+
 import { signUp } from '@/lib/api/auth';
+
 import { useAsync } from '@/hooks/useAsync';
+
+import Button from '@/components/Button/Button';
+import TextInput from '@/components/Input/TextInput';
+
 import { SignupFormValues } from './type';
 
 const signupSchema = z

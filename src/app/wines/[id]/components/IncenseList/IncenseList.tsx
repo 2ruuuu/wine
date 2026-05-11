@@ -1,25 +1,26 @@
 import {
   Apple,
+  Baking,
+  Berry,
+  Caramel,
   Cherry,
   Chocolate,
   Citrus,
   Flower,
-  Berry,
   Grass,
-  Tobacco,
+  Leather,
+  Mineral,
   NoImage,
   Oak,
   Peach,
+  Pepper,
   Soil,
-  Mineral,
-  Baking,
+  Spice,
+  Tobacco,
   Tropical,
   Vanilla,
-  Pepper,
-  Leather,
-  Spice,
-  Caramel,
 } from '@/constants/images';
+
 import IncenseCard from '../IncenseCard/IncenseCard';
 import { IncenseListProps } from './type';
 

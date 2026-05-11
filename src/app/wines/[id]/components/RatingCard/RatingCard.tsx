@@ -1,10 +1,12 @@
 'use client';
+import { useAuthStore } from '@/stores/useAuthStore';
+
 import Button from '@/components/Button/Button';
+import { useModal } from '@/components/Modal/ModalProvider';
+
 import RatingAvg from './RatingAvg/RatingAvg';
 import RatingBar from './RatingBar/RatingBar';
 import { RatingBarProps } from './RatingBar/type';
-import { useModal } from '@/components/Modal/ModalProvider';
-import { useAuthStore } from '@/stores/useAuthStore';
 
 const RatingCard = ({
   reviewCount,

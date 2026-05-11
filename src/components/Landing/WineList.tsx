@@ -1,9 +1,11 @@
 'use client';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Autoplay } from 'swiper/modules';
-import 'swiper/swiper-bundle.css';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+
+import { Autoplay, Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper-bundle.css';
+
 import { Wine } from './type';
 
 const WineList = () => {

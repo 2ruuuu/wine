@@ -1,7 +1,8 @@
-import { instance } from './axios';
 import { WineDetailResponse } from '@/app/wines/[id]/type';
 import { SuggestedWineProps } from '@/app/wines/components/SuggestedWine/type';
 import { GetWinesParams, WinesResponse } from '@/app/wines/type';
+
+import { instance } from './axios';
 
 export const getWines = async (
   params: GetWinesParams,
@@ -15,9 +16,12 @@ export const getWines = async (
 export const getRecommendedWines = async (
   limit = 10,
 ): Promise<SuggestedWineProps[]> => {
-  const response = await instance.get<SuggestedWineProps[]>('/wines/recommended', {
-    params: { limit },
-  });
+  const response = await instance.get<SuggestedWineProps[]>(
+    '/wines/recommended',
+    {
+      params: { limit },
+    },
+  );
   return response.data;
 };
 

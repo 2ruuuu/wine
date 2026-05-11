@@ -1,4 +1,5 @@
 import Image from 'next/image';
+
 import { NoImage } from '@/constants/images';
 
 interface IncenseCardProps {

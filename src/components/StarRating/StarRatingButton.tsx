@@ -1,9 +1,11 @@
 'use client';
 
+import Image from 'next/image';
+
 import { Star } from '@/constants/icons';
 import { NUMBER_ARR } from '@/constants/starRating';
+
 import { InteractiveStarProps } from './type';
-import Image from 'next/image';
 
 const StarRatingButton = ({ rating, onChange }: InteractiveStarProps) => {
   return (

@@ -1,4 +1,4 @@
-import { WineType } from "@/constants/chips";
+import { WineType } from '@/constants/chips';
 
 export type WineFilterProps = {
   selectedWineTypes: WineType[];

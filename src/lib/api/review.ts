@@ -1,5 +1,6 @@
-import { instance } from './axios';
 import { WineDetailResponse } from '@/app/wines/[id]/type';
+
+import { instance } from './axios';
 
 export interface PatchReviewRequestBody {
   rating: number;

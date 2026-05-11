@@ -1,7 +1,9 @@
-import { ChangeEvent, useEffect, useState, forwardRef } from 'react';
 import Image from 'next/image';
+import { ChangeEvent, forwardRef, useEffect, useState } from 'react';
+
 import { CameraBlack, CameraGray } from '@/constants/icons';
 import { profileImage } from '@/constants/images';
+
 import { PhotoInputProps } from './type';
 
 const PhotoInput = forwardRef<HTMLInputElement, PhotoInputProps>(

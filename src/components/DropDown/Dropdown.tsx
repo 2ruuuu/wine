@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+
 import type { DropdownProps } from './type';
 
 const variantClassMap = {
