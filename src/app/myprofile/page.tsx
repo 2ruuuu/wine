@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { useAuthStore } from '@/stores/useAuthStore';
 
@@ -13,6 +13,7 @@ const MyProfile = () => {
   const { user, accessToken } = useAuthStore();
 
   const [isReady, setIsReady] = useState(false);
+  const hadAuthRef = useRef(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -23,9 +24,20 @@ const MyProfile = () => {
   }, []);
 
   useEffect(() => {
+    if (user && accessToken) {
+      hadAuthRef.current = true;
+    }
+  }, [user, accessToken]);
+
+  useEffect(() => {
     if (!isReady) return;
 
     if (!user || !accessToken) {
+      if (hadAuthRef.current) {
+        router.replace('/');
+        return;
+      }
+
       router.replace('/login');
     }
   }, [isReady, user, accessToken, router]);

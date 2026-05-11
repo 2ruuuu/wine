@@ -90,7 +90,7 @@ const MyProfilePage = () => {
       } catch (error: any) {
         if (error.response?.status === 401) {
           useAuthStore.getState().clearAuth();
-          window.location.replace('/login');
+          window.location.replace('/');
           return;
         }
 
