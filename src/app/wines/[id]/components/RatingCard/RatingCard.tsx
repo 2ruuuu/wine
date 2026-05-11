@@ -37,7 +37,7 @@ const RatingCard = ({
   };
 
   return (
-    <div className="w-full xl:max-w-[285px] md:max-w-[640px] mx-auto">
+    <div className="w-full xl:max-w-[285px] md:max-w-[720px] mx-auto">
       {/* 1. 모바일 전용 (기본값) */}
       <div className="flex md:hidden flex-col gap-10 w-full">
         <div className="flex gap-4">
@@ -60,8 +60,8 @@ const RatingCard = ({
         )}
       </div>
       {/* 2. 태블릿(md) 전용 */}
-      <div className="hidden md:flex xl:hidden flex-row w-full justify-between items-start">
-        <div className="flex flex-col gap-4 max-w-[280px] w-full">
+      <div className="hidden md:flex xl:hidden flex-row w-full justify-between items-start md:max-w-[720px]">
+        <div className="flex flex-col gap-4 max-w-[300px] w-full">
           <RatingAvg avgRating={avgRating} />
           {isLoggedIn && (
             <Button fullWidth={false} onClick={handleReviewCreate}>
@@ -69,7 +69,7 @@ const RatingCard = ({
             </Button>
           )}
         </div>
-        <div className="flex-1 max-w-[280px] w-full">
+        <div className="flex-1 max-w-[360px] w-full">
           <RatingBar
             id={id}
             wineId={id}

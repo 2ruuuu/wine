@@ -6,8 +6,8 @@ import { TopProps } from './type';
 
 const Top = ({ wine }: TopProps) => {
   return (
-    <div className="flex justify-center max-w-[1140px] w-full gap-12">
-      <div className="relative w-[420px] h-[310px] shrink-0">
+    <div className="flex justify-center items-center max-w-[1140px] w-full md:gap-12">
+      <div className="relative w-full max-w-[280px] md:max-w-[300px] xl:max-w-[420px] h-[250px] md:h-[310px] shrink-0">
         <Image
           src={wine.image}
           alt="와인 이미지"
@@ -28,7 +28,9 @@ const Top = ({ wine }: TopProps) => {
               {wine.reviewCount}개의 후기
             </span>
           </div>
-          <p className="xl:text-[40px] md:text-[32px] font-bold">{wine.name}</p>
+          <p className="xl:text-[40px] md:text-[32px] font-bold break-all">
+            {wine.name}
+          </p>
           <p className="text-[18px] text-gray-600">{wine.region}</p>
         </div>
         <span className="text-end text-2xl font-semibold">

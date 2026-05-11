@@ -5,7 +5,7 @@ import { AromaListProps } from './type';
 
 const AromaList = ({ aroma }: AromaListProps) => {
   return (
-    <div className="flex">
+    <div className="flex flex-wrap">
       {aroma.map((item, index) => (
         <Fragment key={item}>
           <Aroma item={item} />

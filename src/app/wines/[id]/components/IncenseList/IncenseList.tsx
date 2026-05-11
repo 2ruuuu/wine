@@ -58,7 +58,7 @@ const IncenseList = ({ aromaStats }: IncenseListProps) => {
   }
 
   return (
-    <div className="flex xl:justify-between md:justify-between justify-between gap-[16px]">
+    <div className="flex xl:justify-between md:justify-between justify-center gap-[16px]">
       {displayAromas.map(([name, count], index) => (
         <IncenseCard
           key={`${name}-${index}`}
