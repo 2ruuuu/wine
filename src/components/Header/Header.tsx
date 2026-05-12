@@ -29,7 +29,7 @@ const Header = () => {
       label: '로그아웃',
       onSelect: () => {
         clearAuth();
-        window.location.replace('/');
+        router.push('/');
       },
     },
   ];
