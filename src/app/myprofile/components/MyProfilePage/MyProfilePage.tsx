@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -29,6 +30,7 @@ import { WineListItem } from '../WineList/type';
 import { MyProfileForm, ProfileTabType } from './type';
 
 const MyProfilePage = () => {
+  const router = useRouter();
   const { user, setAuth, accessToken, refreshToken } = useAuthStore();
 
   const [nickname, setNickname] = useState(user?.nickname ?? '');
@@ -62,6 +64,7 @@ const MyProfilePage = () => {
   useEffect(() => {
     const fetchMyProfileData = async () => {
       if (!accessToken) {
+        router.replace('/login');
         setIsLoading(false);
         return;
       }
@@ -101,7 +104,7 @@ const MyProfilePage = () => {
     };
 
     fetchMyProfileData();
-  }, [accessToken, refreshToken, setAuth]);
+  }, [accessToken, refreshToken, setAuth, router]);
 
   const handleUpdateWine = async () => {
     try {
@@ -255,21 +258,7 @@ const MyProfilePage = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <main
-        className="
-          mx-auto
-          flex
-          w-full
-          max-w-[343px]
-          flex-col
-
-          min-[744px]:max-w-[704px]
-
-          min-[1280px]:w-[960px]
-          min-[1280px]:max-w-none
-          min-[1280px]:flex-row
-        "
-      >
+      <main className="mx-auto flex w-full max-w-[343px] flex-col min-[744px]:max-w-[704px] min-[1280px]:w-[960px] min-[1280px]:max-w-none min-[1280px]:flex-row">
         <ProfileSidebar
           nickname={nickname}
           imageUrl={profileImage}
@@ -279,16 +268,7 @@ const MyProfilePage = () => {
           onChangeProfileImage={handleChangeProfileImage}
         />
 
-        <section
-          className="
-            w-full
-            py-8
-            min-[1280px]:flex-1
-            min-[1280px]:py-8
-            min-[1280px]:pl-9
-            min-[1280px]:pr-0
-          "
-        >
+        <section className="w-full py-8 min-[1280px]:flex-1 min-[1280px]:py-8 min-[1280px]:pr-0 min-[1280px]:pl-9">
           <div className="w-full">
             <ProfileTabs
               activeTab={activeTab}

@@ -13,7 +13,7 @@ const ProfileSidebar = ({
   onChangeProfileImage,
 }: ProfileSidebarProps) => {
   return (
-    <aside className="w-full border-b-0 py-8 min-[744px]:flex min-[744px]:flex-col min-[744px]:items-center min-[1280px]:w-60 min-[1280px]:border-b-0 min-[1280px]:border-r min-[1280px]:border-gray-300 min-[1280px]:px-7 min-[1280px]:py-10">
+    <aside className="w-full border-b-0 py-8 min-[744px]:flex min-[744px]:flex-col min-[744px]:items-center min-[1280px]:w-60 min-[1280px]:border-r min-[1280px]:border-b-0 min-[1280px]:border-gray-300 min-[1280px]:px-7 min-[1280px]:py-10">
       <div className="mb-6 flex justify-center">
         <PhotoInput
           label="프로필 사진"
