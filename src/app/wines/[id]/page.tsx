@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 
 import { getWineDetail } from '@/lib/api/wine';
@@ -13,7 +13,10 @@ import Top from './components/Top/Top';
 
 const Wine = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
-  const wineData = await getWineDetail(Number(id));
+  const cookieStore = await cookies();
+  const token = cookieStore.get('accessToken')?.value;
+
+  const wineData = await getWineDetail(Number(id), token);
 
   if (!wineData) notFound();
 
