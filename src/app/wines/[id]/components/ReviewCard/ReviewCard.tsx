@@ -32,6 +32,8 @@ const ReviewCard = ({ review, wine }: ReviewCardProps) => {
   const user = useAuthStore((state) => state.user);
   const isLoggedIn = !!user;
 
+  const isMyReview = user?.id === review.user.id;
+
   const handleDelete = () => {
     openModal({
       type: 'delete',
@@ -89,23 +91,25 @@ const ReviewCard = ({ review, wine }: ReviewCardProps) => {
               </span>
             </div>
           </div>
-          <Dropdown variant="basic" options={dropdownOptions}>
-            {({ toggle }) => (
-              <button
-                onClick={toggle}
-                className="flex cursor-pointer justify-center p-2"
-              >
-                <Image
-                  src={Hamburger}
-                  alt="햄버거 버튼"
-                  width={4}
-                  height={20}
-                  style={{ width: 'auto', height: 'auto' }}
-                  className="h-5 w-1"
-                />
-              </button>
-            )}
-          </Dropdown>
+          {isMyReview && (
+            <Dropdown variant="basic" options={dropdownOptions}>
+              {({ toggle }) => (
+                <button
+                  onClick={toggle}
+                  className="flex cursor-pointer justify-center p-2"
+                >
+                  <Image
+                    src={Hamburger}
+                    alt="햄버거 버튼"
+                    width={4}
+                    height={20}
+                    style={{ width: 'auto', height: 'auto' }}
+                    className="h-5 w-1"
+                  />
+                </button>
+              )}
+            </Dropdown>
+          )}
         </div>
         <AromaList aroma={review.aroma} />
         <p className="text-black">{review.content}</p>
