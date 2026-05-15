@@ -1,11 +1,9 @@
 import ReviewCard from '../ReviewCard/ReviewCard';
 import { ReviewCardListProps } from './type';
 
-const ReviewCardList = ({
-  reviewCount,
-  reviews,
-  wine,
-}: ReviewCardListProps) => {
+const ReviewCardList = ({ wine }: ReviewCardListProps) => {
+  const { reviewCount, reviews } = wine;
+
   return (
     <div className="mx-auto flex w-full max-w-[720px] flex-col gap-5">
       <div className="flex items-center gap-3.5">

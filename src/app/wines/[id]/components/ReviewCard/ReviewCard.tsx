@@ -10,7 +10,7 @@ import { Review } from '@/types/review';
 
 import { useAuthStore } from '@/stores/useAuthStore';
 
-import { deleteReview, patchReview } from '@/lib/api/review';
+import { deleteReview } from '@/lib/api/review';
 import { formatTimeAgo } from '@/lib/date-fns';
 
 import { Down, Hamburger, Profile, Up } from '@/constants/icons';
@@ -55,9 +55,17 @@ const ReviewCard = ({ review, wine }: ReviewCardProps) => {
       mode: 'edit',
       review: {
         ...review,
-        wine: wine,
-      } as Review,
-      onUpdated: (updatedReview) => {
+        wine: {
+          id: wine.id,
+          name: wine.name,
+          region: wine.region,
+          image: wine.image,
+          type: '',
+          price: 0,
+          avgRating: 0,
+        },
+      } as unknown as Review,
+      onUpdated: () => {
         router.refresh();
       },
     });
@@ -111,23 +119,14 @@ const ReviewCard = ({ review, wine }: ReviewCardProps) => {
             </Dropdown>
           )}
         </div>
-        <AromaList aroma={review.aroma} />
+        <AromaList review={review} />
         <p className="text-black">{review.content}</p>
       </div>
-      {isTasteOpen && (
-        <TasteList
-          lightBold={review.lightBold}
-          smoothTannic={review.smoothTannic}
-          drySweet={review.drySweet}
-          softAcidic={review.softAcidic}
-        />
-      )}
+      {isTasteOpen && <TasteList review={review} />}
 
       <div className="relative flex items-center justify-end">
         <div className="absolute left-0">
-          {isLoggedIn && (
-            <HeartToggle id={review.id} isLiked={review.isLiked} />
-          )}
+          {isLoggedIn && <HeartToggle review={review} />}
         </div>
         <button
           onClick={() => setIsTasteOpen(!isTasteOpen)}

@@ -1,10 +1,14 @@
+import { WineDetailResponse } from '@/app/wines/[id]/type';
+
 export interface RatingBarProps {
-  id: number;
-  reviewCount: number;
-  avgRatings: Record<string, number>;
-  avgRating: number;
-  name: string;
-  image: string;
-  region: string;
-  wineId: number;
+  wine: Pick<
+    WineDetailResponse,
+    | 'id'
+    | 'reviewCount'
+    | 'avgRating'
+    | 'avgRatings'
+    | 'name'
+    | 'image'
+    | 'region'
+  >;
 }

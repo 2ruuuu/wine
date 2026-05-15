@@ -1,34 +1,12 @@
+import { Review, WineDetailResponse } from '@/app/wines/[id]/type';
+
+interface ReviewCardItem extends Omit<Review, 'wine' | 'likeCount'> {
+  wineId?: number;
+  teamId?: string;
+  likeCount?: number;
+}
+
 export interface ReviewCardProps {
-  review: {
-    id: number;
-    rating: number;
-    aroma: string[];
-    content: string;
-    createdAt: string;
-    updatedAt: string;
-    lightBold: number;
-    smoothTannic: number;
-    drySweet: number;
-    softAcidic: number;
-    isLiked: boolean;
-    user: {
-      id: number;
-      nickname: string;
-      image: string | null;
-    };
-    wine?:
-      | {
-          id: number;
-          name: string;
-          image: string;
-          region: string;
-        }
-      | undefined;
-    likeCount?: number | undefined;
-  };
-  wine: {
-    name: string;
-    image: string;
-    region: string;
-  };
+  review: ReviewCardItem;
+  wine: Pick<WineDetailResponse, 'id' | 'name' | 'region' | 'image'>;
 }

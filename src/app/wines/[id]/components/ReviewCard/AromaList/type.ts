@@ -1,3 +1,5 @@
+import { Review } from '@/app/wines/[id]/type';
+
 export interface AromaListProps {
-  aroma: string[];
+  review: Pick<Review, 'aroma'>;
 }

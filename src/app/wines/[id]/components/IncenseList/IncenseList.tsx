@@ -47,7 +47,9 @@ const AROMA_PNG: Record<string, any> = {
   noImage: NoImage,
 };
 
-const IncenseList = ({ aromaStats }: IncenseListProps) => {
+const IncenseList = ({ wine }: IncenseListProps) => {
+  const { aromaStats } = wine;
+
   const validAromas = Object.entries(aromaStats)
     .filter(([_, value]) => value > 0)
     .sort((a, b) => b[1] - a[1]);

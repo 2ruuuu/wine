@@ -1,4 +1,5 @@
+import { Review } from '@/app/wines/[id]/type';
+
 export interface HeartToggleProps {
-  id: number;
-  isLiked: boolean;
+  review: Pick<Review, 'id' | 'isLiked'>;
 }

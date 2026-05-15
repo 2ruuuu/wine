@@ -2,7 +2,8 @@ import StarRating from '@/components/StarRating/StarRating';
 
 import { RatingAvgProps } from './type';
 
-const RatingAvg = ({ avgRating }: RatingAvgProps) => {
+const RatingAvg = ({ wine }: RatingAvgProps) => {
+  const { avgRating } = wine;
   const safeRating = avgRating ?? 0;
   const AvgRatingFloor = Math.floor(safeRating);
   const AvgRating = safeRating.toFixed(1);

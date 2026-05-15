@@ -13,7 +13,8 @@ import { HeartEmpty, HeartFill } from '@/constants/icons';
 
 import { HeartToggleProps } from './type';
 
-const HeartToggle = ({ id, isLiked }: HeartToggleProps) => {
+const HeartToggle = ({ review }: HeartToggleProps) => {
+  const { isLiked, id } = review;
   const router = useRouter();
   const [isHeart, setIsHeart] = useState(isLiked);
 

@@ -1,5 +1,8 @@
 import { WineDetailResponse } from '../../type';
 
 export interface TopProps {
-  wine: WineDetailResponse;
+  wine: Pick<
+    WineDetailResponse,
+    'image' | 'avgRating' | 'reviewCount' | 'name' | 'region' | 'price'
+  >;
 }
