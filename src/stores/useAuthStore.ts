@@ -1,5 +1,6 @@
 import toast from 'react-hot-toast';
 
+import Cookies from 'js-cookie';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -33,13 +34,19 @@ export const useAuthStore = create<AuthState>()(
       user: null,
       accessToken: null,
       refreshToken: null,
-      setAuth: (authData) =>
+      setAuth: (authData) => {
+        Cookies.set('accessToken', authData.accessToken, { expires: 7 }); // 7일 유지 등 설정
+        Cookies.set('refreshToken', authData.refreshToken, { expires: 30 });
         set({
           user: authData.user,
           accessToken: authData.accessToken,
           refreshToken: authData.refreshToken,
-        }),
+        });
+      },
       clearAuth: () => {
+        Cookies.remove('accessToken');
+        Cookies.remove('refreshToken');
+
         set({ user: null, accessToken: null, refreshToken: null });
         useAuthStore.persist.clearStorage();
         toast.success('로그아웃 되었습니다.');
