@@ -27,7 +27,10 @@ export const getRecommendedWines = async (
 
 export const getWineDetail = async (
   id: number,
+  token?: string,
 ): Promise<WineDetailResponse> => {
-  const response = await instance.get<WineDetailResponse>(`/wines/${id}`);
+  const response = await instance.get<WineDetailResponse>(`/wines/${id}`, {
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
+  });
   return response.data;
 };
