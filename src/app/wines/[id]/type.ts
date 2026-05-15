@@ -7,14 +7,14 @@ export interface User {
 export interface Review {
   id: number;
   rating: number;
-  aroma: string[];
-  content: string;
-  createdAt: string;
-  updatedAt: string;
   lightBold: number;
   smoothTannic: number;
   drySweet: number;
   softAcidic: number;
+  aroma: string[];
+  content: string;
+  createdAt: string;
+  updatedAt: string;
   user: User;
   isLiked: boolean;
   likes?: any[];
@@ -32,7 +32,6 @@ export interface WineDetailResponse {
   recentReview: Review;
   userId: number;
   reviews: Review[];
-
   avgRatings: Record<string, number>;
 
   reviewStats: {
