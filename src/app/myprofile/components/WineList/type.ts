@@ -9,6 +9,7 @@ export interface WineListItem {
   reviewCount: number;
   recentReview: null | string;
   userId: number;
+  createdAt: string;
 }
 
 export interface WineListProps {

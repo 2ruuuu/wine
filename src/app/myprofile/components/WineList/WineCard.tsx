@@ -50,7 +50,7 @@ const WineCard = ({ wine, onDeleteWine, onUpdateWine }: WineCardProps) => {
       <div className="relative pr-12">
         {/* 와인 이름만 클릭 시 상세 이동 */}
         <Link href={`/wines/${wine.id}`} className="inline-block">
-          <h3 className="text-[18px] font-bold leading-[1.35] text-black hover:underline">
+          <h3 className="text-[18px] leading-[1.35] font-bold text-black hover:underline">
             {wine.name}
           </h3>
         </Link>
@@ -63,7 +63,7 @@ const WineCard = ({ wine, onDeleteWine, onUpdateWine }: WineCardProps) => {
       </div>
 
       {/* 햄버거 클릭 영역 넓힘 */}
-      <div className="absolute right-[-8px] top-[276px] z-10">
+      <div className="absolute top-[276px] right-[-8px] z-10">
         <Dropdown variant="basic" options={dropdownOptions}>
           {({ toggle }) => (
             <button

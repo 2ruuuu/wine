@@ -7,10 +7,10 @@ const ProfileTabs = ({
   onChangeTab,
 }: ProfileTabsProps) => {
   return (
-    <div className="relative flex max-w-[725px] gap-7 pb-4 mb-7 overflow-visible after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:bg-gray-300 min-[744px]:after:w-[calc(100%+40px)] min-[1280px]:after:w-[calc(100%+80px)]">
+    <div className="relative mb-7 flex max-w-[725px] gap-7 overflow-visible pb-4 after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:bg-gray-300 after:content-[''] min-[744px]:after:w-[calc(100%+40px)] min-[1280px]:after:w-[calc(100%+80px)]">
       <button
         onClick={() => onChangeTab('review')}
-        className={`bg-transparent border-none cursor-pointer ${
+        className={`cursor-pointer border-none bg-transparent ${
           activeTab === 'review' ? 'font-bold text-black' : 'text-gray-400'
         }`}
       >
@@ -19,7 +19,7 @@ const ProfileTabs = ({
 
       <button
         onClick={() => onChangeTab('wine')}
-        className={`bg-transparent border-none cursor-pointer ${
+        className={`cursor-pointer border-none bg-transparent ${
           activeTab === 'wine' ? 'font-bold text-black' : 'text-gray-400'
         }`}
       >
