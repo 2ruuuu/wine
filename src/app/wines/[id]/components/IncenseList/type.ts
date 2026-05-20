@@ -1,3 +1,5 @@
+import { WineDetailResponse } from '../../type';
+
 export interface IncenseListProps {
-  aromaStats: Record<string, number>;
+  wine: Pick<WineDetailResponse, 'aromaStats' | 'name'>;
 }

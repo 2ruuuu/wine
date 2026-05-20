@@ -2,10 +2,7 @@ import Image from 'next/image';
 
 import { NoImage } from '@/constants/images';
 
-interface IncenseCardProps {
-  name: string;
-  icon: any;
-}
+import { IncenseCardProps } from './type';
 
 const AROMA_NAME_KOR: Record<string, string> = {
   CHERRY: '체리',

@@ -1,6 +1,7 @@
 import { RatingBarProps } from './type';
 
-const RatingBar = ({ reviewCount, avgRatings }: RatingBarProps) => {
+const RatingBar = ({ wine }: RatingBarProps) => {
+  const { avgRatings, reviewCount } = wine;
   const scores = ['5', '4', '3', '2', '1'];
 
   return (

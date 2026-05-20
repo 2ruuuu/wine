@@ -2,12 +2,8 @@ import Taste from '@/components/Taste/Taste';
 
 import { TasteListProps } from './type';
 
-const TasteList = ({
-  lightBold,
-  smoothTannic,
-  drySweet,
-  softAcidic,
-}: TasteListProps) => {
+const TasteList = ({ review }: TasteListProps) => {
+  const { lightBold, smoothTannic, drySweet, softAcidic } = review;
   const TasteArray = [
     { type: 'lightBold', value: lightBold },
     { type: 'smoothTannic', value: smoothTannic },

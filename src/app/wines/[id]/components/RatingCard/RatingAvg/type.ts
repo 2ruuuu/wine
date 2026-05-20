@@ -1,3 +1,5 @@
+import { WineDetailResponse } from '@/app/wines/[id]/type';
+
 export interface RatingAvgProps {
-  avgRating: number | undefined;
+  wine: Pick<WineDetailResponse, 'avgRating'>;
 }

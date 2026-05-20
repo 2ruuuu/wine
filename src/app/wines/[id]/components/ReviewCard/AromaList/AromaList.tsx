@@ -3,7 +3,8 @@ import { Fragment } from 'react';
 import Aroma from '../Aroma/Aroma';
 import { AromaListProps } from './type';
 
-const AromaList = ({ aroma }: AromaListProps) => {
+const AromaList = ({ review }: AromaListProps) => {
+  const { aroma } = review;
   return (
     <div className="flex flex-wrap">
       {aroma.map((item, index) => (

@@ -52,33 +52,13 @@ const Wine = async ({ params }: { params: Promise<{ id: string }> }) => {
             <Flavor wine={wineData} />
           </div>
           <div className="flex w-full md:justify-center">
-            <Incense
-              reviewCount={wineData.reviewCount}
-              aromaStats={wineData.aromaStats}
-            />
+            <Incense wine={wineData} />
           </div>
         </div>
         <hr className="my-10 border-gray-300 md:my-20 xl:my-20" />
         <div className="flex flex-col-reverse gap-10 md:flex-col-reverse md:items-center md:gap-[77px] xl:flex-row xl:items-start xl:justify-between xl:gap-12">
-          <ReviewCardList
-            reviewCount={wineData.reviewCount}
-            reviews={wineData.reviews}
-            wine={{
-              name: wineData.name,
-              image: wineData.image,
-              region: wineData.region,
-            }}
-          />
-          <RatingCard
-            id={wineData.id}
-            wineId={wineData.id}
-            reviewCount={wineData.reviewCount}
-            avgRatings={wineData.avgRatings}
-            avgRating={wineData.avgRating}
-            name={wineData.name}
-            image={wineData.image}
-            region={wineData.region}
-          />
+          <ReviewCardList wine={wineData} />
+          <RatingCard wine={wineData} />
         </div>
       </div>
     </div>

@@ -1,27 +1,8 @@
-export interface User {
-  id: number;
-  nickname: string;
-  image: string | null;
-}
-
-export interface Review {
-  id: number;
-  rating: number;
-  aroma: string[];
-  content: string;
-  createdAt: string;
-  updatedAt: string;
-  lightBold: number;
-  smoothTannic: number;
-  drySweet: number;
-  softAcidic: number;
-  user: User;
-  isLiked: boolean;
-  likes?: any[];
-}
+import { WineDetailResponse } from '@/app/wines/[id]/type';
 
 export interface ReviewCardListProps {
-  reviewCount: number;
-  reviews: Review[];
-  wine: any;
+  wine: Pick<
+    WineDetailResponse,
+    'id' | 'name' | 'region' | 'image' | 'reviewCount' | 'reviews'
+  >;
 }

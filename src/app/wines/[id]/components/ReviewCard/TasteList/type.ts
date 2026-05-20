@@ -1,6 +1,8 @@
+import { Review } from '@/app/wines/[id]/type';
+
 export interface TasteListProps {
-  lightBold: number;
-  smoothTannic: number;
-  drySweet: number;
-  softAcidic: number;
+  review: Pick<
+    Review,
+    'lightBold' | 'smoothTannic' | 'drySweet' | 'softAcidic'
+  >;
 }
